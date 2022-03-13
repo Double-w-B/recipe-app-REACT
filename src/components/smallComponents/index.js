@@ -4,6 +4,8 @@ import RangeFilter from "./RangeFilter";
 import RecipeInfo from "./RecipeInfo";
 import RecipeNutrition from "./RecipeNutrition";
 import RecipeIngredients from "./RecipeIngredients";
+import NavbarResults from "./NavbarResults";
+import NavbarInfoIcon from "./NavbarInfoIcon";
 
 export {
   CookingTime,
@@ -12,4 +14,6 @@ export {
   RecipeInfo,
   RecipeNutrition,
   RecipeIngredients,
+  NavbarResults,
+  NavbarInfoIcon,
 };

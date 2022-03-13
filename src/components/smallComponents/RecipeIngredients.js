@@ -4,8 +4,9 @@ import noImg from "../../images/no-img.jpg";
 const RecipeIngredients = ({ found }) => {
   const [showText, setShowText] = useState(false);
 
-  const checkAndShowText = (e) =>
-    e.currentTarget.lastChild.title.length > 30 && setShowText(!showText);
+  const checkAndShowText = (e) => {
+    e.currentTarget.lastChild.textContent.length > 30 && setShowText(!showText);
+  };
 
   const { ingredients } = found.recipe;
 
@@ -17,11 +18,22 @@ const RecipeIngredients = ({ found }) => {
         {ingredients.map((item, index) => {
           const { image, foodCategory, text } = item;
           return (
-            <div key={index} className="ex-ingredient" onClick={checkAndShowText}>
+            <div
+              key={index}
+              className="ex-ingredient"
+              onClick={checkAndShowText}
+            >
               <div className="ex-ingredient-img no-select">
                 <img src={!image ? noImg : image} alt={foodCategory} />
               </div>
-              <p title={text}>
+              <p
+                title={text}
+                style={
+                  text.length > 30
+                    ? { cursor: "pointer" }
+                    : { cursor: "default" }
+                }
+              >
                 {text.length > 30
                   ? showText
                     ? text

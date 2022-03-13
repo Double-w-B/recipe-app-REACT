@@ -47,6 +47,9 @@ const Wrapper = styled.div`
   &.show {
     opacity: 1;
   }
+  & a img:active {
+    transform: scale(0.8);
+  }
   & a img.rotate {
     transform: rotateY(180deg);
     -webkit-transform: rotateY(180deg);

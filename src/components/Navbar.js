@@ -1,18 +1,19 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import logo from "../images/logo.jpg";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch } from "./index";
+import { NavbarResults, NavbarInfoIcon } from "./smallComponents";
 import { AppContext } from "../context/context";
 import { Link } from "react-router-dom";
-import star from "../images/checked.png";
 
 const Navbar = () => {
-  const { query, setQuery, fetchRecipes, email, isModal, recipesData } =
+  const { query, setQuery, fetchRecipes, email, isModal } =
     useContext(AppContext);
   const { setQueryPath, isLoading, isError, lastQuery, setLastQuery } =
     useContext(AppContext);
-  const { queryPath, currentPath, localStrPath, setIsError, setIsLoading } =
-    useContext(AppContext);
+  const { setIsError, setIsLoading } = useContext(AppContext);
+
+  const [showInfo, setShowInfo] = React.useState(true);
 
   /*   const [width, setWidth] = React.useState(window.innerWidth);
 
@@ -24,17 +25,24 @@ const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }); */
 
-
-  const changeQuery = (someQuery) => {
-    const newQuery = someQuery
+  const filterQuery = (text) => {
+    const newQuery = text
       .replace(/[^0-9a-z]/gi, " ")
       .split(" ")
       .filter((word) => word.length > 0 && word);
 
+    return newQuery;
+  };
+
+  const changeQuery = (someQuery) => {
     if (someQuery === lastQuery) {
-      return newQuery.join(" ");
+      if (filterQuery(someQuery).length > 2) {
+        return `${filterQuery(someQuery).slice(0, 2).join(" ")} ... `;
+      } else {
+        return filterQuery(someQuery).join(" ");
+      }
     } else {
-      return newQuery.join("+");
+      return filterQuery(someQuery).join("+");
     }
   };
 
@@ -50,6 +58,14 @@ const Navbar = () => {
 
     fetchRecipes();
     setQuery("");
+    setShowInfo(true);
+  };
+
+  const handleClick = () => {
+    setLastQuery("");
+    setQuery("");
+    setIsError(false);
+    setIsLoading(false);
   };
 
   const conditionalLink = () => {
@@ -71,24 +87,11 @@ const Navbar = () => {
   };
 
   if (!isModal && email) {
-    const firstPath = `/recipes/${queryPath}`;
-    const secondPath = `/savedrecipes`;
-    const thirdPath = `/savedrecipes/${localStrPath}`;
-
     return (
       <section className="navbar">
         <div className="logo no-select">
           <Link to="/">
-            <img
-              src={logo}
-              alt="logo"
-              onClick={() => {
-                setLastQuery("");
-                setQuery("");
-                setIsError(false);
-                setIsLoading(false);
-              }}
-            />
+            <img src={logo} alt="logo" onClick={handleClick} />
           </Link>
         </div>
         <form onSubmit={handleSubmit}>
@@ -106,44 +109,14 @@ const Navbar = () => {
           />
           {conditionalLink()}
         </form>
-
         {/* {<div className="displayWidth">{width} px</div>} */}
-        <div
-          className={
-            !isError &&
-            !isLoading &&
-            (currentPath === firstPath ||
-              currentPath === secondPath ||
-              currentPath === thirdPath)
-              ? "results show no-select"
-              : "results no-select"
-          }
-        >
-          {currentPath === firstPath && (
-            <>
-              <p>
-                {window.innerWidth > 430 && "Results for"}{" "}
-                <span>{changeQuery(lastQuery)}</span>:{" "}
-              </p>
-              <p>
-                {recipesData &&
-                  recipesData.count
-                    .toString()
-                    .replace(/(?!^)(?=(?:\d{3})+(?:\.|$))/gm, " ")}{" "}
-                recipes
-              </p>
-            </>
-          )}
-          {(currentPath === secondPath || currentPath === thirdPath) && (
-            <p
-              className="saved-rec"
-              style={{ textAlign: "center", marginRight: "0.5rem" }}
-            >
-              <img src={star} alt="star" /> Saved{" "}
-              {window.innerWidth < 400 && <br />} Recipes
-            </p>
-          )}
-        </div>
+        <NavbarResults
+          filterQuery={filterQuery}
+          changeQuery={changeQuery}
+          showInfo={showInfo}
+          setShowInfo={setShowInfo}
+        />
+        <NavbarInfoIcon showInfo={showInfo} setShowInfo={setShowInfo} />
       </section>
     );
   }

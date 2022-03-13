@@ -159,7 +159,8 @@ form button * {
   display: none;
 }
 
-.results {
+.results,
+.results--info-btn {
   min-height: 3rem;
   padding: 0.2rem 0.5rem 0.2rem 0.8rem;
   display: grid;
@@ -168,10 +169,16 @@ form button * {
   position: absolute;
   right: -100%;
   top: 1rem;
-  background-color: rgba(0, 0, 0, 0.55);
+  background-color: rgba(0, 0, 0, 0.4);
   transition: all 0.5s ease-out;
   opacity: 0;
 }
+
+.results{
+  cursor: pointer;
+}
+
+
 
 .results .saved-rec {
   display: flex;
@@ -192,9 +199,27 @@ form button * {
   text-transform: lowercase;
 }
 
+.results--info-btn {
+  right: 0;
+  opacity: 1;
+  font-size: 1.8rem;
+  color: var(--yellow-clr);
+}
+.results--info-btn *{
+  cursor: pointer;
+}
+
+.results--info-btn *:active{
+transform: scale(0.7);
+}
+
 .results.show {
   right: 0;
   opacity: 1;
+}
+.results--info-btn.hide {
+  /* right: -100%; */
+  opacity: 0;
 }
 
 /* ----------- Recipes ----------- */
@@ -213,11 +238,9 @@ form button * {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
   justify-items: center;
- 
 }
 
 .loadMore-btn {
-
   width: 16rem;
   min-width: 16rem;
   min-height: 13rem;
