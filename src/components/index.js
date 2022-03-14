@@ -26,6 +26,8 @@ import { GiHotMeal } from "react-icons/gi";
 import { GiKnifeFork } from "react-icons/gi";
 import { HiOutlineMail } from "react-icons/hi";
 import { FaRegWindowClose } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
+import { BsInfoCircle } from "react-icons/bs";
 
 export {
   Filters,
@@ -53,4 +55,6 @@ export {
   GiKnifeFork,
   HiOutlineMail,
   FaRegWindowClose,
+  FaSearch,
+  BsInfoCircle,
 };

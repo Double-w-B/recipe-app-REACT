@@ -10,14 +10,12 @@ const LocalRecipes = () => {
     useContext(AppContext);
 
   React.useEffect(() => {
-    // setCurrentPath(window.location.pathname);
     if (currentPath !== "/savedrecipes") {
       setCurrentPath("");
       setTimeout(() => {
         setCurrentPath(window.location.pathname);
       }, 500);
     }
-    console.log(currentPath);
   }, []);
 
   if (localStrRecipes.length < 1) {
