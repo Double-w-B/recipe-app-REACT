@@ -4,7 +4,7 @@ import { FiExternalLink } from "react-icons/fi";
 import { AppContext } from "../context/context";
 
 const SingleRecipe = ({ item, id }) => {
-  const { setPath, path, queryPath } = React.useContext(AppContext);
+  const { newPath, path, queryPath } = React.useContext(AppContext);
 
   const {
     recipe: { image, label, source },
@@ -16,14 +16,13 @@ const SingleRecipe = ({ item, id }) => {
   };
 
   const handleMouseDown = () => {
-    setPath(id);
+    newPath(id);
     localStorage.setItem("path", JSON.stringify(id));
   };
 
   return (
     <article className="single-recipe" onMouseDown={handleMouseDown}>
-      <img src={image} alt={label} />
-
+        <img src={image} alt={label} />
       <div className="single-rec-info">
         <div>
           <h4>{label.length > 35 ? checkLength(label) : label}</h4>

@@ -4,11 +4,11 @@ import {
   RecipeInfo,
   RecipeNutrition,
   RecipeIngredients,
-} from "./smallComponents";
+} from "./small_Components";
 
 const ExactRecipe = () => {
-  const { path, recipes, setRecipe, setCurrentPath } = useContext(AppContext);
-  const { setLocalStrRecipes, localStrRecipes, setRotate } =
+  const { path, recipes, setRecipe, changeThePath } = useContext(AppContext);
+  const { updateLocalStrRecipes, localStrRecipes, rotateStar } =
     useContext(AppContext);
 
   const [checked, setChecked] = useState(false);
@@ -19,7 +19,7 @@ const ExactRecipe = () => {
   });
 
   React.useEffect(() => {
-    setCurrentPath(window.location.pathname);
+    changeThePath(window.location.pathname);
     // eslint-disable-next-line
   }, []);
 
@@ -43,17 +43,13 @@ const ExactRecipe = () => {
       );
 
     if (checked) {
-      setLocalStrRecipes(filteredStorage());
+      updateLocalStrRecipes(filteredStorage());
       setRecipe("");
     }
 
     if (!checked) {
-      setLocalStrRecipes([...localStrRecipes, found]);
-      setRotate(true);
-
-      setTimeout(() => {
-        setRotate(false);
-      }, 300);
+      updateLocalStrRecipes([...localStrRecipes, found]);
+      rotateStar();
     }
   };
 
@@ -65,7 +61,6 @@ const ExactRecipe = () => {
         <div className="ex-recipe-img">
           <img src={image} alt={label} />
         </div>
-
         <RecipeInfo
           checked={checked}
           setChecked={setChecked}

@@ -4,21 +4,23 @@ import { HiOutlineMail, FaRegWindowClose } from "./index";
 import { AppContext } from "../context/context";
 
 const GreetingModal = () => {
-  const { isModal, setIsModal, email, setEmail } = React.useContext(AppContext);
+  const { isModal, showHideModal, email, saveEmail } =
+    React.useContext(AppContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     localStorage.setItem("newsletter", JSON.stringify(email));
-    setIsModal(false);
+    showHideModal()
   };
 
   const handleChange = (e) => {
     const regExp =
+      // eslint-disable-next-line
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     regExp.test(String(e.target.value).toLowerCase())
-      ? setEmail(e.target.value)
-      : setEmail("");
+      ? saveEmail(e.target.value)
+      : saveEmail("");
   };
 
   isModal
@@ -70,9 +72,9 @@ const GreetingModal = () => {
         >
           <FaRegWindowClose
             onClick={() => {
-              setEmail("no_email");
-              localStorage.setItem("newsletter", JSON.stringify("no_email"));
-              setIsModal(false);
+              saveEmail("user_denied");
+              localStorage.setItem("newsletter", JSON.stringify("user_denied"));
+              showHideModal()
             }}
           />
         </div>

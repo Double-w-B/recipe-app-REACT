@@ -1,17 +1,20 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
-import logo from "../images/logo.jpg";
-import { FaSearch } from "./index";
-import { NavbarResults, NavbarInfoIcon } from "./smallComponents";
-import { AppContext } from "../context/context";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { FaSearch } from "react-icons/fa";
+import { AppContext } from "../context/context";
+import { NavbarResults, NavbarInfoIcon } from "./small_Components";
+import logo from "../images/logo.jpg";
+
 
 const Navbar = () => {
-  const { query, setQuery, fetchRecipes, email, isModal } =
+  const { fetchRecipes, email, isModal, recipesData, query, lastQuery } =
     useContext(AppContext);
-  const { setQueryPath, isLoading, isError, lastQuery, setLastQuery } =
+  const { newQueryPath, queryPath, isLoading, isError, currentPath } =
     useContext(AppContext);
-  const { setIsError, setIsLoading } = useContext(AppContext);
+  const { localStrPath, loadingToFalse, handleError, createQuery } =
+    useContext(AppContext);
+  const { clearQuery, handleQuery } = useContext(AppContext);
 
   const [showInfo, setShowInfo] = React.useState(true);
 
@@ -46,26 +49,24 @@ const Navbar = () => {
     }
   };
 
+  const handleClick = () => {
+    handleQuery("");
+    clearQuery();
+    loadingToFalse();
+    handleError(false);
+  };
+
   const handleSubmit = (e) => {
     if (!query) {
       e.preventDefault();
       return;
     }
-    setLastQuery(changeQuery(query));
-    setQueryPath(changeQuery(query));
-
+    handleQuery(changeQuery(query));
+    newQueryPath(changeQuery(query));
     localStorage.setItem("queryPath", JSON.stringify(changeQuery(query)));
 
     fetchRecipes();
-    setQuery("");
-    setShowInfo(true);
-  };
-
-  const handleClick = () => {
-    setLastQuery("");
-    setQuery("");
-    setIsError(false);
-    setIsLoading(false);
+    clearQuery();
   };
 
   const conditionalLink = () => {
@@ -87,6 +88,10 @@ const Navbar = () => {
   };
 
   if (!isModal && email) {
+    const firstPath = `/recipes/${queryPath}`;
+    const secondPath = `/savedrecipes`;
+    const thirdPath = `/savedrecipes/${localStrPath}`;
+
     return (
       <section className="navbar">
         <div className="logo no-select">
@@ -103,13 +108,15 @@ const Navbar = () => {
               (e.target.placeholder = "find a recipe for your mood")
             }
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            disabled={isLoading || isError ? "disabled" : ""}
+            onChange={(e) => createQuery(e.target.value)}
+            disabled={(isLoading || isError) && "disabled"}
             required
           />
           {conditionalLink()}
         </form>
+
         {/* {<div className="displayWidth">{width} px</div>} */}
+
         <NavbarResults
           filterQuery={filterQuery}
           changeQuery={changeQuery}
@@ -117,6 +124,42 @@ const Navbar = () => {
           setShowInfo={setShowInfo}
         />
         <NavbarInfoIcon showInfo={showInfo} setShowInfo={setShowInfo} />
+        {/* <div
+          className={
+            !isError &&
+            !isLoading &&
+            (currentPath === firstPath ||
+              currentPath === secondPath ||
+              currentPath === thirdPath)
+              ? "results show no-select"
+              : "results no-select"
+          }
+        >
+          {currentPath === firstPath && (
+            <>
+              <p>
+                {window.innerWidth > 430 && "Results for"}{" "}
+                <span>{changeQuery(lastQuery)}</span>:{" "}
+              </p>
+              <p>
+                {recipesData &&
+                  recipesData.count
+                    .toString()
+                    .replace(/(?!^)(?=(?:\d{3})+(?:\.|$))/gm, " ")}{" "}
+                {recipesData.count > 1 ? "recipes" : "recipe"}
+              </p>
+            </>
+          )}
+          {(currentPath === secondPath || currentPath === thirdPath) && (
+            <p
+              className="saved-rec"
+              style={{ textAlign: "center", marginRight: "0.5rem" }}
+            >
+              <img src={star} alt="star" /> Saved{" "}
+              {window.innerWidth < 400 && <br />} Recipes
+            </p>
+          )}
+        </div> */}
       </section>
     );
   }

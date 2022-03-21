@@ -27,12 +27,9 @@ const Wrapper = styled.footer`
   width: 100%;
   color: rgba(0, 0, 0, 0.8);
 
-  /* letter-spacing: 0.3px; */
-  /* margin-top: 1vh; */
   height: 5vh;
   display: grid;
   justify-items: center;
-  /* background-color: tomato; */
   a {
     color: #d1031b;
     font-weight: bold;

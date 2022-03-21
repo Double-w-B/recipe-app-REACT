@@ -6,9 +6,9 @@ import errorImg from "../images/error.png";
 import errorSearch from "../images/errorSearch.png";
 
 const Error = () => {
-  const { setIsError, recipes, lastQuery, setLastQuery } =
+  const { recipes, lastQuery, handleError, currentPath, handleQuery } =
     React.useContext(AppContext);
-  const { diet, health, meal, cuisine, dish, calories, currentPath } =
+  const { diet, health, meal, cuisine, dish, calories } =
     React.useContext(AppContext);
 
   const navigate = useNavigate();
@@ -20,9 +20,9 @@ const Error = () => {
       } else {
         navigate("/");
       }
-      setIsError(false);
-      setLastQuery("");
+      handleQuery("");
       localStorage.setItem("lastQuery", JSON.stringify(""));
+      handleError(false);
     }, 4000);
   });
 
