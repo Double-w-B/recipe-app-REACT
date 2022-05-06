@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-
 import loadingImage from "../images/preloader.gif";
 
 const Loading = () => {
@@ -19,7 +18,6 @@ const Wrapper = styled.div`
   margin: 0 auto;
   display: grid;
   place-content: center;
-  /* background-color: rgba(0, 0, 0, 0.3); */
   @media screen and (max-width: 992px) {
     & img {
       margin-left: 2.5rem;

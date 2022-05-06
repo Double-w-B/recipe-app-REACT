@@ -1,17 +1,17 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Navbar, Recipes, Footer, Filters, Error } from "./components";
-import { LocalExactRecipe, ExactRecipe, LocalRecipes } from "./components";
-import { GreetingModal } from "./components";
+import { Navbar, Recipes, Footer } from "./components";
+import { Filters, LocalExactRecipe, ExactRecipe } from "./components";
+import { LocalRecipes, LocalStorageBtn, NewsletterModal } from "./components";
+import { Error } from "./components";
 import { AppContext } from "./context/context";
-import { LocalStorage } from "./components";
 
 function App() {
   const { path, queryPath, localStrPath } = React.useContext(AppContext);
 
   return (
     <Router>
-      <GreetingModal />
+      <NewsletterModal />
       <Navbar></Navbar>
       <Routes>
         <Route exact path="/" element={<Filters />} />
@@ -29,7 +29,7 @@ function App() {
         />
         <Route exact path="*" element={<Error />} />
       </Routes>
-      <LocalStorage />
+      <LocalStorageBtn />
       <Footer />
     </Router>
   );

@@ -1,26 +1,25 @@
 import React, { useContext } from "react";
-import SingleRecipe from "./SingleRecipe";
-import Loading from "./Loading";
-import Error from "./Error";
+import { SingleRecipe, Loading, Error } from "./";
 import { AppContext } from "../context/context";
 import loading from "../images/preloader.gif";
 
 const Recipes = () => {
   const { recipes, isLoading, isError, fetchRecipes, nextPageLoading } =
     useContext(AppContext);
-  const { setNextPageLoading, setPage, page, nextPage, setCurrentPath } =
+  const { setNextPageLoading, changeThePage, page, nextPage, changeThePath } =
     useContext(AppContext);
 
   React.useEffect(() => {
-    setCurrentPath("");
+    changeThePath("");
     setTimeout(() => {
-      setCurrentPath(window.location.pathname);
+      changeThePath(window.location.pathname);
     }, 500);
+    // eslint-disable-next-line
   }, []);
 
   const handleClick = () => {
-    setNextPageLoading(true);
-    setPage(page + 1);
+    setNextPageLoading();
+    changeThePage(page + 1);
     fetchRecipes();
   };
 

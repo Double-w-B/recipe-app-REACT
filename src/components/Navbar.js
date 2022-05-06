@@ -1,17 +1,17 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
-import logo from "../images/logo.jpg";
-import { FaSearch } from "./index";
-import { NavbarResults, NavbarInfoIcon } from "./smallComponents";
-import { AppContext } from "../context/context";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { FaSearch } from "react-icons/fa";
+import { AppContext } from "../context/context";
+import { NavbarResults, NavbarInfoIcon } from "./small_Components";
+import logo from "../images/logo.jpg";
 
 const Navbar = () => {
-  const { query, setQuery, fetchRecipes, email, isModal } =
+  const { fetchRecipes, email, isModal, query, lastQuery } =
     useContext(AppContext);
-  const { setQueryPath, isLoading, isError, lastQuery, setLastQuery } =
-    useContext(AppContext);
-  const { setIsError, setIsLoading } = useContext(AppContext);
+  const { newQueryPath, isLoading, isError } = useContext(AppContext);
+  const { loadingToFalse, handleError, createQuery } = useContext(AppContext);
+  const { clearQuery, handleQuery } = useContext(AppContext);
 
   const [showInfo, setShowInfo] = React.useState(true);
 
@@ -46,26 +46,24 @@ const Navbar = () => {
     }
   };
 
+  const handleClick = () => {
+    handleQuery("");
+    clearQuery();
+    loadingToFalse();
+    handleError(false);
+  };
+
   const handleSubmit = (e) => {
     if (!query) {
       e.preventDefault();
       return;
     }
-    setLastQuery(changeQuery(query));
-    setQueryPath(changeQuery(query));
-
+    handleQuery(changeQuery(query));
+    newQueryPath(changeQuery(query));
     localStorage.setItem("queryPath", JSON.stringify(changeQuery(query)));
 
     fetchRecipes();
-    setQuery("");
-    setShowInfo(true);
-  };
-
-  const handleClick = () => {
-    setLastQuery("");
-    setQuery("");
-    setIsError(false);
-    setIsLoading(false);
+    clearQuery();
   };
 
   const conditionalLink = () => {
@@ -103,13 +101,15 @@ const Navbar = () => {
               (e.target.placeholder = "find a recipe for your mood")
             }
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            disabled={isLoading || isError ? "disabled" : ""}
+            onChange={(e) => createQuery(e.target.value)}
+            disabled={(isLoading || isError) && "disabled"}
             required
           />
           {conditionalLink()}
         </form>
+
         {/* {<div className="displayWidth">{width} px</div>} */}
+
         <NavbarResults
           filterQuery={filterQuery}
           changeQuery={changeQuery}

@@ -1,17 +1,17 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../context/context";
-import { PreferencesFilter, RangeFilter } from "./smallComponents";
+import { PreferencesFilter, RangeFilter } from "./small_Components";
 
-const Filters = () => {
-  const { isModal, email } = useContext(AppContext);
-  const { setCurrentPath, minInput, setMinInput, maxInput, setMaxInput } =
+const Checkboxes = () => {
+  const { email, isModal, minInput, maxInput, changePreferences } =
     useContext(AppContext);
+  const { changeThePath } = useContext(AppContext);
 
   const [minPercent, setMinPercent] = useState("0");
   const [maxPercent, setMaxPercent] = useState("0");
 
   React.useEffect(() => {
-    setCurrentPath(window.location.pathname);
+    changeThePath(window.location.pathname);
     // eslint-disable-next-line
   }, []);
 
@@ -25,32 +25,30 @@ const Filters = () => {
     let gap = 50;
 
     if (e.target.name === "input-min") {
-      if (
-        Number(maxInput) - gap > Number(e.target.value) &&
+      Number(maxInput) - gap > Number(e.target.value) &&
         e.target.value > 0 &&
-        e.target.value <= 980
-      ) {
-        setMinInput(e.target.value.replace(/^0+/, ""));
-      }
+        e.target.value <= 980 &&
+        changePreferences("minInput", e.target.value.replace(/^0+/, ""));
 
-      e.target.value === "0" && setMinInput(e.target.value);
+      e.target.value === "0" && changePreferences("minInput", e.target.value);
 
-      !e.target.value && setMinInput("0");
+      !e.target.value && changePreferences("minInput", "0");
     }
 
     if (e.target.name === "input-max") {
-      e.target.value <= 1000 && setMaxInput(e.target.value.replace(/^0+/, ""));
+      e.target.value <= 1000 &&
+        changePreferences("maxInput", e.target.value.replace(/^0+/, ""));
 
       setTimeout(() => {
         Number(e.target.value) <= Number(minInput) &&
-          setMaxInput(Number(minInput) + gap);
+          changePreferences("maxInput", Number(minInput) + gap);
 
         Number(e.target.value) > Number(minInput) &&
           e.target.value <= 1000 &&
-          setMaxInput(e.target.value);
+          changePreferences("maxInput", e.target.value);
       }, 700);
 
-      !e.target.value && setMaxInput("1000");
+      !e.target.value && changePreferences("maxInput", "1000");
     }
   };
 
@@ -59,11 +57,34 @@ const Filters = () => {
 
     e.target.name === "range-min" &&
       Number(e.target.value) + gap < Number(maxInput) &&
-      setMinInput(e.target.value);
+      changePreferences("minInput", e.target.value);
 
     e.target.name === "range-max" &&
       Number(e.target.value) > Number(minInput) + gap &&
-      setMaxInput(e.target.value);
+      changePreferences("maxInput", e.target.value);
+  };
+
+  const handlePrefChange = (e) => {
+    switch (e.target.name) {
+      case "dietType":
+        changePreferences("diet", e.target.value);
+        break;
+      case "healthLabel":
+        changePreferences("health", e.target.value);
+        break;
+      case "mealType":
+        changePreferences("meal", e.target.value);
+        break;
+      case "cuisineType":
+        changePreferences("cuisine", e.target.value);
+        break;
+      case "dishType":
+        changePreferences("dish", e.target.value);
+        break;
+
+      default:
+        console.log("Switch in a Checkboxes");
+    }
   };
 
   if (!isModal && email) {
@@ -71,7 +92,7 @@ const Filters = () => {
       <main>
         <section className="recipes-container">
           <div className="recipes-center no-select">
-            <PreferencesFilter />
+            <PreferencesFilter handlePrefChange={handlePrefChange} />
             <RangeFilter
               handleInput={handleInput}
               checkRangeValue={checkRangeValue}
@@ -93,4 +114,4 @@ const Filters = () => {
   );
 };
 
-export default Filters;
+export default Checkboxes;

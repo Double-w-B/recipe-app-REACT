@@ -1,19 +1,19 @@
 /* Components */
 import Filters from "./Filters";
-import Error from "./Error";
 import ExactRecipe from "./ExactRecipe";
 import Footer from "./Footer";
-import Loading from "./Loading";
 import Navbar from "./Navbar";
 import Recipes from "./Recipes";
 import SingleRecipe from "./SingleRecipe";
-import GreetingModal from "./GreetingModal";
+import NewsletterModal from "./NewsletterModal";
+import Loading from "./Loading";
+import Error from "./Error";
 import LocalRecipes from "./localSavedRecipes/LocalRecipes";
 import LocalSingleRecipe from "./localSavedRecipes/LocalSingleRecipe";
 import LocalExactRecipe from "./localSavedRecipes/LocalExactRecipe";
-import LocalStorage from "./localSavedRecipes/LocalStorage";
+import LocalStorageBtn from "./localSavedRecipes/LocalStorageBtn";
 
-/* Images */
+/* Icons */
 import { GiRiceCooker } from "react-icons/gi";
 import { BiTime } from "react-icons/bi";
 import { FiExternalLink } from "react-icons/fi";
@@ -26,20 +26,20 @@ import { GiHotMeal } from "react-icons/gi";
 import { GiKnifeFork } from "react-icons/gi";
 import { HiOutlineMail } from "react-icons/hi";
 import { FaRegWindowClose } from "react-icons/fa";
-import { FaSearch } from "react-icons/fa";
 import { BsInfoCircle } from "react-icons/bs";
+import { FaSearch } from "react-icons/fa";
 
 export {
   Filters,
-  Error,
   ExactRecipe,
   Footer,
-  Loading,
   Navbar,
   Recipes,
-  GreetingModal,
+  NewsletterModal,
   SingleRecipe,
-  LocalStorage,
+  Loading,
+  Error,
+  LocalStorageBtn,
   LocalRecipes,
   LocalSingleRecipe,
   LocalExactRecipe,
@@ -55,6 +55,6 @@ export {
   GiKnifeFork,
   HiOutlineMail,
   FaRegWindowClose,
-  FaSearch,
   BsInfoCircle,
+  FaSearch,
 };

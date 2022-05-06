@@ -1,21 +1,22 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { LocalSingleRecipe } from "../index";
-import { AppContext } from "../../context/context";
 import { Link } from "react-router-dom";
+import { LocalSingleRecipe } from "../";
+import { AppContext } from "../../context/context";
 import recipeImg from "../../images/recipe.png";
 
 const LocalRecipes = () => {
-  const { localStrRecipes, setCurrentPath, currentPath } =
+  const { localStrRecipes, changeThePath, currentPath } =
     useContext(AppContext);
 
   React.useEffect(() => {
     if (currentPath !== "/savedrecipes") {
-      setCurrentPath("");
+      changeThePath("");
       setTimeout(() => {
-        setCurrentPath(window.location.pathname);
+        changeThePath(window.location.pathname);
       }, 500);
     }
+    // eslint-disable-next-line
   }, []);
 
   if (localStrRecipes.length < 1) {
@@ -53,7 +54,6 @@ const LocalRecipes = () => {
 
 const Wrapper = styled.section`
   height: 84vh;
-  /* min-height: 84vh; */
   h1 {
     margin-top: 3rem;
     text-align: center;

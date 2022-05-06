@@ -1,16 +1,15 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { AppContext } from "../../context/context";
 import {
   RecipeIngredients,
   RecipeNutrition,
   RecipeInfo,
-} from "../smallComponents";
+} from "../small_Components";
 
 const LocalExactRecipe = () => {
-  const { localStrRecipes, setLocalStrRecipes, localStrPath, setLocalStrPath } =
+  const { localStrRecipes, updateLocalStrRecipes, localStrPath } =
     useContext(AppContext);
-
-  const [checked, setChecked] = useState(false);
+  const { newLocalStrPath } = useContext(AppContext);
 
   React.useEffect(() => {
     document.querySelector("body").scrollTo(0, 0);
@@ -21,27 +20,14 @@ const LocalExactRecipe = () => {
     return uri.substring(51) === localStrPath;
   });
 
-  React.useEffect(() => {
-    Object.values(localStrRecipes).find(
-      (item) =>
-        item.recipe.uri.substring(51) === found.recipe.uri.substring(51) &&
-        setChecked(true)
-    );
-  });
-
-  React.useEffect(() => {
-    document.querySelector("body").scrollTo(0, 0);
-  }, []);
-
   const checkStorage = (found) => {
     const filteredStorage = () =>
       Object.values(localStrRecipes).filter(
         (item) =>
           item.recipe.uri.substring(51) !== found.recipe.uri.substring(51)
       );
-
-    checked && setLocalStrRecipes(filteredStorage());
-    setLocalStrPath("myrecipes");
+    updateLocalStrRecipes(filteredStorage());
+    newLocalStrPath("removedRecipe");
   };
 
   const { image, label } = found.recipe;
