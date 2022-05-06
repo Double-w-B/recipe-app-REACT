@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import Navbar from "./Navbar";
 import Recipes from "./Recipes";
 import SingleRecipe from "./SingleRecipe";
-import GreetingModal from "./GreetingModal";
+import NewsletterModal from "./NewsletterModal";
 import Loading from "./Loading";
 import Error from "./Error";
 import LocalRecipes from "./localSavedRecipes/LocalRecipes";
@@ -35,7 +35,7 @@ export {
   Footer,
   Navbar,
   Recipes,
-  GreetingModal,
+  NewsletterModal,
   SingleRecipe,
   Loading,
   Error,

@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Navbar, Recipes, Footer } from "./components";
 import { Filters, LocalExactRecipe, ExactRecipe } from "./components";
-import { LocalRecipes, LocalStorageBtn, GreetingModal } from "./components";
+import { LocalRecipes, LocalStorageBtn, NewsletterModal } from "./components";
 import { Error } from "./components";
 import { AppContext } from "./context/context";
 
@@ -11,7 +11,7 @@ function App() {
 
   return (
     <Router>
-      <GreetingModal />
+      <NewsletterModal />
       <Navbar></Navbar>
       <Routes>
         <Route exact path="/" element={<Filters />} />

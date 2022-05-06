@@ -6,14 +6,11 @@ import { AppContext } from "../context/context";
 import { NavbarResults, NavbarInfoIcon } from "./small_Components";
 import logo from "../images/logo.jpg";
 
-
 const Navbar = () => {
-  const { fetchRecipes, email, isModal, recipesData, query, lastQuery } =
+  const { fetchRecipes, email, isModal, query, lastQuery } =
     useContext(AppContext);
-  const { newQueryPath, queryPath, isLoading, isError, currentPath } =
-    useContext(AppContext);
-  const { localStrPath, loadingToFalse, handleError, createQuery } =
-    useContext(AppContext);
+  const { newQueryPath, isLoading, isError } = useContext(AppContext);
+  const { loadingToFalse, handleError, createQuery } = useContext(AppContext);
   const { clearQuery, handleQuery } = useContext(AppContext);
 
   const [showInfo, setShowInfo] = React.useState(true);
@@ -88,10 +85,6 @@ const Navbar = () => {
   };
 
   if (!isModal && email) {
-    const firstPath = `/recipes/${queryPath}`;
-    const secondPath = `/savedrecipes`;
-    const thirdPath = `/savedrecipes/${localStrPath}`;
-
     return (
       <section className="navbar">
         <div className="logo no-select">
@@ -124,42 +117,6 @@ const Navbar = () => {
           setShowInfo={setShowInfo}
         />
         <NavbarInfoIcon showInfo={showInfo} setShowInfo={setShowInfo} />
-        {/* <div
-          className={
-            !isError &&
-            !isLoading &&
-            (currentPath === firstPath ||
-              currentPath === secondPath ||
-              currentPath === thirdPath)
-              ? "results show no-select"
-              : "results no-select"
-          }
-        >
-          {currentPath === firstPath && (
-            <>
-              <p>
-                {window.innerWidth > 430 && "Results for"}{" "}
-                <span>{changeQuery(lastQuery)}</span>:{" "}
-              </p>
-              <p>
-                {recipesData &&
-                  recipesData.count
-                    .toString()
-                    .replace(/(?!^)(?=(?:\d{3})+(?:\.|$))/gm, " ")}{" "}
-                {recipesData.count > 1 ? "recipes" : "recipe"}
-              </p>
-            </>
-          )}
-          {(currentPath === secondPath || currentPath === thirdPath) && (
-            <p
-              className="saved-rec"
-              style={{ textAlign: "center", marginRight: "0.5rem" }}
-            >
-              <img src={star} alt="star" /> Saved{" "}
-              {window.innerWidth < 400 && <br />} Recipes
-            </p>
-          )}
-        </div> */}
       </section>
     );
   }
