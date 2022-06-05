@@ -1,4 +1,31 @@
-@media screen and (max-width: 1365px) {
+@media screen and (max-width: 1920px) {
+  .recipes-center {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 1800px) {
+  .recipes-center {
+    grid-gap: 1rem;
+  }
+
+  .ex-recipe-center {
+    width: 75%;
+  }
+}
+
+@media screen and (max-width: 1700px) {
+  .recipes-center {
+    grid-gap: 0;
+    width: 75%;
+  }
+
+  .ex-recipe-center {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 1530px) {
   .recipes-container {
     padding: 3rem 7rem 0.5rem 7rem;
   }
@@ -9,10 +36,11 @@
   }
 
   .single-recipe {
-    /* min-width: 16rem;
-    max-width: 16rem;
-    max-height: 13rem; */
     border: 8px solid rgba(255, 255, 255, 0.5);
+  }
+
+  .ex-recipe-center {
+    width: 85%;
   }
 
   .ex-total-ingredients {

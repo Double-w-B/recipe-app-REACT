@@ -1,9 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Navbar, Recipes, Footer } from "./components";
-import { Filters, LocalExactRecipe, ExactRecipe } from "./components";
-import { LocalRecipes, LocalStorageBtn, NewsletterModal } from "./components";
-import { Error } from "./components";
+import * as componentsModule from "./components";
 import { AppContext } from "./context/context";
 
 function App() {
@@ -11,26 +8,34 @@ function App() {
 
   return (
     <Router>
-      <NewsletterModal />
-      <Navbar></Navbar>
+      <componentsModule.NewsletterModal />
+      <componentsModule.Navbar />
       <Routes>
-        <Route exact path="/" element={<Filters />} />
-        <Route exact path={`/recipes/${queryPath}`} element={<Recipes />} />
+        <Route exact path="/" element={<componentsModule.Home />} />
+        <Route
+          exact
+          path={`/recipes/${queryPath}`}
+          element={<componentsModule.SearchResults />}
+        />
         <Route
           exact
           path={`/recipes/${queryPath}/${path}`}
-          element={<ExactRecipe />}
+          element={<componentsModule.SelectedRecipe />}
         />
-        <Route exact path="/savedrecipes" element={<LocalRecipes />} />
+        <Route
+          exact
+          path="/savedrecipes"
+          element={<componentsModule.SavedRecipesResults />}
+        />
         <Route
           exact
           path={`/savedrecipes/${localStrPath}`}
-          element={<LocalExactRecipe />}
+          element={<componentsModule.SavedSelectedRecipe />}
         />
-        <Route exact path="*" element={<Error />} />
+        <Route exact path="*" element={<componentsModule.Error />} />
       </Routes>
-      <LocalStorageBtn />
-      <Footer />
+      <componentsModule.SavedRecipesBtn />
+      <componentsModule.Footer />
     </Router>
   );
 }

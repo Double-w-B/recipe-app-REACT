@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
 import { AppContext } from "../context/context";
-import { NavbarResults, NavbarInfoIcon } from "./small_Components";
+import { NavbarResults, NavbarInfoIcon } from "./helpers";
 import logo from "../images/logo.jpg";
 
 const Navbar = () => {
@@ -14,16 +14,6 @@ const Navbar = () => {
   const { clearQuery, handleQuery } = useContext(AppContext);
 
   const [showInfo, setShowInfo] = React.useState(true);
-
-  /*   const [width, setWidth] = React.useState(window.innerWidth);
-
-  React.useEffect(() => {
-    function handleResize() {
-      setWidth(window.innerWidth);
-    }
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }); */
 
   const filterQuery = (text) => {
     const newQuery = text
@@ -95,10 +85,10 @@ const Navbar = () => {
         <form onSubmit={handleSubmit}>
           <input
             type="text"
-            placeholder="find a recipe for your mood"
+            placeholder="recipe, ingredient, keyword ..."
             onFocus={(e) => (e.target.placeholder = "")}
             onBlur={(e) =>
-              (e.target.placeholder = "find a recipe for your mood")
+              (e.target.placeholder = "recipe, ingredient, keyword ...")
             }
             value={query}
             onChange={(e) => createQuery(e.target.value)}

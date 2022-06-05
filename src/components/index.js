@@ -1,17 +1,17 @@
 /* Components */
-import Filters from "./Filters";
-import ExactRecipe from "./ExactRecipe";
+import Home from "./pages/Home";
+import SelectedRecipe from "./pages/SelectedRecipe";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-import Recipes from "./Recipes";
-import SingleRecipe from "./SingleRecipe";
+import SearchResults from "./pages/SearchResults";
+import SearchSingleResult from "./SearchSingleResult";
 import NewsletterModal from "./NewsletterModal";
 import Loading from "./Loading";
-import Error from "./Error";
-import LocalRecipes from "./localSavedRecipes/LocalRecipes";
-import LocalSingleRecipe from "./localSavedRecipes/LocalSingleRecipe";
-import LocalExactRecipe from "./localSavedRecipes/LocalExactRecipe";
-import LocalStorageBtn from "./localSavedRecipes/LocalStorageBtn";
+import Error from "./pages/Error";
+import SavedRecipesResults from "./savedRecipes/SavedRecipesResults";
+import SavedSingleRecipe from "./savedRecipes/SavedSingleRecipe";
+import SavedSelectedRecipe from "./savedRecipes/SavedSelectedRecipe";
+import SavedRecipesBtn from "./savedRecipes/SavedRecipesBtn";
 
 /* Icons */
 import { GiRiceCooker } from "react-icons/gi";
@@ -30,19 +30,19 @@ import { BsInfoCircle } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
 
 export {
-  Filters,
-  ExactRecipe,
+  Home,
+  SelectedRecipe,
   Footer,
   Navbar,
-  Recipes,
+  SearchResults,
   NewsletterModal,
-  SingleRecipe,
+  SearchSingleResult,
   Loading,
   Error,
-  LocalStorageBtn,
-  LocalRecipes,
-  LocalSingleRecipe,
-  LocalExactRecipe,
+  SavedRecipesBtn,
+  SavedRecipesResults,
+  SavedSingleRecipe,
+  SavedSelectedRecipe,
   GiRiceCooker,
   BiTime,
   FiExternalLink,

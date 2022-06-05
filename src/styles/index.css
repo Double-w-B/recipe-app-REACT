@@ -112,17 +112,21 @@ body {
 .navbar form input::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: #000;
-  opacity: 0.3; /* Firefox */
+  opacity: 0.3;
+  /* Firefox */
+  font-style: italic;
 }
 
 .navbar form input:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
   color: rgba(0, 0, 0, 0.3);
+  font-style: italic;
 }
 
 .navbar form input::-ms-input-placeholder {
   /* Microsoft Edge */
   color: rgba(0, 0, 0, 0.3);
+  font-style: italic;
 }
 
 form a,
@@ -174,11 +178,9 @@ form button * {
   opacity: 0;
 }
 
-.results{
+.results {
   cursor: pointer;
 }
-
-
 
 .results .saved-rec {
   display: flex;
@@ -205,20 +207,21 @@ form button * {
   font-size: 1.8rem;
   color: var(--yellow-clr);
 }
-.results--info-btn *{
+
+.results--info-btn * {
   cursor: pointer;
 }
 
-.results--info-btn *:active{
-transform: scale(0.7);
+.results--info-btn *:active {
+  transform: scale(0.7);
 }
 
 .results.show {
   right: 0;
   opacity: 1;
 }
+
 .results--info-btn.hide {
-  /* right: -100%; */
   opacity: 0;
 }
 
@@ -240,13 +243,16 @@ transform: scale(0.7);
   justify-items: center;
 }
 
+.recipes-center {
+  grid-gap: 2rem;
+}
+
 .loadMore-btn {
   width: 16rem;
   min-width: 16rem;
   min-height: 13rem;
   background-color: var(--light-grey-bcg-clr);
   font-size: 2.2rem;
-
   margin: 1rem;
   border: 10px solid rgba(255, 255, 255, 0.1);
   box-shadow: var(--secondary-shadow);
@@ -359,7 +365,7 @@ transform: scale(0.7);
 }
 
 .ex-recipe-center {
-  width: 85%;
+  width: 70%;
   margin: 0 auto;
   display: grid;
   padding: 1rem;
@@ -431,6 +437,7 @@ transform: scale(0.7);
 .checkbox-container img {
   cursor: pointer;
 }
+
 .checkbox-container img:active {
   transform: scale(0.8);
 }
@@ -697,6 +704,7 @@ transform: scale(0.7);
   justify-content: center;
   background-color: var(--light-grey-bcg-clr);
   color: rgba(0, 0, 0, 0.8);
+  color: #303030;
 }
 
 .greeting img {
@@ -705,6 +713,7 @@ transform: scale(0.7);
 }
 
 .greeting h1 {
+  justify-self: center;
   color: var(--yellow-clr);
 }
 
@@ -726,6 +735,23 @@ transform: scale(0.7);
   text-align: center;
   font-size: 1.2rem;
   color: var(--red-clr);
+}
+
+.container form input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #000;
+  opacity: 0.3;
+  /* Firefox */
+}
+
+.container form input:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.container form input::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: rgba(0, 0, 0, 0.3);
 }
 
 .greeting button {

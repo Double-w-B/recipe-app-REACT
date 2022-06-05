@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./CSS/index.css";
-import "./CSS/media.css";
+import "./styles/index.css";
+import "./styles/media.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { AppProvider } from "./context/context";

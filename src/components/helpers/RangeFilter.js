@@ -95,10 +95,11 @@ const RangeFilter = ({
   );
 };
 
+
 const Wrapper = styled.div`
-  width: 16rem;
-  min-width: 16rem;
-  min-height: 13rem;
+  width: 20rem;
+  min-width: 20rem;
+  min-height: 17rem;
   margin: 1rem;
   background-color: rgba(245, 245, 245, 0.6);
   font-size: 3rem;
@@ -296,8 +297,16 @@ const Wrapper = styled.div`
   }
 
   /* ----------- Media Queries ----------- */
+  @media screen and (max-width: 1700px) {
+    width: 19rem;
+    min-width: 19rem;
+    min-height: 16rem;
+  }
 
-  @media screen and (max-width: 1365px) {
+  @media screen and (max-width: 1530px) {
+    width: 16rem;
+    min-width: 16rem;
+    min-height: 13rem;
     .lastLabel {
       font-size: 2.1rem;
     }

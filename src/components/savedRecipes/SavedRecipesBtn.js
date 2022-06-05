@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { AppContext } from "../../context/context";
 import star from "../../images/checked.png";
 
-const LocalStorage = () => {
+const SavedRecipesBtn = () => {
   const { rotate, isError, isLoading, currentPath, path, queryPath, email } =
     useContext(AppContext);
 
@@ -72,4 +72,4 @@ const Wrapper = styled.div`
   }
 `;
 
-export default LocalStorage;
+export default SavedRecipesBtn;

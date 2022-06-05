@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { GiKnifeFork, GiRiceCooker } from "../";
 import { FiExternalLink, HiOutlineCalculator } from "../";
-import CookingTime from "../small_Components/CookingTime";
+import CookingTime from "../helpers/CookingTime";
 import checkedIco from "../../images/checked.png";
 import uncheckedIco from "../../images/unchecked.png";
 import { AppContext } from "../../context/context";
