@@ -14,20 +14,17 @@ import SavedSelectedRecipe from "./savedRecipes/SavedSelectedRecipe";
 import SavedRecipesBtn from "./savedRecipes/SavedRecipesBtn";
 
 /* Icons */
-import { GiRiceCooker } from "react-icons/gi";
 import { BiTime } from "react-icons/bi";
 import { FiExternalLink } from "react-icons/fi";
 import { HiOutlineCalculator } from "react-icons/hi";
 import { BiRefresh } from "react-icons/bi";
-import { GiFruitBowl } from "react-icons/gi";
-import { VscSettings } from "react-icons/vsc";
-import { GiMeal } from "react-icons/gi";
-import { GiHotMeal } from "react-icons/gi";
-import { GiKnifeFork } from "react-icons/gi";
 import { HiOutlineMail } from "react-icons/hi";
 import { FaRegWindowClose } from "react-icons/fa";
 import { BsInfoCircle } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
+import { GiKnifeFork } from "react-icons/gi";
+import { GiRiceCooker } from "react-icons/gi";
+
 
 export {
   Home,
@@ -48,10 +45,9 @@ export {
   FiExternalLink,
   HiOutlineCalculator,
   BiRefresh,
-  GiFruitBowl,
-  VscSettings,
-  GiMeal,
-  GiHotMeal,
+  // GiFruitBowl,
+  // VscSettings,
+  // GiHotMeal,
   GiKnifeFork,
   HiOutlineMail,
   FaRegWindowClose,

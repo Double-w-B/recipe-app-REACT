@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
 import { AppContext } from "../context/context";
 import { NavbarResults, NavbarInfoIcon } from "./helpers";
-import logo from "../images/logo.jpg";
+import logoImg from "../images/logo.jpg";
 
 const Navbar = () => {
   const { fetchRecipes, email, isModal, query, lastQuery } =
@@ -79,7 +79,7 @@ const Navbar = () => {
       <section className="navbar">
         <div className="logo no-select">
           <Link to="/">
-            <img src={logo} alt="logo" onClick={handleClick} />
+            <img src={logoImg} alt="logo" onClick={handleClick} />
           </Link>
         </div>
         <form onSubmit={handleSubmit}>
@@ -97,8 +97,6 @@ const Navbar = () => {
           />
           {conditionalLink()}
         </form>
-
-        {/* {<div className="displayWidth">{width} px</div>} */}
 
         <NavbarResults
           filterQuery={filterQuery}

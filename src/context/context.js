@@ -249,8 +249,6 @@ const AppProvider = ({ children }) => {
 
         nextPage(data, nextPageLink);
 
-        // console.log(data);
-
         dispatch({
           type: actionsModule.GET_ALL_RECIPES,
           payload: [...state.recipes, ...recipesArray],

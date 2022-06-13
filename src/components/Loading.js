@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import loadingImage from "../images/preloader.gif";
+import preloaderImg from "../images/preloader.gif";
 
 const Loading = () => {
   return (
     <main>
       <Wrapper>
-        <img src={loadingImage} alt="preloader" />
+        <img src={preloaderImg} alt="preloader" />
       </Wrapper>
     </main>
   );
@@ -21,6 +21,7 @@ const Wrapper = styled.div`
   @media screen and (max-width: 992px) {
     & img {
       margin-left: 2.5rem;
+      color: transparent;
     }
   }
 `;

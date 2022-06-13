@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import { GiKnifeFork, GiRiceCooker } from "../";
-import { FiExternalLink, HiOutlineCalculator } from "../";
+import * as IconsModule from "../";
 import CookingTime from "../helpers/CookingTime";
 import checkedIco from "../../images/checked.png";
 import uncheckedIco from "../../images/unchecked.png";
@@ -58,18 +57,18 @@ const RecipeInfo = ({ checked, setChecked, checkStorage, found }) => {
       <div className="ex-short-info">
         {totalTime > 0 && <CookingTime totalTime={totalTime} />}
         <p>
-          <GiKnifeFork />
+          <IconsModule.GiKnifeFork />
           {mealType[0]}
         </p>
         <p>
-          <GiRiceCooker />
+          <IconsModule.GiRiceCooker />
           {dietLabels
             .map((label) => label.toString().toLowerCase())
             .join(", ")}{" "}
           {cuisineType[0]} cuisine
         </p>
         <p title={`Total: ${Math.round(calories)} kcal`} className="calories">
-          <HiOutlineCalculator />
+          <IconsModule.HiOutlineCalculator />
           {Math.round(calories / portion)} kcal (per serving)
         </p>
       </div>
@@ -82,7 +81,7 @@ const RecipeInfo = ({ checked, setChecked, checkStorage, found }) => {
         <p>
           Full recipe:
           <a href={url} target="_blank" rel="noopener noreferrer">
-            {source} <FiExternalLink />
+            {source} <IconsModule.FiExternalLink />
           </a>
         </p>
         <div
