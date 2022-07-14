@@ -7,6 +7,7 @@ import star from "../../images/checked.png";
 const SavedRecipesBtn = () => {
   const { rotate, isError, isLoading, currentPath, path, queryPath, email } =
     useContext(AppContext);
+  const { clearQuery } = useContext(AppContext);
 
   const firstPath = "/";
   const secondPath = `/recipes/${queryPath}`;
@@ -25,7 +26,7 @@ const SavedRecipesBtn = () => {
           : "no-select"
       }
     >
-      <Link to="/savedrecipes">
+      <Link to="/savedrecipes" onClick={() => clearQuery()}>
         <img src={star} alt="star" className={rotate ? "rotate" : ""} />
       </Link>
     </Wrapper>
@@ -35,17 +36,25 @@ const SavedRecipesBtn = () => {
 const Wrapper = styled.div`
   width: 3rem;
   height: 3rem;
+  border-radius: 50%;
+  padding: 0.3rem;
   display: grid;
   place-items: center;
   position: fixed;
   right: 1.18rem;
+  right: 1.5rem;
   bottom: 4rem;
   bottom: 1.18rem;
   background-color: rgba(0, 0, 0, 0.4);
   transition: all 0.5s ease-out;
   opacity: 0;
+
   &.show {
     opacity: 1;
+  }
+  & a img {
+    width: 100%;
+    transform: translateY(-1px);
   }
   & a img:active {
     transform: scale(0.8);
@@ -59,11 +68,11 @@ const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 900px) {
-    top: 1rem;
-    left: -100%;
+    top: 0.5rem;
+    left: 0.5rem;
 
     &.show {
-      left: 0;
+      left: 0.5rem;
     }
   }
 

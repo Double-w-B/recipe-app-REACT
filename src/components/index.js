@@ -20,11 +20,9 @@ import { HiOutlineCalculator } from "react-icons/hi";
 import { BiRefresh } from "react-icons/bi";
 import { HiOutlineMail } from "react-icons/hi";
 import { FaRegWindowClose } from "react-icons/fa";
-import { BsInfoCircle } from "react-icons/bs";
 import { FaSearch } from "react-icons/fa";
 import { GiKnifeFork } from "react-icons/gi";
 import { GiRiceCooker } from "react-icons/gi";
-
 
 export {
   Home,
@@ -45,12 +43,8 @@ export {
   FiExternalLink,
   HiOutlineCalculator,
   BiRefresh,
-  // GiFruitBowl,
-  // VscSettings,
-  // GiHotMeal,
   GiKnifeFork,
   HiOutlineMail,
   FaRegWindowClose,
-  BsInfoCircle,
   FaSearch,
 };

@@ -10,6 +10,7 @@ const RecipeInfo = ({ checked, setChecked, checkStorage, found }) => {
   const { currentPath } = useContext(AppContext);
 
   const [copied, setCopied] = useState(false);
+  const [hover, setHover] = useState(false);
 
   const { label, source, cuisineType, yield: portion } = found.recipe;
   const { dietLabels, mealType, calories, totalTime } = found.recipe;
@@ -22,12 +23,30 @@ const RecipeInfo = ({ checked, setChecked, checkStorage, found }) => {
     }, 1000);
   };
 
+  const switchBackgroundClr = () => {
+    if (checked) {
+      return "checkbox-container background no-select";
+    } else {
+      return "checkbox-container no-select";
+    }
+  };
+
   return (
     <div className="ex-recipe-info">
-      <div className="checkbox-container no-select">
+      <div
+        className={switchBackgroundClr()}
+        style={{
+          backgroundColor:
+            currentPath === "/savedrecipes" ? "rgba(0,0,0,0.4)" : undefined,
+        }}
+      >
         {currentPath === "/savedrecipes" ? (
           <>
-            <Link to="/savedrecipes">
+            <Link
+              to="/savedrecipes"
+              onMouseOver={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
+            >
               <img
                 src={checkedIco}
                 alt="icon"
@@ -36,7 +55,7 @@ const RecipeInfo = ({ checked, setChecked, checkStorage, found }) => {
                 }}
               />
             </Link>
-            <p>Remove</p>
+            <p className={hover ? "show" : undefined}>Remove</p>
           </>
         ) : (
           <>
@@ -47,13 +66,16 @@ const RecipeInfo = ({ checked, setChecked, checkStorage, found }) => {
                 checkStorage(found);
                 setChecked(!checked);
               }}
+              onMouseOver={() => setHover(true)}
+              onMouseLeave={() => setHover(false)}
             />
-            <p>{checked ? "Saved!" : "Save"}</p>
+            <p className={hover ? "show" : undefined}>
+              {checked ? "Saved!" : "Save"}
+            </p>
           </>
         )}
       </div>
       <h1>{label}</h1>
-
       <div className="ex-short-info">
         {totalTime > 0 && <CookingTime totalTime={totalTime} />}
         <p>
@@ -72,11 +94,9 @@ const RecipeInfo = ({ checked, setChecked, checkStorage, found }) => {
           {Math.round(calories / portion)} kcal (per serving)
         </p>
       </div>
-
       <div className="ex-health-labels">
         <p>{healthLabels.map((label) => label).join(", ")}</p>
       </div>
-
       <div className="link">
         <p>
           Full recipe:

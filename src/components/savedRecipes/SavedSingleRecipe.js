@@ -12,7 +12,7 @@ const SavedSingleRecipe = ({ item, id }) => {
   const {
     recipe: { image, label, source },
   } = item;
-
+  
   const onLoad = React.useCallback(() => {
     setRecipeImg(image);
   }, [image]);

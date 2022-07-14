@@ -12,7 +12,7 @@ const SearchSingleResult = ({ item, id }) => {
   const {
     recipe: { image, label, source },
   } = item;
-
+  
   const handleMouseDown = () => {
     newPath(id);
     localStorage.setItem("path", JSON.stringify(id));

@@ -172,7 +172,7 @@ form button * {
   color: #fff;
   position: absolute;
   right: -100%;
-  top: 1rem;
+  top: 0.5rem;
   background-color: rgba(0, 0, 0, 0.4);
   transition: all 0.5s ease-out;
   opacity: 0;
@@ -180,6 +180,8 @@ form button * {
 
 .results {
   cursor: pointer;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
 }
 
 .results .saved-rec {
@@ -195,24 +197,30 @@ form button * {
 
 .results p span {
   font-size: 1.2rem;
-  color: var(--yellow-clr);
+  color: #f5c855;
   font-style: italic;
   font-weight: bold;
   text-transform: lowercase;
 }
 
 .results--info-btn {
-  right: 0;
+  border-radius: 50%;
+  right: 0.5rem;
   opacity: 1;
   font-size: 1.8rem;
-  color: var(--yellow-clr);
+}
+
+.results--info-btn img {
+  color: #f5c855;
+  width: 30px;
+  transform: translateX(-2px);
 }
 
 .results--info-btn * {
   cursor: pointer;
 }
 
-.results--info-btn *:active {
+.results--info-btn img:active {
   transform: scale(0.7);
 }
 
@@ -301,7 +309,6 @@ form button * {
   box-shadow: var(--secondary-shadow);
 }
 
-/* .single-recipe a img { */
 .single-recipe img {
   width: 100%;
   height: 100%;
@@ -416,12 +423,12 @@ form button * {
 
 .checkbox-container {
   width: 12%;
-  min-width: 75px;
-  height: 25%;
-  min-height: 80px;
-  border-radius: 0 0 0.7rem 0.7rem;
-  border: 2px solid rgba(0, 0, 0, 0.3);
-  border-top: none;
+  max-width: 55px;
+  height: 20%;
+  max-height: 55px;
+  min-width: 45px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -430,13 +437,22 @@ form button * {
   background-color: var(--light-grey-bcg-clr);
   position: absolute;
   right: 0;
-  top: -1rem;
-  overflow: hidden;
-  box-shadow: var(--checkBox-shadow);
+  top: 0;
+}
+
+.checkbox-container a {
+  display: grid;
+  place-items: center;
+}
+
+.checkbox-container.background {
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .checkbox-container img {
   cursor: pointer;
+  width: 35px;
+  transform: translateY(-1px);
 }
 
 .checkbox-container img:active {
@@ -447,12 +463,14 @@ form button * {
   cursor: default;
   font-size: 0.9rem;
   position: absolute;
-  bottom: -2rem;
+  bottom: -1.5rem;
   left: 50;
+  opacity: 0;
 }
 
-.checkbox-container:hover p {
-  bottom: -0.05rem;
+.checkbox-container p.show,
+.checkbox-container a p.show {
+  opacity: 1;
 }
 
 .ex-short-info {
@@ -485,7 +503,7 @@ form button * {
 }
 
 /* ----------- LINK  ----------- */
-/* .ex-recipe-info */
+/* ex-recipe-info */
 
 .link {
   display: flex;
@@ -631,16 +649,8 @@ form button * {
   justify-content: center;
 }
 
-/* .ex-ingredient:nth-child(even) {
-  background: #ccc;
-}
-.ex-ingredient:nth-child(odd) {
-  background: #fff;
-} */
-
 .ex-ingredient-img {
   width: 60%;
-  /* height: 50%; */
   border-radius: 50%;
   border: 2px solid var(--light-grey-bcg-clr);
   overflow: hidden;

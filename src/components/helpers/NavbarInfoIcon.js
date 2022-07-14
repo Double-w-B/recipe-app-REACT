@@ -1,5 +1,5 @@
 import React from "react";
-import { BsInfoCircle } from "../index";
+import InfoIcon from "../../images/info.png"
 import { AppContext } from "../../context/context";
 
 const NavbarInfoIcon = ({ showInfo, setShowInfo }) => {
@@ -17,7 +17,11 @@ const NavbarInfoIcon = ({ showInfo, setShowInfo }) => {
             : "results--info-btn no-select"
         }
       >
-        <BsInfoCircle onClick={() => setShowInfo(!showInfo)} />
+        <img
+          src={InfoIcon}
+          alt="info icon"
+          onClick={() => setShowInfo(!showInfo)}
+        />
       </div>
     )
   );

@@ -217,10 +217,6 @@
     grid-template-rows: repeat(auto-fill, minmax(300px, 1fr));
   }
 
-  .checkbox-container p {
-    bottom: -0.05rem;
-  }
-
   .ex-recipe-info {
     grid-column: 1/6;
     grid-row: 1/2;
@@ -281,11 +277,6 @@
     font-size: 1.4rem;
   }
 
-  /* .ex-total-nutrients {
-    display: flex;
-    flex-wrap: wrap;
-  } */
-
   .ex-total-nutrients p {
     font-size: 1.05rem;
   }
@@ -294,9 +285,6 @@
     background-color: rgba(246, 186, 5, 0.6);
   }
 
-  .checkbox-container {
-    min-height: 75px;
-  }
 
   .recipes-container {
     padding: 5rem 3rem 2rem 3rem;
@@ -518,8 +506,14 @@
   }
 
   .checkbox-container {
-    height: 21%;
-    min-height: 60px;
+    max-height: 50px;
+    max-width: 50px;
+  }
+  .checkbox-container img {
+    width: 30px;
+  }
+  .checkbox-container img:hover + p {
+    opacity: 0;
   }
 
   link div p:first-child {
@@ -565,11 +559,6 @@
 
   .ex-recipe-center {
     padding: 0.5rem;
-  }
-
-  .checkbox-container {
-    top: -0.5rem;
-    right: 0.1rem;
   }
 
   .ex-total-ingredients {
@@ -645,14 +634,6 @@
     padding: 6rem 0.5rem 3rem 0.5rem;
   }
 
-  .checkbox-container {
-    height: 18%;
-    min-height: 65px;
-    width: 12%;
-    min-width: 60px;
-    right: -0.5rem;
-  }
-
   .checkbox-container p {
     font-size: 0.8rem;
   }
@@ -692,9 +673,12 @@
   }
 }
 
-@media screen and (max-width: 320px) {
-  /* .single-recipe {
-    min-height: 14rem;
-    max-height: 15rem;
-  } */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }

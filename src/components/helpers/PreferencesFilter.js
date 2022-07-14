@@ -44,7 +44,6 @@ const PreferencesFilter = ({ handlePrefChange }) => {
   });
 };
 
-
 const Wrapper = styled.div`
   width: 20rem;
   min-width: 20rem;
@@ -110,6 +109,7 @@ const Wrapper = styled.div`
     font-size: 2.2rem;
     color: rgba(0, 0, 0, 0.7);
     transform: translateY(3rem);
+
     & *:first-child {
       color: var(--yellow-clr);
       margin-right: 1rem;
@@ -170,6 +170,14 @@ const Wrapper = styled.div`
     &:hover {
       label {
         transform: translateY(1.1rem);
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+      label {
+        & *:first-child {
+          font-size: 2.5rem;
+        }
       }
     }
 

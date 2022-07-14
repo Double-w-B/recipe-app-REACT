@@ -95,7 +95,6 @@ const RangeFilter = ({
   );
 };
 
-
 const Wrapper = styled.div`
   width: 20rem;
   min-width: 20rem;
@@ -128,12 +127,13 @@ const Wrapper = styled.div`
 
   .lastLabel {
     line-height: 1;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
     display: block;
     align-items: center;
     font-size: 2.2rem;
     color: rgba(0, 0, 0, 0.7);
     transform: translateY(3rem);
+
     & *:first-child {
       color: var(--yellow-clr);
       margin-right: 1rem;
@@ -336,63 +336,80 @@ const Wrapper = styled.div`
         transform: translateY(1.1rem);
       }
     }
+  }
 
-    @media screen and (max-width: 768px) {
-      border: 2px solid rgba(255, 255, 255, 0.4);
+  @media screen and (max-width: 900px) {
+    .lastLabel {
+      & *:first-child {
+        font-size: 2.5rem;
+      }
+    }
+  }
 
+  @media screen and (max-width: 768px) {
+    border: 2px solid rgba(255, 255, 255, 0.4);
+
+    .lastLabel {
+      font-size: 1.8rem;
+      transform: none;
+      margin-top: 3.5rem;
+    }
+
+    .inputs-wrapper .num-inp-con .field input {
+      font-size: 1.05rem;
+    }
+
+    .lastLabel sup,
+    .inputs-wrapper {
+      opacity: 1;
+    }
+
+    .lastLabel.show {
+      transform: none;
+    }
+
+    &:hover {
       .lastLabel {
-        font-size: 1.8rem;
-        transform: none;
-        margin-top: 3.5rem;
-      }
-
-      .inputs-wrapper .num-inp-con .field input {
-        font-size: 1.05rem;
-      }
-
-      .lastLabel sup,
-      .inputs-wrapper {
-        opacity: 1;
-      }
-
-      .lastLabel.show {
         transform: none;
       }
+    }
+  }
 
-      &:hover {
-        .lastLabel {
-          transform: none;
-        }
-      }
+  @media screen and (max-width: 700px) {
+    width: 15rem;
+    min-width: 15rem;
+    min-height: 13rem;
+
+    .lastLabel {
+      margin-top: 3rem;
     }
 
-    @media screen and (max-width: 700px) {
-      width: 15rem;
-      min-width: 15rem;
-      min-height: 13rem;
-
-      .inputs-wrapper .num-inp-con .field {
-        height: 70%;
-      }
-      .inputs-wrapper .num-inp-con .field input {
-        font-size: 1rem;
-      }
-    }
-    @media screen and (max-width: 600px) {
-      width: 19rem;
-      min-width: 19rem;
-      min-height: 16rem;
-
-      .lastLabel {
-        font-size: 2rem;
-      }
+    .inputs-wrapper {
+      margin-top: 0.2rem;
     }
 
-    @media screen and (max-width: 430px) {
-      width: 17rem;
-      min-width: 17rem;
-      min-height: 15rem;
+    .inputs-wrapper .num-inp-con .field {
+      height: 70%;
     }
+    .inputs-wrapper .num-inp-con .field input {
+      font-size: 1rem;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 19rem;
+    min-width: 19rem;
+    min-height: 16rem;
+
+    .lastLabel {
+      font-size: 2rem;
+    }
+  }
+
+  @media screen and (max-width: 430px) {
+    width: 17rem;
+    min-width: 17rem;
+    min-height: 15rem;
   }
 `;
 
