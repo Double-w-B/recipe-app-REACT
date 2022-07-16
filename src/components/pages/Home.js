@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AppContext } from "../../context/context";
-import { PreferencesFilter, RangeFilter } from "../helpers";
+import * as FiltersModule from "../Filters";
 
 const Home = () => {
   const { email, isModal, minInput, maxInput, changePreferences } =
@@ -92,8 +92,8 @@ const Home = () => {
       <main>
         <section className="recipes-container">
           <div className="recipes-center no-select">
-            <PreferencesFilter handlePrefChange={handlePrefChange} />
-            <RangeFilter
+            <FiltersModule.PreferencesFilter handlePrefChange={handlePrefChange} />
+            <FiltersModule.RangeFilter
               handleInput={handleInput}
               checkRangeValue={checkRangeValue}
               minPercent={minPercent}

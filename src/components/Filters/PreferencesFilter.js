@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { preferencesData } from "../../data/foodTypes";
 import { AppContext } from "../../context/context";
-import { BiRefresh } from "../";
+import { BiRefresh } from "..";
 import sortIco from "../../images/sort-down.svg";
 
 const PreferencesFilter = ({ handlePrefChange }) => {
@@ -136,7 +136,9 @@ const Wrapper = styled.div`
     transform: translateY(1.1rem);
   }
 
+  
   /* ----------- Media Queries ----------- */
+
   @media screen and (max-width: 1700px) {
     width: 19rem;
     min-width: 19rem;

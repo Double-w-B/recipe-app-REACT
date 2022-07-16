@@ -1,13 +1,11 @@
 /* Components */
-import Home from "./pages/Home";
-import SelectedRecipe from "./pages/SelectedRecipe";
+import Home from "./Pages/Home";
+import SelectedRecipe from "./Pages/SelectedRecipe";
 import Footer from "./Footer";
-import Navbar from "./Navbar";
-import SearchResults from "./pages/SearchResults";
+import SearchResults from "./Pages/SearchResults";
 import SearchSingleResult from "./SearchSingleResult";
-import NewsletterModal from "./NewsletterModal";
 import Loading from "./Loading";
-import Error from "./pages/Error";
+import Error from "./Pages/Error";
 import SavedRecipesResults from "./savedRecipes/SavedRecipesResults";
 import SavedSingleRecipe from "./savedRecipes/SavedSingleRecipe";
 import SavedSelectedRecipe from "./savedRecipes/SavedSelectedRecipe";
@@ -28,9 +26,7 @@ export {
   Home,
   SelectedRecipe,
   Footer,
-  Navbar,
   SearchResults,
-  NewsletterModal,
   SearchSingleResult,
   Loading,
   Error,

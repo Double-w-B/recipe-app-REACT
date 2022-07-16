@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FiExternalLink } from "react-icons/fi";
 import { AppContext } from "../context/context";
-import { checkLength } from "./helpers";
+import { checkLength } from "../helpers";
 import logoPreloader from "../images/logoPreloader.png";
 
 const SearchSingleResult = ({ item, id }) => {

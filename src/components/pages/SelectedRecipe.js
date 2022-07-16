@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "../../context/context";
-import * as helpersModule from "../helpers";
+import * as recipeModule from "../Recipe";
 
 const SelectedRecipe = () => {
   const { path, recipes, setRecipe, changeThePath } = useContext(AppContext);
@@ -57,14 +57,14 @@ const SelectedRecipe = () => {
         <div className="ex-recipe-img">
           <img src={image} alt={label} />
         </div>
-        <helpersModule.RecipeInfo
+        <recipeModule.RecipeInfo
           checked={checked}
           setChecked={setChecked}
           checkStorage={checkStorage}
           found={found}
         />
-        <helpersModule.RecipeNutrition found={found} />
-        <helpersModule.RecipeIngredients found={found} />
+        <recipeModule.RecipeNutrition found={found} />
+        <recipeModule.RecipeIngredients found={found} />
       </div>
     </article>
   );

@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import * as componentsModule from "./components";
+import NewsletterModal from "./components/Modal/NewsletterModal";
+import { Navbar } from "./components/Navbar";
 import { AppContext } from "./context/context";
 
 function App() {
@@ -8,8 +10,8 @@ function App() {
 
   return (
     <Router>
-      <componentsModule.NewsletterModal />
-      <componentsModule.Navbar />
+      <NewsletterModal />
+      <Navbar />
       <Routes>
         <Route exact path="/" element={<componentsModule.Home />} />
         <Route

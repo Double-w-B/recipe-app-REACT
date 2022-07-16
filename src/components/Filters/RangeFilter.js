@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { AppContext } from "../../context/context";
-import { BiRefresh, HiOutlineCalculator } from "../";
+import { BiRefresh, HiOutlineCalculator } from "..";
 
 const RangeFilter = ({
   checkRangeValue,

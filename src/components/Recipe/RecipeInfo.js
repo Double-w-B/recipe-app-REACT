@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
-import * as IconsModule from "../";
-import CookingTime from "../helpers/CookingTime";
+import * as IconsModule from "..";
+import RecipeCookingTime from "./RecipeCookingTime";
 import checkedIco from "../../images/checked.png";
 import uncheckedIco from "../../images/unchecked.png";
 import { AppContext } from "../../context/context";
@@ -77,7 +77,7 @@ const RecipeInfo = ({ checked, setChecked, checkStorage, found }) => {
       </div>
       <h1>{label}</h1>
       <div className="ex-short-info">
-        {totalTime > 0 && <CookingTime totalTime={totalTime} />}
+        {totalTime > 0 && <RecipeCookingTime totalTime={totalTime} />}
         <p>
           <IconsModule.GiKnifeFork />
           {mealType[0]}

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../context/context";
-import * as helpersModule from "../helpers";
+import * as recipeModule from "../Recipe";
 
 const SavedSelectedRecipe = () => {
   const { localStrRecipes, updateLocalStrRecipes, localStrPath } =
@@ -35,9 +35,9 @@ const SavedSelectedRecipe = () => {
           <img src={image} alt={label} />
         </div>
 
-        <helpersModule.RecipeInfo checkStorage={checkStorage} found={found} />
-        <helpersModule.RecipeNutrition found={found} />
-        <helpersModule.RecipeIngredients found={found} />
+        <recipeModule.RecipeInfo checkStorage={checkStorage} found={found} />
+        <recipeModule.RecipeNutrition found={found} />
+        <recipeModule.RecipeIngredients found={found} />
       </div>
     </article>
   );

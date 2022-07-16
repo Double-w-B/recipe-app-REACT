@@ -29,19 +29,19 @@ const Error = () => {
   if (recipes.length === 0 && lastQuery) {
     return (
       <main>
-        <div className="error">
-          <Wrapper>
+        <StyledErrorContainer className="error">
+          <StyledImgContainer>
             <div className="circle">
               <img src={errorSearch} alt="error" className="errorSearch" />
             </div>
-          </Wrapper>
+          </StyledImgContainer>
           <h2>
             No recipes found for: <span>{lastQuery}</span>
             <br />
             {(diet || health || meal || cuisine || dish || calories) &&
               "and your preferences."}
           </h2>
-        </div>
+        </StyledErrorContainer>
       </main>
     );
   }
@@ -49,18 +49,46 @@ const Error = () => {
   return (
     <main>
       <div className="error">
-        <Wrapper>
+        <StyledImgContainer>
           <p>
             4 <img src={errorImg} alt="error" /> 4
           </p>
-        </Wrapper>
+        </StyledImgContainer>
         <h2>Oops, the page you were looking for doesn't exist.</h2>
       </div>
     </main>
   );
 };
 
-const Wrapper = styled.div`
+const StyledErrorContainer = styled.div`
+  width: 100%;
+  height: 84vh;
+  font-size: 1.4rem;
+  margin: 0 auto;
+  display: grid;
+  place-content: center;
+
+  h2 {
+    margin: 3rem 1rem 0 1rem;
+    color: #e5e5e55d;
+    color: rgba(0, 0, 0, 0.8);
+    text-align: center;
+    text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.7);
+
+    span {
+      color: var(--yellow-clr);
+      letter-spacing: 1px;
+      text-decoration: underline;
+      background-color: rgba(124, 123, 123, 0.6);
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 0.2rem 0.5rem;
+      border-radius: 5px;
+      text-shadow: none;
+    }
+  }
+`;
+
+const StyledImgContainer = styled.div`
   margin: 0 auto;
   p {
     font-size: 7rem;
@@ -75,7 +103,6 @@ const Wrapper = styled.div`
   }
   .circle {
     border-radius: 50%;
-    /* background-color: yellow; */
     .errorSearch {
       -webkit-animation: rotate 3s linear infinite; /* Chrome, Safari 5 */
       -moz-animation: rotate 3s linear infinite; /* Firefox 5-15 */

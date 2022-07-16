@@ -1,7 +1,7 @@
 import React from "react";
-import { BiTime } from "../";
+import { BiTime } from "..";
 
-const CookingTime = ({ totalTime }) => {
+const RecipeCookingTime = ({ totalTime }) => {
   if (totalTime / 60 > 0.1 && totalTime / 60 <= 0.99) {
     return (
       <p className="time">
@@ -60,4 +60,4 @@ const CookingTime = ({ totalTime }) => {
   return <p></p>;
 };
 
-export default CookingTime;
+export default RecipeCookingTime;
