@@ -1,4 +1,6 @@
 import React, { useContext, useState } from "react";
+import styled from "styled-components";
+import { StyledResultsWrapper } from "./SearchResults";
 import { AppContext } from "../../context/context";
 import * as FiltersModule from "../Filters";
 
@@ -90,28 +92,94 @@ const Home = () => {
   if (!isModal && email) {
     return (
       <main>
-        <section className="recipes-container">
-          <div className="recipes-center no-select">
-            <FiltersModule.PreferencesFilter handlePrefChange={handlePrefChange} />
+        <StyledFiltersWrapper>
+          <StyledFiltersContainer className=" no-select">
+            <FiltersModule.PreferencesFilter
+              handlePrefChange={handlePrefChange}
+            />
             <FiltersModule.RangeFilter
               handleInput={handleInput}
               checkRangeValue={checkRangeValue}
               minPercent={minPercent}
               maxPercent={maxPercent}
             />
-          </div>
-        </section>
+          </StyledFiltersContainer>
+        </StyledFiltersWrapper>
       </main>
     );
   }
 
   return (
     <main>
-      <section className="ex-recipes-container">
-        <div className="recipes-center"></div>
-      </section>
+      <StyledEmptyWrapper />
     </main>
   );
 };
+
+const StyledFiltersWrapper = styled(StyledResultsWrapper)``;
+
+const StyledFiltersContainer = styled.div`
+  width: 80%;
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
+  justify-items: center;
+
+  @media screen and (max-width: 1920px) {
+    width: 70%;
+  }
+
+  @media screen and (max-width: 1800px) {
+    grid-gap: 1rem;
+  }
+
+  @media screen and (max-width: 1700px) {
+    grid-gap: 0;
+    width: 75%;
+  }
+
+  @media screen and (max-width: 1530px) {
+    width: 85%;
+  }
+
+  @media screen and (max-width: 1300px) {
+    width: 92%;
+  }
+
+  @media screen and (max-width: 1200px) {
+    width: 95%;
+  }
+
+  @media screen and (max-width: 1100px) {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 945px) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 900px) {
+    width: 95%;
+  }
+
+  @media screen and (max-width: 700px) {
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+
+  @media screen and (max-width: 600px) {
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  }
+
+  @media screen and (max-width: 430px) {
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+`;
+
+const StyledEmptyWrapper = styled.section`
+  padding: 4rem 7rem 3rem 7rem;
+  min-height: 84vh;
+`;
 
 export default Home;

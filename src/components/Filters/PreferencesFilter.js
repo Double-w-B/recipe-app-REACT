@@ -136,9 +136,6 @@ const Wrapper = styled.div`
     transform: translateY(1.1rem);
   }
 
-  
-  /* ----------- Media Queries ----------- */
-
   @media screen and (max-width: 1700px) {
     width: 19rem;
     min-width: 19rem;

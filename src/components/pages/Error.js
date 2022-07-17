@@ -29,7 +29,7 @@ const Error = () => {
   if (recipes.length === 0 && lastQuery) {
     return (
       <main>
-        <StyledErrorContainer className="error">
+        <StyledErrorContainer>
           <StyledImgContainer>
             <div className="circle">
               <img src={errorSearch} alt="error" className="errorSearch" />
@@ -48,14 +48,14 @@ const Error = () => {
 
   return (
     <main>
-      <div className="error">
+      <StyledErrorContainer>
         <StyledImgContainer>
           <p>
             4 <img src={errorImg} alt="error" /> 4
           </p>
         </StyledImgContainer>
         <h2>Oops, the page you were looking for doesn't exist.</h2>
-      </div>
+      </StyledErrorContainer>
     </main>
   );
 };

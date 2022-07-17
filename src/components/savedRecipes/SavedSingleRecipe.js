@@ -1,4 +1,6 @@
 import React from "react";
+import styled from "styled-components";
+import * as StyledModule from "../SearchSingleResult";
 import { Link } from "react-router-dom";
 import { FiExternalLink } from "react-icons/fi";
 import { AppContext } from "../../context/context";
@@ -26,9 +28,9 @@ const SavedSingleRecipe = ({ item, id }) => {
   }, [image, onLoad]);
 
   return (
-    <article className="single-recipe" onMouseDown={() => newLocalStrPath(id)}>
+    <StyledSavedSingleRecipeWrapper onMouseDown={() => newLocalStrPath(id)}>
       <img src={recipeImg} alt={label} />
-      <div className="single-rec-info">
+      <StyledSingleRecipeContainer>
         <div>
           <h4>{label.length > 35 ? checkLength(label) : label}</h4>
           <p>from {source}</p>
@@ -36,9 +38,11 @@ const SavedSingleRecipe = ({ item, id }) => {
         <Link to={`/savedrecipes/${localStrPath}`}>
           <FiExternalLink className="single-rec-link-img" />
         </Link>
-      </div>
-    </article>
+      </StyledSingleRecipeContainer>
+    </StyledSavedSingleRecipeWrapper>
   );
 };
 
+const StyledSavedSingleRecipeWrapper = styled(StyledModule.StyledSingleRecipeWrapper)``;
+const StyledSingleRecipeContainer = styled(StyledModule.StyledSingleRecipe)``;
 export default SavedSingleRecipe;

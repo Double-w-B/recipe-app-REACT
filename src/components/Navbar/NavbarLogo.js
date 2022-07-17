@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const NavbarLogo = (props) => {
   return (
-    <StyledContainer className=" no-select">
+    <StyledContainer className="no-select">
       <Link to="/">
         <img src={logoImg} alt="logo" onClick={props.handleClick} />
       </Link>
@@ -27,8 +27,6 @@ const StyledContainer = styled.div`
     cursor: pointer;
     box-shadow: var(--primary-shadow);
   }
-
-  /* ----------- Media Queries ----------- */
 
   @media screen and (max-width: 1200px) {
     margin-left: 3rem;

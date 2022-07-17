@@ -69,8 +69,6 @@ const StyledSection = styled.section`
   align-items: center;
   position: relative;
 
-  /* ----------- Media Queries ----------- */
-
   @media screen and (max-width: 900px) {
     justify-content: center;
   }

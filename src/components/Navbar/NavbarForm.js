@@ -134,8 +134,6 @@ const StyledForm = styled.form`
     }
   }
 
-  /* ----------- Media Queries ----------- */
-
   @media screen and (max-width: 1200px) {
     input {
       font-size: 1.45rem;

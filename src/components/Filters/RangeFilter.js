@@ -296,7 +296,6 @@ const Wrapper = styled.div`
     }
   }
 
-  /* ----------- Media Queries ----------- */
   @media screen and (max-width: 1700px) {
     width: 19rem;
     min-width: 19rem;

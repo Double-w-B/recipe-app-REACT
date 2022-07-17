@@ -12,18 +12,24 @@ const NavbarResults = ({ filterQuery, changeQuery, showInfo, setShowInfo }) => {
   const secondPath = `/savedrecipes`;
   const thirdPath = `/savedrecipes/${localStrPath}`;
 
+  const hideResults = () => {
+    if (
+      !isError &&
+      !isLoading &&
+      showInfo &&
+      (currentPath === firstPath ||
+        currentPath === secondPath ||
+        currentPath === thirdPath)
+    ) {
+      return "show no-select";
+    } else {
+      return "no-select";
+    }
+  };
+
   return (
     <StyledContainer
-      className={
-        !isError &&
-        !isLoading &&
-        showInfo &&
-        (currentPath === firstPath ||
-          currentPath === secondPath ||
-          currentPath === thirdPath)
-          ? "show no-select"
-          : "no-select"
-      }
+      className={hideResults()}
       onClick={() => setShowInfo(!showInfo)}
     >
       {currentPath === firstPath && (

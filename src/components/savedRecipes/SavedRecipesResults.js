@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
+import * as StyledModule from "../Pages/SearchResults";
 import { Link } from "react-router-dom";
 import SavedSingleRecipe from "./SavedSingleRecipe";
 import { AppContext } from "../../context/context";
@@ -22,7 +23,7 @@ const SavedRecipesResults = () => {
   if (localStrRecipes.length < 1) {
     return (
       <main>
-        <Wrapper>
+        <StyledNoRecipesContainer>
           <div>
             <h1>
               Add your first recipe to have it <br /> always by your side!
@@ -31,7 +32,7 @@ const SavedRecipesResults = () => {
               <img src={recipeImg} alt="icon" />
             </Link>
           </div>
-        </Wrapper>
+        </StyledNoRecipesContainer>
       </main>
     );
   }
@@ -39,20 +40,23 @@ const SavedRecipesResults = () => {
   if (localStrRecipes.length > 0) {
     return (
       <main>
-        <section className="recipes-container">
-          <div className="results-container no-select">
+        <StyledSavedRecipesWrapper>
+          <StyledSavedRecipesContainer className="no-select">
             {Object.values(localStrRecipes).map((item) => {
               const id = item.recipe.uri.substring(51);
               return <SavedSingleRecipe key={id} item={item} id={id} />;
             })}
-          </div>
-        </section>
+          </StyledSavedRecipesContainer>
+        </StyledSavedRecipesWrapper>
       </main>
     );
   }
 };
 
-const Wrapper = styled.section`
+const StyledSavedRecipesWrapper = styled(StyledModule.StyledResultsWrapper)``;
+const StyledSavedRecipesContainer = styled(StyledModule.StyledResultsContainer)``;
+
+const StyledNoRecipesContainer = styled.section`
   height: 84vh;
   h1 {
     margin-top: 3rem;

@@ -1,4 +1,6 @@
 import React, { useContext } from "react";
+import styled from "styled-components";
+import * as StyledModule from "../Pages/SelectedRecipe";
 import { AppContext } from "../../context/context";
 import * as recipeModule from "../Recipe";
 
@@ -29,18 +31,21 @@ const SavedSelectedRecipe = () => {
   const { image, label } = found.recipe;
 
   return (
-    <article key={localStrPath} className="ex-recipes-container">
-      <div className="ex-recipe-center">
-        <div className="ex-recipe-img">
+    <StyledSavedRecipeWrapper key={localStrPath}>
+      <StyledSavedRecipeContainer>
+        <StyledSavedRecipeImg>
           <img src={image} alt={label} />
-        </div>
+        </StyledSavedRecipeImg>
 
         <recipeModule.RecipeInfo checkStorage={checkStorage} found={found} />
         <recipeModule.RecipeNutrition found={found} />
         <recipeModule.RecipeIngredients found={found} />
-      </div>
-    </article>
+      </StyledSavedRecipeContainer>
+    </StyledSavedRecipeWrapper>
   );
 };
+const StyledSavedRecipeWrapper = styled(StyledModule.StyledRecipeWrapper)``;
+const StyledSavedRecipeContainer = styled(StyledModule.StyledRecipeContainer)``;
+const StyledSavedRecipeImg = styled(StyledModule.StyledRecipeImg)``;
 
 export default SavedSelectedRecipe;

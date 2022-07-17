@@ -13,19 +13,23 @@ const SavedRecipesBtn = () => {
   const secondPath = `/recipes/${queryPath}`;
   const thirdPath = `/recipes/${queryPath}/${path}`;
 
+  const hideBtn = () => {
+    if (
+      !isError &&
+      !isLoading &&
+      email &&
+      (currentPath === firstPath ||
+        currentPath === secondPath ||
+        currentPath === thirdPath)
+    ) {
+      return "show  no-select";
+    } else {
+      return "no-select";
+    }
+  };
+
   return (
-    <Wrapper
-      className={
-        !isError &&
-        !isLoading &&
-        email &&
-        (currentPath === firstPath ||
-          currentPath === secondPath ||
-          currentPath === thirdPath)
-          ? "show  no-select"
-          : "no-select"
-      }
-    >
+    <Wrapper className={hideBtn()}>
       <Link to="/savedrecipes" onClick={() => clearQuery()}>
         <img src={star} alt="star" className={rotate ? "rotate" : ""} />
       </Link>
