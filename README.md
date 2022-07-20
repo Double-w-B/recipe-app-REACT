@@ -18,7 +18,7 @@ User gets over 2.3 million recipes in English with the most accurate automated n
 
 The main idea of the app is to find a recipe according the preferences, to check out the ingredients of a dish and to visit the web page of full recipe or to save the recipes to the localStorage for further purposes.
 
-Technology: <HTML + CSS + React.js + styled-components + RWD >
+Technology: <React.js + CSS + styled-components + RWD>
 
 ![img-1](https://user-images.githubusercontent.com/105418561/179506640-111d312f-1273-4972-bf0f-76dff9f21837.jpg)
 
