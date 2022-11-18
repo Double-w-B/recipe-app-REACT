@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { SearchSingleResult, Loading, Error } from "../index";
-import { AppContext } from "../../context/context";
-import loading from "../../images/preloader.gif";
+import { Loading, Error } from "../../index";
+import SingleRecipeResult from "../../shared/SingleRecipeResult";
+import { AppContext } from "../../../context/context";
+import loading from "../../../images/preloader.gif";
 
-const SearchResults = () => {
+const QueryResults = () => {
   const { recipes, isLoading, isError, fetchRecipes, nextPageLoading } =
     useContext(AppContext);
   const { setNextPageLoading, changeThePage, page, nextPage, changeThePath } =
@@ -31,14 +32,17 @@ const SearchResults = () => {
   if (isLoading) {
     return <Loading />;
   }
+
   return (
     <main>
       <StyledResultsWrapper>
         <StyledResultsContainer className="no-select">
-          {recipes.map((item) => {
+          {recipes.map((item, index) => {
             const id = item.recipe.uri.substring(51);
 
-            return <SearchSingleResult key={id} item={item} id={id} />;
+            return (
+              <SingleRecipeResult key={id} item={item} id={id} type={"query"} />
+            );
           })}
 
           {nextPage && (
@@ -48,9 +52,9 @@ const SearchResults = () => {
                   <img src={loading} alt="preloader" />
                 ) : (
                   <p>
-                    More
+                    Load
                     <br />
-                    recipes
+                    more
                   </p>
                 )}
               </div>
@@ -209,4 +213,4 @@ const StyledLoadMoreBtn = styled.div`
   }
 `;
 
-export default SearchResults;
+export default QueryResults;

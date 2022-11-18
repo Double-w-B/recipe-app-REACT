@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import { StyledResultsWrapper } from "./SearchResults";
-import { AppContext } from "../../context/context";
-import * as FiltersModule from "../Filters";
+import { StyledResultsWrapper } from "../QueryResults/QueryResultsPage";
+import { AppContext } from "../../../context/context";
+import * as FiltersModule from "./Filters";
 
 const Home = () => {
   const { email, isModal, minInput, maxInput, changePreferences } =

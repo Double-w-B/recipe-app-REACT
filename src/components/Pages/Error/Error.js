@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { AppContext } from "../../context/context";
-import errorImg from "../../images/error.png";
-import errorSearch from "../../images/errorSearch.png";
+import { AppContext } from "../../../context/context";
+import errorImg from "../../../images/error.png";
+import errorSearch from "../../../images/errorSearch.png";
 
 const Error = () => {
   const { recipes, lastQuery, handleError, currentPath, handleQuery } =

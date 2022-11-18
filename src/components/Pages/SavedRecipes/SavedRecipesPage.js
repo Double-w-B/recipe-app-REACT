@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import * as StyledModule from "../Pages/SearchResults";
+import * as StyledModule from "../QueryResults/QueryResultsPage";
 import { Link } from "react-router-dom";
-import SavedSingleRecipe from "./SavedSingleRecipe";
-import { AppContext } from "../../context/context";
-import recipeImg from "../../images/recipe.png";
+import SingleRecipeResult from "../../shared/SingleRecipeResult";
+import { AppContext } from "../../../context/context";
+import recipeImg from "../../../images/recipe.png";
 
 const SavedRecipesResults = () => {
   const { localStrRecipes, changeThePath, currentPath } =
@@ -44,7 +44,14 @@ const SavedRecipesResults = () => {
           <StyledSavedRecipesContainer className="no-select">
             {Object.values(localStrRecipes).map((item) => {
               const id = item.recipe.uri.substring(51);
-              return <SavedSingleRecipe key={id} item={item} id={id} />;
+              return (
+                <SingleRecipeResult
+                  key={id}
+                  item={item}
+                  id={id}
+                  type={"saved"}
+                />
+              );
             })}
           </StyledSavedRecipesContainer>
         </StyledSavedRecipesWrapper>
@@ -54,7 +61,9 @@ const SavedRecipesResults = () => {
 };
 
 const StyledSavedRecipesWrapper = styled(StyledModule.StyledResultsWrapper)``;
-const StyledSavedRecipesContainer = styled(StyledModule.StyledResultsContainer)``;
+const StyledSavedRecipesContainer = styled(
+  StyledModule.StyledResultsContainer
+)``;
 
 const StyledNoRecipesContainer = styled.section`
   height: 84vh;

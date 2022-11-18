@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { AppContext } from "../../context/context";
-import { BiRefresh, HiOutlineCalculator } from "..";
+import { AppContext } from "../../../../context/context";
+import { BiRefresh, HiOutlineCalculator } from "../../../index";
 
 const RangeFilter = ({
   checkRangeValue,
@@ -292,14 +292,14 @@ const Wrapper = styled.div`
     }
 
     .lastLabel {
-      transform: translateY(1.5rem);
+      transform: translateY(1.1rem);
     }
   }
 
   @media screen and (max-width: 1700px) {
-    width: 19rem;
-    min-width: 19rem;
-    min-height: 16rem;
+    width: 17.5rem;
+    min-width: 17.5rem;
+    min-height: 14.5rem;
   }
 
   @media screen and (max-width: 1530px) {

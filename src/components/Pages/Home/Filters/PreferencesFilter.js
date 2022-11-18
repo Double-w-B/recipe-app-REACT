@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { preferencesData } from "../../data/foodTypes";
-import { AppContext } from "../../context/context";
-import { BiRefresh } from "..";
-import sortIco from "../../images/sort-down.svg";
+import { preferencesData } from "../../../../data/foodTypes";
+import { AppContext } from "../../../../context/context";
+import { BiRefresh } from "../../../index";
+import sortIco from "../../../../images/sort-down.svg";
 
 const PreferencesFilter = ({ handlePrefChange }) => {
   const { diet, health, meal, cuisine, dish, changePreferences } =
@@ -92,7 +92,7 @@ const Wrapper = styled.div`
     background-color: transparent;
     background-image: url(${sortIco}),
       linear-gradient(to bottom, #ffffff 0%, #e5e5e55d 100%);
-    background-repeat: no-repeat /* , repeat */;
+    background-repeat: no-repeat;
     background-position: right 0.7em top 5%, 0 0;
     background-size: 0.65em auto, 100%;
   }
@@ -106,7 +106,7 @@ const Wrapper = styled.div`
     line-height: 1;
     display: flex;
     align-items: center;
-    font-size: 2.2rem;
+    font-size: 2.1rem;
     color: rgba(0, 0, 0, 0.7);
     transform: translateY(3rem);
 
@@ -124,7 +124,7 @@ const Wrapper = styled.div`
     }
 
     label {
-      transform: translateY(1.5rem);
+      transform: translateY(1.1rem);
     }
   }
 
@@ -137,9 +137,9 @@ const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 1700px) {
-    width: 19rem;
-    min-width: 19rem;
-    min-height: 16rem;
+    width: 17.5rem;
+    min-width: 17.5rem;
+    min-height: 14.5rem;
   }
 
   @media screen and (max-width: 1530px) {
