@@ -2,22 +2,17 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FiExternalLink } from "react-icons/fi";
-import { AppContext } from "../context/context";
-import { checkLength } from "../helpers";
-import logoPreloader from "../images/logoPreloader.png";
+import { AppContext } from "../../context/context";
+import logoPreloader from "../../images/logoPreloader.png";
 
-const SearchSingleResult = ({ item, id }) => {
+const SingleRecipeResult = ({ item, id, type }) => {
   const { newPath, path, queryPath } = React.useContext(AppContext);
+  const { localStrPath, newLocalStrPath } = React.useContext(AppContext);
   const [recipeImg, setRecipeImg] = React.useState(logoPreloader);
 
   const {
     recipe: { image, label, source },
   } = item;
-
-  const handleMouseDown = () => {
-    newPath(id);
-    localStorage.setItem("path", JSON.stringify(id));
-  };
 
   const onLoad = React.useCallback(() => {
     setRecipeImg(image);
@@ -31,6 +26,26 @@ const SearchSingleResult = ({ item, id }) => {
     }, 100);
   }, [image, onLoad]);
 
+  const handleMouseDown = () => {
+    if (type === "query") {
+      newPath(id);
+      localStorage.setItem("path", JSON.stringify(id));
+      return;
+    }
+    return newLocalStrPath(id);
+  };
+
+  const setPath = () => {
+    if (type === "query") return `/recipes/${queryPath}/${path}`;
+
+    return `/savedrecipes/${localStrPath}`;
+  };
+
+  const checkLength = (label) => {
+    const words = label.split(" ");
+    return `${words.slice(0, 3).join(" ")}...`;
+  };
+
   return (
     <StyledSingleRecipeWrapper onMouseDown={handleMouseDown}>
       <img src={recipeImg} alt={label} />
@@ -41,7 +56,7 @@ const SearchSingleResult = ({ item, id }) => {
           <p>from {source}</p>
         </div>
 
-        <Link to={`/recipes/${queryPath}/${path}`}>
+        <Link to={setPath()} state={type}>
           <FiExternalLink />
         </Link>
       </StyledSingleRecipe>
@@ -61,6 +76,7 @@ export const StyledSingleRecipeWrapper = styled.article`
 
   &:hover {
     box-shadow: var(--tertiary-shadow);
+    transform: scale(1.1);
   }
 
   &:hover div {
@@ -151,4 +167,4 @@ export const StyledSingleRecipe = styled.div`
   }
 `;
 
-export default SearchSingleResult;
+export default SingleRecipeResult;

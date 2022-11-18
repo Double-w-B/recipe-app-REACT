@@ -1,77 +1,78 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import * as IconsModule from "../../index";
+import CookingTime from "./CookingTime";
+import checkedIco from "../../../images/checked.png";
+import uncheckedIco from "../../../images/unchecked.png";
+import { AppContext } from "../../../context/context";
 
-import * as IconsModule from "..";
-import RecipeCookingTime from "./RecipeCookingTime";
-import checkedIco from "../../images/checked.png";
-import uncheckedIco from "../../images/unchecked.png";
-import { AppContext } from "../../context/context";
-
-const RecipeInfo = ({ checked, setChecked, checkStorage, found }) => {
+const MainInfo = ({ checked, setChecked, checkStorage, found, type }) => {
   const { currentPath } = useContext(AppContext);
 
   const [copied, setCopied] = useState(false);
-  const [hover, setHover] = useState(false);
 
   const { label, source, cuisineType, yield: portion } = found.recipe;
   const { dietLabels, mealType, calories, totalTime } = found.recipe;
   const { url, healthLabels } = found.recipe;
 
   const handleCopy = () => {
+    navigator.clipboard.writeText(url);
     setCopied(true);
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setCopied(false);
-    }, 1000);
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  };
+
+  const handleClick = () => {
+    if (type === "query") {
+      checkStorage(found);
+      setChecked(!checked);
+    } else {
+      checkStorage(found);
+    }
+  };
+
+  const createButton = (type) => {
+    if (type === "query") {
+      return (
+        <>
+          <img
+            src={checked ? checkedIco : uncheckedIco}
+            alt=""
+            onClick={handleClick}
+          />
+          <p>{checked ? "Saved!" : "Save"}</p>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Link to="/savedrecipes" onClick={handleClick}>
+            <img src={checkedIco} alt="" />
+          </Link>
+          <p>Remove</p>
+        </>
+      );
+    }
   };
 
   return (
-    // <div className="ex-recipe-info">
     <StyledRecipeInfo>
       <StyledSaveBtnContainer
         checked={checked}
-        hover={hover}
         currentPath={currentPath}
         className="no-select"
       >
-        {currentPath === "/savedrecipes" ? (
-          <>
-            <Link
-              to="/savedrecipes"
-              onMouseOver={() => setHover(true)}
-              onMouseLeave={() => setHover(false)}
-            >
-              <img
-                src={checkedIco}
-                alt="icon"
-                onClick={() => {
-                  checkStorage(found);
-                }}
-              />
-            </Link>
-            <p>Remove</p>
-          </>
-        ) : (
-          <>
-            <img
-              src={checked ? checkedIco : uncheckedIco}
-              alt="icon"
-              onClick={() => {
-                checkStorage(found);
-                setChecked(!checked);
-              }}
-              onMouseOver={() => setHover(true)}
-              onMouseLeave={() => setHover(false)}
-            />
-            <p>{checked ? "Saved!" : "Save"}</p>
-          </>
-        )}
+        {createButton(type)}
       </StyledSaveBtnContainer>
 
       <h1>{label}</h1>
 
       <StyledShortInfo>
-        {totalTime > 0 && <RecipeCookingTime totalTime={totalTime} />}
+        {totalTime > 0 && <CookingTime totalTime={totalTime} />}
         <p>
           <IconsModule.GiKnifeFork />
           {mealType[0]}
@@ -100,13 +101,9 @@ const RecipeInfo = ({ checked, setChecked, checkStorage, found }) => {
             {source} <IconsModule.FiExternalLink />
           </a>
         </p>
-        <div
-          className="no-select"
-          onClick={() => navigator.clipboard.writeText(url)}
-        >
-          <p onClick={handleCopy}>Copy link</p>
-          <p>Copied!</p>
-        </div>
+        <button className="no-select" onClick={handleCopy}>
+          {copied ? "Copied!" : "Copy link"}
+        </button>
       </StyledLinkContainer>
     </StyledRecipeInfo>
   );
@@ -116,7 +113,7 @@ const StyledRecipeInfo = styled.div`
   cursor: default;
   grid-column: 2/4;
   grid-row: 1/2;
-  padding: 1rem 1.5rem;
+  padding: 0.5rem 0.5rem 0 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -142,7 +139,6 @@ const StyledRecipeInfo = styled.div`
   }
 
   @media screen and (max-width: 1100px) {
-    padding: 1rem;
   }
 
   @media screen and (max-width: 900px) {
@@ -166,13 +162,14 @@ const StyledRecipeInfo = styled.div`
     font-size: 1rem;
 
     h1 {
+      margin: 0.5rem 0 1rem 0;
       font-size: 1.6rem;
     }
   }
 
   @media screen and (max-width: 480px) {
     h1 {
-      margin: 0.5rem 0 0 0.5rem;
+      margin: 0.5rem 0 1rem 0.5rem;
       font-size: 1.5rem;
     }
   }
@@ -205,6 +202,12 @@ const StyledSaveBtnContainer = styled.div`
   right: 0;
   top: 0;
 
+  &:hover {
+    p {
+      opacity: 1;
+    }
+  }
+
   a {
     display: grid;
     place-items: center;
@@ -226,7 +229,7 @@ const StyledSaveBtnContainer = styled.div`
     position: absolute;
     bottom: -1.5rem;
     left: 50;
-    opacity: ${(props) => (props.hover ? "1" : "0")};
+    opacity: 0;
   }
 
   @media screen and (max-width: 550px) {
@@ -276,18 +279,22 @@ const StyledShortInfo = styled.div`
 const StyledHealthLabelsContainer = styled.div`
   cursor: default;
   width: 100%;
+  padding: 0.5rem;
   font-size: 1rem;
   background-color: var(--olive-clr);
-  padding: 0 0.5rem;
   box-shadow: var(--checkBox-shadow);
 
   p {
-    text-align: justify;
+    overflow-wrap: break-word;
   }
 
   @media screen and (max-width: 1100px) {
     font-size: 0.95rem;
     padding: 0.5rem;
+  }
+
+  @media screen and (max-width: 900px) {
+    margin: 0.5rem 0 1rem 0;
   }
 `;
 
@@ -316,39 +323,19 @@ const StyledLinkContainer = styled.div`
     }
   }
 
-  div {
+  button {
+    width: 80px;
+    padding: 0.3rem 0.2rem;
+    border: none;
+    border-radius: 0.1rem;
+    outline: none;
     margin-left: 2rem;
-    display: flex;
-    align-items: center;
+    text-align: center;
     cursor: pointer;
     font-size: 1rem;
-    position: relative;
+    background-color: var(--olive-clr);
     box-shadow: var(--checkBox-shadow);
-
-    p:first-child {
-      border-radius: 5%;
-      background-color: var(--olive-clr);
-      padding: 0.2rem 0.5rem;
-      text-align: center;
-
-      &:hover {
-        background-color: rgba(104, 176, 102, 0.7);
-      }
-
-      &:active {
-        transform: scale(0.9);
-      }
-    }
-
-    p:last-child {
-      position: absolute;
-      color: rgba(0, 0, 0, 0.4);
-      bottom: -1.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      transition: all 0.1s linear;
-      opacity: ${(props) => (props.copied ? "1" : "0")};
-    }
+    transition: all 0.3s linear;
   }
 
   @media screen and (max-width: 1200px) {
@@ -364,17 +351,8 @@ const StyledLinkContainer = styled.div`
   }
 
   @media screen and (max-width: 600px) {
-    justify-content: space-between;
     font-size: 1rem;
-  }
-
-  @media screen and (max-width: 550px) {
-    div {
-      p:first-child {
-        padding: 0 0.5rem;
-      }
-    }
   }
 `;
 
-export default RecipeInfo;
+export default MainInfo;

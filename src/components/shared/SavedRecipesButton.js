@@ -72,16 +72,14 @@ const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 900px) {
+    position: absolute;
+
     top: 0.5rem;
     left: 0.5rem;
 
     &.show {
       left: 0.5rem;
     }
-  }
-
-  @media screen and (max-width: 600px) {
-    position: absolute;
   }
 `;
 

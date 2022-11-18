@@ -1,7 +1,7 @@
 import React from "react";
-import { BiTime } from "..";
+import { BiTime } from "react-icons/bi";
 
-const RecipeCookingTime = ({ totalTime }) => {
+const CookingTime = ({ totalTime }) => {
   if (totalTime / 60 > 0.1 && totalTime / 60 <= 0.99) {
     return (
       <p className="time">
@@ -60,4 +60,4 @@ const RecipeCookingTime = ({ totalTime }) => {
   return <p></p>;
 };
 
-export default RecipeCookingTime;
+export default CookingTime;

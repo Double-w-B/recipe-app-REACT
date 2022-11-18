@@ -1,36 +1,47 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
-import { AppContext } from "../../context/context";
-import * as recipeModule from "../Recipe";
+import { AppContext } from "../../../context/context";
+import * as Component from "./index";
+import { useLocation } from "react-router-dom";
 
-const SelectedRecipe = () => {
+const Recipe = () => {
+  const location = useLocation();
   const { path, recipes, setRecipe, changeThePath } = useContext(AppContext);
+  const { localStrPath, newLocalStrPath } = useContext(AppContext);
   const { updateLocalStrRecipes, localStrRecipes, rotateStar } =
     useContext(AppContext);
 
   const [checked, setChecked] = useState(false);
 
-  const found = recipes.find((item) => {
+  React.useEffect(() => {
+    document.body.scrollTo(0, 0);
+  });
+
+  const allRecipes = location.state === "query" ? recipes : localStrRecipes;
+
+  const found = allRecipes.find((item) => {
     const { uri } = item.recipe;
-    return uri.substring(51) === path;
+    if (location.state === "query") return uri.substring(51) === path;
+
+    return uri.substring(51) === localStrPath;
   });
 
   React.useEffect(() => {
-    changeThePath(window.location.pathname);
+    if (location.state === "query") {
+      changeThePath(window.location.pathname);
+    }
     // eslint-disable-next-line
   }, []);
 
   React.useEffect(() => {
-    Object.values(localStrRecipes).find(
-      (item) =>
-        item.recipe.uri.substring(51) === found.recipe.uri.substring(51) &&
-        setChecked(true)
-    );
+    if (location.state === "query") {
+      Object.values(localStrRecipes).find(
+        (item) =>
+          item.recipe.uri.substring(51) === found.recipe.uri.substring(51) &&
+          setChecked(true)
+      );
+    }
   });
-
-  React.useEffect(() => {
-    document.querySelector("body").scrollTo(0, 0);
-  }, []);
 
   const checkStorage = (found) => {
     const filteredStorage = () =>
@@ -39,34 +50,41 @@ const SelectedRecipe = () => {
           item.recipe.uri.substring(51) !== found.recipe.uri.substring(51)
       );
 
-    if (checked) {
+    if (location.state === "query" && checked) {
       updateLocalStrRecipes(filteredStorage());
       setRecipe("");
+      return;
     }
 
-    if (!checked) {
+    if (location.state === "query" && !checked) {
       updateLocalStrRecipes([...localStrRecipes, found]);
       rotateStar();
+      return;
     }
+
+    updateLocalStrRecipes(filteredStorage());
+    newLocalStrPath("removedRecipe");
   };
 
-  const { image, label } = found.recipe;
+  const initialState = {
+    checked,
+    setChecked,
+    found,
+    checkStorage,
+  };
+
+  const { image } = found.recipe;
 
   return (
-    <StyledRecipeWrapper key={path}>
+    <StyledRecipeWrapper>
       <StyledRecipeContainer>
         <StyledRecipeImg>
-          <img src={image} alt={label} />
+          <img src={image} alt="" />
         </StyledRecipeImg>
 
-        <recipeModule.RecipeInfo
-          checked={checked}
-          setChecked={setChecked}
-          checkStorage={checkStorage}
-          found={found}
-        />
-        <recipeModule.RecipeNutrition found={found} />
-        <recipeModule.RecipeIngredients found={found} />
+        <Component.MainInfo {...initialState} type={location.state} />
+        <Component.Nutrition found={found} />
+        <Component.Ingredients found={found} />
       </StyledRecipeContainer>
     </StyledRecipeWrapper>
   );
@@ -144,6 +162,7 @@ export const StyledRecipeImg = styled.div`
   grid-column: 1/2;
   grid-row: 1/2;
   border: 2px solid rgba(0, 0, 0, 0.6);
+  border-radius: 0.2rem;
   box-shadow: var(--primary-shadow);
 
   img {
@@ -174,4 +193,4 @@ export const StyledRecipeImg = styled.div`
   }
 `;
 
-export default SelectedRecipe;
+export default Recipe;

@@ -1,13 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import noImg from "../../images/no-img.jpg";
+import SingleIngredient from "./SingleIngredient";
 
 const RecipeIngredients = ({ found }) => {
-  const [showText, setShowText] = useState(false);
-
-  const checkAndShow = (e) =>
-    e.currentTarget.lastChild.title.length > 30 && setShowText(!showText);
-
   const { ingredients } = found.recipe;
 
   return (
@@ -17,26 +12,8 @@ const RecipeIngredients = ({ found }) => {
 
       <StyledIngredientsContainer>
         {ingredients.map((item, index) => {
-          const { image, foodCategory, text } = item;
-
-          return (
-            <StyledIngredient key={index} onClick={checkAndShow} text={text}>
-
-              <StyledImgContainer className="no-select">
-                <img src={!image ? noImg : image} alt={foodCategory} />
-              </StyledImgContainer>
-
-              <p title={text}>
-                {text.length > 30
-                  ? showText
-                    ? text
-                    : `${text.substring(0, 30)}...`
-                  : text}
-              </p>
-            </StyledIngredient>
-          );
+          return <SingleIngredient key={index} {...item} />;
         })}
-        
       </StyledIngredientsContainer>
     </StyledIngredientsWrapper>
   );
@@ -77,6 +54,7 @@ const StyledIngredientsContainer = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(100px, 290px));
   grid-template-rows: repeat(auto-fit, minmax(100px, 290px));
   background-color: var(--light-grey-bcg-clr);
+  box-shadow: var(--primary-shadow);
 
   @media screen and (max-width: 1530px) {
     grid-template-columns: repeat(auto-fit, minmax(100px, 275px));
@@ -131,59 +109,6 @@ const StyledIngredientsContainer = styled.div`
   @media screen and (max-width: 430px) {
     grid-template-columns: repeat(auto-fit, minmax(100px, 200px));
     grid-template-rows: repeat(auto-fit, minmax(100px, 200px));
-  }
-`;
-
-const StyledIngredient = styled.div`
-  padding: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  &:hover div {
-    border: 2px solid black;
-  }
-
-  &:hover p {
-    opacity: 1;
-  }
-
-  p {
-    margin-top: 0.5rem;
-    text-align: center;
-    width: 100%;
-    transition: all 0.1s ease-in-out;
-    opacity: 0.65;
-    cursor: ${(props) => (props.text.length > 30 ? "pointer" : "default")};
-  }
-`;
-
-const StyledImgContainer = styled.div`
-  width: 60%;
-  border-radius: 50%;
-  border: 2px solid var(--light-grey-bcg-clr);
-  overflow: hidden;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  @media screen and (max-width: 900px) {
-    min-width: 100px;
-    min-height: 100px;
-  }
-
-  @media screen and (max-width: 768px) {
-    min-width: 90px;
-    min-height: 90px;
-  }
-
-  @media screen and (max-width: 600px) {
-    min-width: 80px;
-    min-height: 80px;
   }
 `;
 
