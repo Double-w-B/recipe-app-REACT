@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../../images/logo.jpg";
 
-const NewsletterContent = (props) => {
+const Content = (props) => {
   return (
     <>
       <img src={logo} alt="logo" />
@@ -23,4 +23,4 @@ const NewsletterContent = (props) => {
   );
 };
 
-export default NewsletterContent;
+export default Content;

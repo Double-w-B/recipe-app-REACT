@@ -1,43 +1,50 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import * as componentsModule from "./components";
+import * as Component from "./components";
 import NewsletterModal from "./components/Modal/NewsletterModal";
 import { Navbar } from "./components/Navbar";
 import { AppContext } from "./context/context";
+import Recipe from "./components/shared/Recipe/Recipe";
 
 function App() {
   const { path, queryPath, localStrPath } = React.useContext(AppContext);
+  const { isModal } = React.useContext(AppContext);
+
+  isModal
+    ? document.body.classList.add("no-scrolling")
+    : document.body.classList.remove("no-scrolling");
 
   return (
     <Router>
-      <NewsletterModal />
+      {/* Modal */}
+      {isModal && <NewsletterModal />}
       <Navbar />
       <Routes>
-        <Route exact path="/" element={<componentsModule.Home />} />
+        <Route exact path="/" element={<Component.Home />} />
         <Route
           exact
           path={`/recipes/${queryPath}`}
-          element={<componentsModule.SearchResults />}
+          element={<Component.QueryResults />}
         />
         <Route
           exact
           path={`/recipes/${queryPath}/${path}`}
-          element={<componentsModule.SelectedRecipe />}
+          element={<Recipe />}
         />
         <Route
           exact
           path="/savedrecipes"
-          element={<componentsModule.SavedRecipesResults />}
+          element={<Component.SavedRecipesResults />}
         />
         <Route
           exact
           path={`/savedrecipes/${localStrPath}`}
-          element={<componentsModule.SavedSelectedRecipe />}
+          element={<Recipe />}
         />
-        <Route exact path="*" element={<componentsModule.Error />} />
+        <Route exact path="*" element={<Component.Error />} />
       </Routes>
-      <componentsModule.SavedRecipesBtn />
-      <componentsModule.Footer />
+      <Component.SavedRecipesBtn />
+      <Component.Footer />
     </Router>
   );
 }
