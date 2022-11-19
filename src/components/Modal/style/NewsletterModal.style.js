@@ -37,17 +37,17 @@ const Content = styled.div`
   display: grid;
   align-items: center;
   justify-content: center;
-  background-color: var(--light-grey-bcg-clr);
+  background-color: rgba(255, 255, 255, 0.7);
   color: #303030;
 
   img {
-    width: 180px;
+    width: 280px;
     margin: 0 auto;
   }
 
   h1 {
     justify-self: center;
-    color: var(--yellow-clr);
+    color: var(--red-clr);
     text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.35);
   }
 

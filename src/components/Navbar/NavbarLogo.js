@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logoImg from "../../images/logo.jpg";
+import logoImg from "../../images/logo.png";
 import styled from "styled-components";
 
 const NavbarLogo = (props) => {
@@ -14,18 +14,16 @@ const NavbarLogo = (props) => {
 };
 
 const StyledContainer = styled.div`
-  width: 120px;
-  height: 60px;
+  width: 20%;
   display: flex;
   align-items: center;
-  margin-left: 4rem;
+  justify-content: center;
+  /* background-color: tomato; */
 
   & img {
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 180px;
     cursor: pointer;
-    box-shadow: var(--primary-shadow);
   }
 
   @media screen and (max-width: 1200px) {
