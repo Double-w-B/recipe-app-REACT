@@ -7,6 +7,8 @@ import errorSearch from "../../../images/errorSearch.png";
 import { rotate1 } from "../../../styles/shared/Keyframes.style";
 
 const Error = () => {
+  const [seconds, setSeconds] = React.useState(5);
+
   const { recipes, lastQuery, handleError, currentPath, handleQuery } =
     React.useContext(AppContext);
   const { diet, health, meal, cuisine, dish, calories } =
@@ -15,16 +17,20 @@ const Error = () => {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    setTimeout(() => {
-      if (currentPath === "/savedrecipes") {
-        navigate("/savedrecipes");
+    let interval = setInterval(() => {
+      if (seconds > 1) {
+        setSeconds(seconds - 1);
       } else {
-        navigate("/");
+        clearInterval(interval);
+        currentPath === "/savedrecipes"
+          ? navigate("/savedrecipes")
+          : navigate("/");
+        handleQuery("");
+        sessionStorage.setItem("lastQuery", JSON.stringify(""));
+        handleError(false);
       }
-      handleQuery("");
-      sessionStorage.setItem("lastQuery", JSON.stringify(""));
-      handleError(false);
-    }, 4000);
+    }, 1000);
+    return () => clearInterval(interval);
   });
 
   if (recipes.length === 0 && lastQuery) {
@@ -56,6 +62,7 @@ const Error = () => {
           </p>
         </StyledImgContainer>
         <h2>Oops, the page you were looking for doesn't exist.</h2>
+        <p>... redirect after {seconds} sec</p>
       </StyledErrorContainer>
     </main>
   );
@@ -76,6 +83,13 @@ const StyledErrorContainer = styled.div`
     text-align: center;
     text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.7);
 
+    & + p {
+      margin-top: 1rem;
+      opacity: 0.5;
+      text-align: center;
+      font-style: italic;
+    }
+
     span {
       color: var(--yellow-clr);
       letter-spacing: 1px;
@@ -91,6 +105,7 @@ const StyledErrorContainer = styled.div`
 
 const StyledImgContainer = styled.div`
   margin: 0 auto;
+
   p {
     font-size: 7rem;
     font-family: "Nixie One", cursive;
