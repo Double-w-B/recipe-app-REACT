@@ -1,4 +1,5 @@
-import styled, { keyframes, css } from "styled-components";
+import styled, { css } from "styled-components";
+import { bounce } from "../../../styles/shared/Keyframes.style";
 
 export const Form = styled.form`
   margin: 0 auto;
@@ -81,19 +82,5 @@ export const Button = styled.button`
 
   @media screen and (max-width: 600px) {
     width: 15%;
-  }
-`;
-
-const bounce = keyframes`
-0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.1);
-  }
-
-  100% {
-    transform: scale(1);
   }
 `;

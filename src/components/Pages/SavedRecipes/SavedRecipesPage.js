@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import SingleRecipeResult from "../../shared/SingleRecipeResult";
 import { AppContext } from "../../../context/context";
 import recipeImg from "../../../images/recipe.png";
+import { shake } from "../../../styles/shared/Keyframes.style";
 
 const SavedRecipesResults = () => {
   const { localStrRecipes, changeThePath, currentPath } =
@@ -85,35 +86,11 @@ const StyledNoRecipesContainer = styled.section`
     width: 130px;
     opacity: 0.7;
     cursor: pointer;
-    animation: shake-animation 4.72s ease infinite;
+    -webkit-animation: ${shake} 4.72s ease infinite;
+    -moz-animation: ${shake} 4.72s ease infinite;
+    -o-animation: ${shake} 4.72s ease infinite;
+    animation: ${shake} 4.72s ease infinite;
     background-color: rgba(255, 255, 255, 0.5);
-  }
-
-  @keyframes shake-animation {
-    0% {
-      transform: translate(0, 0);
-    }
-    1.78571% {
-      transform: translate(5px, 0);
-    }
-    3.57143% {
-      transform: translate(0, 0);
-    }
-    5.35714% {
-      transform: translate(5px, 0);
-    }
-    7.14286% {
-      transform: translate(0, 0);
-    }
-    8.92857% {
-      transform: translate(5px, 0);
-    }
-    10.71429% {
-      transform: translate(0, 0);
-    }
-    100% {
-      transform: translate(0, 0);
-    }
   }
 `;
 

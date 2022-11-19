@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../../context/context";
 import errorImg from "../../../images/error.png";
 import errorSearch from "../../../images/errorSearch.png";
+import { rotate1 } from "../../../styles/shared/Keyframes.style";
 
 const Error = () => {
   const { recipes, lastQuery, handleError, currentPath, handleQuery } =
@@ -104,50 +105,14 @@ const StyledImgContainer = styled.div`
   .circle {
     border-radius: 50%;
     .errorSearch {
-      -webkit-animation: rotate 3s linear infinite; /* Chrome, Safari 5 */
-      -moz-animation: rotate 3s linear infinite; /* Firefox 5-15 */
-      -o-animation: rotate 3s linear infinite; /* Opera 12+ */
-      animation: rotate 3s linear infinite; /* Chrome, Firefox 16+, 
+      -webkit-animation: ${rotate1} 3s linear infinite; /* Chrome, Safari 5 */
+      -moz-animation: ${rotate1} 3s linear infinite; /* Firefox 5-15 */
+      -o-animation: ${rotate1} 3s linear infinite; /* Opera 12+ */
+      animation: ${rotate1} 3s linear infinite; /* Chrome, Firefox 16+, 
                                                       IE 10+, Safari 5 */
       width: 150px;
       margin: 0 auto;
       opacity: 0.8;
-    }
-  }
-
-  /* @-webkit-keyframes rotate {
-    from {
-      -webkit-transform: rotate(0deg) translateX(30px) rotate(0deg);
-    }
-    to {
-      -webkit-transform: rotate(360deg) translateX(30px) rotate(-360deg);
-    }
-  }
-
-  @-moz-keyframes rotate {
-    from {
-      -moz-transform: rotate(0deg) translateX(30px) rotate(0deg);
-    }
-    to {
-      -moz-transform: rotate(360deg) translateX(30px) rotate(-360deg);
-    }
-  }
-
-  @-o-keyframes rotate {
-    from {
-      -o-transform: rotate(0deg) translateX(30px) rotate(0deg);
-    }
-    to {
-      -o-transform: rotate(360deg) translateX(30px) rotate(-360deg);
-    }
-  } */
-
-  @keyframes rotate {
-    from {
-      transform: rotate(0deg) translateX(30px) rotate(0deg);
-    }
-    to {
-      transform: rotate(360deg) translateX(30px) rotate(-360deg);
     }
   }
 `;
