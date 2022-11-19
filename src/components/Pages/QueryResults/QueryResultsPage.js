@@ -3,7 +3,9 @@ import styled from "styled-components";
 import { Loading, Error } from "../../index";
 import SingleRecipeResult from "../../shared/SingleRecipeResult";
 import { AppContext } from "../../../context/context";
-import loading from "../../../images/preloader.gif";
+import LoadingAnimation from "../../shared/LoadingAnimation";
+import { IoMdSearch } from "react-icons/io";
+import { rotate2 } from "../../../styles/shared/Keyframes.style";
 
 const QueryResults = () => {
   const { recipes, isLoading, isError, fetchRecipes, nextPageLoading } =
@@ -49,13 +51,14 @@ const QueryResults = () => {
             <StyledLoadMoreBtn>
               <div onClick={handleClick}>
                 {nextPageLoading ? (
-                  <img src={loading} alt="preloader" />
+                  <LoadingAnimation />
                 ) : (
-                  <p>
-                    Load
-                    <br />
-                    more
-                  </p>
+                  <>
+                    <p>Load</p>
+                    <p>
+                      more <IoMdSearch />
+                    </p>
+                  </>
                 )}
               </div>
             </StyledLoadMoreBtn>
@@ -164,25 +167,43 @@ const StyledLoadMoreBtn = styled.div`
     margin: 0 auto;
     width: 100%;
     height: 100%;
-    display: grid;
-    place-items: center;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     color: rgba(0, 0, 0, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.25);
+
+    p {
+      color: var(--red-clr);
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+
+      &:last-child {
+        display: flex;
+        align-items: center;
+        svg {
+          margin-left: 0.5rem;
+          align-self: center;
+        }
+      }
+    }
 
     &:hover {
       cursor: pointer;
       color: rgba(0, 0, 0, 1);
       background-color: rgba(0, 0, 0, 0.2);
+
+      svg {
+        -webkit-animation: ${rotate2} 1.5s linear infinite; /* Chrome, Safari 5 */
+        -moz-animation: ${rotate2} 1.5s linear infinite; /* Firefox 5-15 */
+        -o-animation: ${rotate2} 1.5s linear infinite; /* Opera 12+ */
+        animation: ${rotate2} 1.5s linear infinite; /* Chrome, Firefox 16+, 
+                                                      IE 10+, Safari 5 */
+      }
     }
 
     &:active p {
       transform: scale(0.95);
-    }
-
-    img {
-      display: block;
-      width: 70%;
     }
   }
 
