@@ -18,7 +18,7 @@ const NavbarForm = (props) => {
 
     handleQuery(changeQuery(query));
     newQueryPath(changeQuery(query));
-    localStorage.setItem("queryPath", JSON.stringify(changeQuery(query)));
+    sessionStorage.setItem("queryPath", JSON.stringify(changeQuery(query)));
 
     fetchRecipes();
     clearQuery();

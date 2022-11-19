@@ -14,18 +14,18 @@ const initialState = {
   isModal: false,
   nextPageLoading: false,
   query: "",
-  lastQuery: JSON.parse(localStorage.getItem("lastQuery")) || "",
-  page: JSON.parse(localStorage.getItem("page")) || 1,
-  nextPage: JSON.parse(localStorage.getItem("nextPage")) || "",
+  lastQuery: JSON.parse(sessionStorage.getItem("lastQuery")) || "",
+  page: JSON.parse(sessionStorage.getItem("page")) || 1,
+  nextPage: JSON.parse(sessionStorage.getItem("nextPage")) || "",
   currentPath: window.location.pathname,
-  path: JSON.parse(localStorage.getItem("path")) || "path",
-  queryPath: JSON.parse(localStorage.getItem("queryPath")) || "",
+  path: JSON.parse(sessionStorage.getItem("path")) || "path",
+  queryPath: JSON.parse(sessionStorage.getItem("queryPath")) || "",
   localStrPath: "recipes",
-  localStrRecipes: JSON.parse(localStorage.getItem("saved-recipes") || "[]"),
-  recipesData: JSON.parse(localStorage.getItem("recipes-data")) || "",
+  localStrRecipes: JSON.parse(sessionStorage.getItem("saved-recipes") || "[]"),
+  recipesData: JSON.parse(sessionStorage.getItem("recipes-data")) || "",
   recipe: "recipe",
-  recipes: JSON.parse(localStorage.getItem("recipes")) || "",
-  email: JSON.parse(localStorage.getItem("newsletter")) || "",
+  recipes: JSON.parse(sessionStorage.getItem("recipes")) || "",
+  email: JSON.parse(sessionStorage.getItem("newsletter")) || "",
   diet: "",
   health: "",
   meal: "",
@@ -144,7 +144,7 @@ const AppProvider = ({ children }) => {
   }, [state.minInput, state.maxInput]);
 
   React.useEffect(() => {
-    localStorage.setItem(
+    sessionStorage.setItem(
       "saved-recipes",
       JSON.stringify(state.localStrRecipes)
     );
@@ -172,19 +172,19 @@ const AppProvider = ({ children }) => {
     const saveQuery = (someQuery) => {
       dispatch({ type: actions.HANDLE_LAST_QUERY, payload: someQuery });
 
-      localStorage.setItem("lastQuery", JSON.stringify(someQuery));
+      sessionStorage.setItem("lastQuery", JSON.stringify(someQuery));
     };
 
     const nextPage = (someData, someLink) => {
       if (someLink !== 1) {
         dispatch({ type: actions.SET_NEXT_PAGE, payload: "" });
-        localStorage.setItem("nextPage", JSON.stringify(""));
+        sessionStorage.setItem("nextPage", JSON.stringify(""));
       } else {
         dispatch({
           type: actions.SET_NEXT_PAGE,
           payload: someData._links.next.href,
         });
-        localStorage.setItem(
+        sessionStorage.setItem(
           "nextPage",
           JSON.stringify(someData._links.next.href)
         );
@@ -192,9 +192,9 @@ const AppProvider = ({ children }) => {
     };
 
     const pageNData = (p, d) => {
-      localStorage.setItem("page", JSON.stringify(p));
+      sessionStorage.setItem("page", JSON.stringify(p));
       dispatch({ type: actions.GET_RECIPES_DATA, payload: d });
-      localStorage.setItem("recipes-data", JSON.stringify(d));
+      sessionStorage.setItem("recipes-data", JSON.stringify(d));
     };
 
     try {
@@ -222,7 +222,7 @@ const AppProvider = ({ children }) => {
           type: actions.GET_ALL_RECIPES,
           payload: recipesArray,
         });
-        localStorage.setItem("recipes", JSON.stringify([...recipesArray]));
+        sessionStorage.setItem("recipes", JSON.stringify([...recipesArray]));
 
         data.hits.length === 0 &&
           dispatch({ type: actions.HANDLE_ERROR, payload: true });
@@ -250,7 +250,7 @@ const AppProvider = ({ children }) => {
           payload: [...state.recipes, ...recipesArray],
         });
 
-        localStorage.setItem(
+        sessionStorage.setItem(
           "recipes",
           JSON.stringify([...state.recipes, ...recipesArray])
         );

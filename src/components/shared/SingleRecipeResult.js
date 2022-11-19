@@ -29,7 +29,7 @@ const SingleRecipeResult = ({ item, id, type }) => {
   const handleMouseDown = () => {
     if (type === "query") {
       newPath(id);
-      localStorage.setItem("path", JSON.stringify(id));
+      sessionStorage.setItem("path", JSON.stringify(id));
       return;
     }
     return newLocalStrPath(id);
@@ -72,6 +72,7 @@ export const StyledSingleRecipeWrapper = styled.article`
   position: relative;
   overflow: hidden;
   border: 10px solid var(--light-grey-bcg-clr);
+  background-color: var(--light-grey-bcg-clr);
   box-shadow: var(--secondary-shadow);
 
   &:hover {
@@ -87,7 +88,7 @@ export const StyledSingleRecipeWrapper = styled.article`
     width: 100%;
     height: 100%;
     display: block;
-    object-fit: fill;
+    object-fit: cover;
     border: 1px solid rgba(0, 0, 0, 0.25);
     color: transparent;
   }

@@ -8,7 +8,7 @@ const CloseBtn = ({ passedEmail }) => {
 
   const handleClick = () => {
     saveEmail("user_denied");
-    localStorage.setItem("newsletter", JSON.stringify("user_denied"));
+    sessionStorage.setItem("newsletter", JSON.stringify("user_denied"));
     handleModal();
   };
 

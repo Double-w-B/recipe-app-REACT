@@ -21,7 +21,7 @@ const Error = () => {
         navigate("/");
       }
       handleQuery("");
-      localStorage.setItem("lastQuery", JSON.stringify(""));
+      sessionStorage.setItem("lastQuery", JSON.stringify(""));
       handleError(false);
     }, 4000);
   });
@@ -115,7 +115,7 @@ const StyledImgContainer = styled.div`
     }
   }
 
-  @-webkit-keyframes rotate {
+  /* @-webkit-keyframes rotate {
     from {
       -webkit-transform: rotate(0deg) translateX(30px) rotate(0deg);
     }
@@ -140,7 +140,7 @@ const StyledImgContainer = styled.div`
     to {
       -o-transform: rotate(360deg) translateX(30px) rotate(-360deg);
     }
-  }
+  } */
 
   @keyframes rotate {
     from {

@@ -9,7 +9,7 @@ const Form = ({ setPassedEmail, passedEmail }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (passedEmail) {
-      localStorage.setItem("newsletter", JSON.stringify(passedEmail));
+      sessionStorage.setItem("newsletter", JSON.stringify(passedEmail));
       saveEmail(passedEmail);
       showHideModal();
     }
