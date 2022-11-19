@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FiExternalLink } from "react-icons/fi";
 import { AppContext } from "../../context/context";
-import logoPreloader from "../../images/logoPreloader.png";
+// import logoPreloader from "../../images/logoPreloader.gif";
+import logoPreloader from "../../images/logo2.png";
 
 const SingleRecipeResult = ({ item, id, type }) => {
   const { newPath, path, queryPath } = React.useContext(AppContext);
@@ -21,9 +22,11 @@ const SingleRecipeResult = ({ item, id, type }) => {
   React.useEffect(() => {
     const img = new Image();
     img.src = image;
-    setTimeout(() => {
+
+    const timer = setTimeout(() => {
       img.onload = onLoad();
     }, 100);
+    return () => clearTimeout(timer);
   }, [image, onLoad]);
 
   const handleMouseDown = () => {
@@ -48,7 +51,7 @@ const SingleRecipeResult = ({ item, id, type }) => {
 
   return (
     <StyledSingleRecipeWrapper onMouseDown={handleMouseDown}>
-      <img src={recipeImg} alt={label} />
+      <img src={recipeImg} alt="" />
 
       <StyledSingleRecipe>
         <div>
