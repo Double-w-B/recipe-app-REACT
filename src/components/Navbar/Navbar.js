@@ -1,14 +1,12 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { AppContext } from "../../context/context";
-import * as NavbarModule from "./index";
+import * as Component from "./index";
 
 const Navbar = () => {
   const { email, isModal, lastQuery } = useContext(AppContext);
   const { loadingToFalse, handleError } = useContext(AppContext);
   const { clearQuery, handleQuery } = useContext(AppContext);
-
-  const [showInfo, setShowInfo] = React.useState(true);
 
   const filterQuery = (text) => {
     const newQuery = text
@@ -41,19 +39,9 @@ const Navbar = () => {
   if (!isModal && email) {
     return (
       <StyledSection>
-        <NavbarModule.NavbarLogo clickEvent={handleClick} />
-        <NavbarModule.NavbarForm changeQuery={changeQuery} />
-
-        <NavbarModule.NavbarResults
-          filterQuery={filterQuery}
-          changeQuery={changeQuery}
-          showInfo={showInfo}
-          setShowInfo={setShowInfo}
-        />
-        <NavbarModule.NavbarInfoIcon
-          showInfo={showInfo}
-          setShowInfo={setShowInfo}
-        />
+        <Component.Logo clickEvent={handleClick} />
+        <Component.SearchForm changeQuery={changeQuery} />
+        <Component.MenuButton />
       </StyledSection>
     );
   }
@@ -65,9 +53,10 @@ const StyledSection = styled.section`
   width: 100%;
   height: 10vh;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   position: relative;
+  /* background-color: rgba(0, 0, 0, 0.3); */
 
   @media screen and (max-width: 900px) {
     justify-content: center;

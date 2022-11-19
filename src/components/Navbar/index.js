@@ -1,7 +1,6 @@
 import Navbar from "./Navbar";
-import NavbarResults from "./NavbarResults";
-import NavbarInfoIcon from "./NavbarInfoIcon";
-import NavbarLogo from "./NavbarLogo";
-import NavbarForm from "./NavbarForm";
+import Logo from "./Logo";
+import SearchForm from "./SearchForm";
+import MenuButton from "./MenuButton";
 
-export { NavbarResults, NavbarInfoIcon, NavbarLogo, NavbarForm, Navbar };
+export { Logo, SearchForm, Navbar, MenuButton };

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 import { AppContext } from "../../context/context";
 
-const NavbarForm = (props) => {
+const SearchForm = (props) => {
   const { changeQuery } = props;
   const { fetchRecipes, query, createQuery } = useContext(AppContext);
   const { clearQuery, handleQuery } = useContext(AppContext);
@@ -62,10 +62,9 @@ const NavbarForm = (props) => {
 };
 
 const StyledForm = styled.form`
-  margin-left: 3rem;
-  display: flex;
-  width: 45%;
+  width: 50%;
   height: 50px;
+  display: flex;
   border: 2px solid var(--yellow-clr);
   box-shadow: var(--primary-shadow);
   background-color: rgba(255, 255, 255, 0.7);
@@ -205,4 +204,4 @@ const StyledForm = styled.form`
   }
 `;
 
-export default NavbarForm;
+export default SearchForm;
