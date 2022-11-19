@@ -6,12 +6,19 @@ import { AppContext } from "../../../context/context";
 import LoadingAnimation from "../../shared/LoadingAnimation";
 import { IoMdSearch } from "react-icons/io";
 import { rotate2 } from "../../../styles/shared/Keyframes.style";
+import Navigation from "../../shared/Navigation";
 
 const QueryResults = () => {
   const { recipes, isLoading, isError, fetchRecipes, nextPageLoading } =
     useContext(AppContext);
   const { setNextPageLoading, changeThePage, page, nextPage, changeThePath } =
     useContext(AppContext);
+
+  const { lastQuery, recipesData } = useContext(AppContext);
+
+  const recipesAmount = recipesData?.count
+    ?.toString()
+    .replace(/(?!^)(?=(?:\d{3})+(?:\.|$))/gm, " ");
 
   React.useEffect(() => {
     changeThePath("");
@@ -37,6 +44,7 @@ const QueryResults = () => {
 
   return (
     <main>
+      <Navigation query={lastQuery} amount={recipesAmount} page={"query"} />
       <StyledResultsWrapper>
         <StyledResultsContainer className="no-select">
           {recipes.map((item, index) => {
@@ -70,43 +78,47 @@ const QueryResults = () => {
 };
 
 export const StyledResultsWrapper = styled.section`
-  padding: 3rem 7rem 3rem 7rem;
+  /* padding: 3rem 7rem 3rem 7rem; */
+  width: 70%;
+  margin: 0 auto;
   min-height: 84vh;
   display: grid;
   place-items: center;
 
   @media screen and (max-width: 1530px) {
-    padding: 3rem 7rem 0.5rem 7rem;
+    /* padding: 3rem 7rem 0.5rem 7rem; */
   }
 
   @media screen and (max-width: 1200px) {
-    padding: 2rem 4rem 2rem 4rem;
+    /* padding: 2rem 4rem 2rem 4rem; */
   }
 
   @media screen and (max-width: 992px) {
-    padding: 2rem 3rem 2rem 3rem;
+    /* padding: 2rem 3rem 2rem 3rem; */
   }
 
   @media screen and (max-width: 900px) {
-    padding: 5rem 3rem 2rem 3rem;
+    /* padding: 5rem 3rem 2rem 3rem; */
   }
 
   @media screen and (max-width: 768px) {
-    padding: 5rem 2rem 2rem 2rem;
+    /* padding: 5rem 2rem 2rem 2rem; */
   }
 
   @media screen and (max-width: 480px) {
-    padding: 5rem 1rem 2rem 1rem;
+    /* padding: 5rem 1rem 2rem 1rem; */
   }
 
   @media screen and (max-width: 400px) {
-    padding: 5rem 0.5rem 2rem 0.5rem;
+    /* padding: 5rem 0.5rem 2rem 0.5rem; */
   }
 `;
 
 export const StyledResultsContainer = styled.div`
-  width: 80%;
-  margin: 0 auto;
+  /* background-color: tomato; */
+
+  width: 100%;
+  /* margin: 0 auto; */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
   justify-items: center;

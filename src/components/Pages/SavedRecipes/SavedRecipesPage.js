@@ -6,6 +6,7 @@ import SingleRecipeResult from "../../shared/SingleRecipeResult";
 import { AppContext } from "../../../context/context";
 import recipeImg from "../../../images/recipe.png";
 import { shake } from "../../../styles/shared/Keyframes.style";
+import Navigation from "../../shared/Navigation";
 
 const SavedRecipesResults = () => {
   const { localStrRecipes, changeThePath, currentPath } =
@@ -41,6 +42,7 @@ const SavedRecipesResults = () => {
   if (localStrRecipes.length > 0) {
     return (
       <main>
+        <Navigation page={"storage"} />
         <StyledSavedRecipesWrapper>
           <StyledSavedRecipesContainer className="no-select">
             {Object.values(localStrRecipes).map((item) => {

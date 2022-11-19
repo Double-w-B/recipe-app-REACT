@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { AppContext } from "../../../context/context";
 import * as Component from "./index";
 import { useLocation } from "react-router-dom";
+import Navigation from "../Navigation";
 
 const Recipe = () => {
   const location = useLocation();
@@ -10,6 +11,7 @@ const Recipe = () => {
   const { localStrPath, newLocalStrPath } = useContext(AppContext);
   const { updateLocalStrRecipes, localStrRecipes, rotateStar } =
     useContext(AppContext);
+  const { lastQuery, recipesAmount } = useContext(AppContext);
 
   const [checked, setChecked] = useState(false);
 
@@ -21,10 +23,13 @@ const Recipe = () => {
 
   const found = allRecipes.find((item) => {
     const { uri } = item.recipe;
-    if (location.state === "query") return uri.substring(51) === path;
-
-    return uri.substring(51) === localStrPath;
+    if (location.state === "query") return uri.split("_")[1] === path;
+    console.log(uri.split("_")[1]);
+    return uri.split("_")[1] === localStrPath;
   });
+
+  // console.log(path);
+  // console.log(localStrPath);
 
   React.useEffect(() => {
     if (location.state === "query") {
@@ -65,6 +70,13 @@ const Recipe = () => {
     updateLocalStrRecipes(filteredStorage());
     newLocalStrPath("removedRecipe");
   };
+  const checkPage = () => {
+    if (location.state === "query") {
+      return "query-recipe";
+    } else {
+      return "saved-recipe";
+    }
+  };
 
   const initialState = {
     checked,
@@ -76,48 +88,58 @@ const Recipe = () => {
   const { image } = found.recipe;
 
   return (
-    <StyledRecipeWrapper>
-      <StyledRecipeContainer>
-        <StyledRecipeImg>
-          <img src={image} alt="" />
-        </StyledRecipeImg>
+    <>
+      <Navigation
+        query={lastQuery}
+        amount={recipesAmount}
+        page={checkPage()}
+        title={found.recipe.label}
+      />
+      <StyledRecipeWrapper>
+        <StyledRecipeContainer>
+          <StyledRecipeImg>
+            <img src={image} alt="" />
+          </StyledRecipeImg>
 
-        <Component.MainInfo {...initialState} type={location.state} />
-        <Component.Nutrition found={found} />
-        <Component.Ingredients found={found} />
-      </StyledRecipeContainer>
-    </StyledRecipeWrapper>
+          <Component.MainInfo {...initialState} type={location.state} />
+          <Component.Nutrition found={found} />
+          <Component.Ingredients found={found} />
+        </StyledRecipeContainer>
+      </StyledRecipeWrapper>
+    </>
   );
 };
 
 export const StyledRecipeWrapper = styled.article`
-  padding: 4rem 7rem 3rem 7rem;
+  /* padding: 3rem 7rem 3rem 7rem; */
+  width: 70%;
   min-height: 84vh;
+  margin: 0 auto;
 
   @media screen and (max-width: 1300px) {
-    padding: 4rem 4.5rem 3rem 4.5rem;
+    /* padding: 4rem 4.5rem 3rem 4.5rem; */
   }
 
   @media screen and (max-width: 1200px) {
-    padding: 4rem 2.5rem 3rem 2.5rem;
+    /* padding: 4rem 2.5rem 3rem 2.5rem; */
   }
 
   @media screen and (max-width: 900px) {
-    padding: 6rem 2.5rem 3rem 2.5rem;
+    /* padding: 6rem 2.5rem 3rem 2.5rem; */
   }
 
   @media screen and (max-width: 550px) {
-    padding: 6rem 1rem 3rem 1rem;
+    /* padding: 6rem 1rem 3rem 1rem; */
   }
 
   @media screen and (max-width: 400px) {
-    padding: 6rem 0.5rem 3rem 0.5rem;
+    /* padding: 6rem 0.5rem 3rem 0.5rem; */
   }
 `;
 
 export const StyledRecipeContainer = styled.div`
-  width: 70%;
-  margin: 0 auto;
+  width: 100%;
+  /* margin: 0 auto; */
   display: grid;
   padding: 1rem;
   gap: 1rem;
@@ -128,27 +150,27 @@ export const StyledRecipeContainer = styled.div`
   box-shadow: var(--secondary-shadow);
 
   @media screen and (max-width: 1800px) {
-    width: 75%;
+    /* width: 100%; */
   }
 
   @media screen and (max-width: 1700px) {
-    width: 80%;
+    /* width: 80%; */
   }
 
   @media screen and (max-width: 1530px) {
-    width: 85%;
+    /* width: 85%; */
   }
 
   @media screen and (max-width: 1100px) {
-    width: 90%;
+    /* width: 90%; */
   }
 
   @media screen and (max-width: 992px) {
-    width: 95%;
+    /* width: 95%; */
   }
 
   @media screen and (max-width: 900px) {
-    width: 100%;
+    /* width: 100%; */
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(auto-fill, minmax(300px, 1fr));
   }
