@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
 import { AppContext } from "../../context/context";
 import * as Component from "./index";
+import StyledNavbar from "./style";
 
 const Navbar = () => {
   const { email, lastQuery } = useContext(AppContext);
@@ -37,35 +37,16 @@ const Navbar = () => {
   };
 
   if (!email) {
-    return <EmptyWrapper />;
+    return <StyledNavbar />;
   }
 
   return (
-    <StyledSection>
+    <StyledNavbar>
       <Component.Logo clickEvent={handleClick} />
       <Component.SearchForm changeQuery={changeQuery} />
       <Component.MenuButton />
-    </StyledSection>
+    </StyledNavbar>
   );
 };
-
-const StyledSection = styled.section`
-  width: 100%;
-  height: 10vh;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  /* background-color: rgba(0, 0, 0, 0.3); */
-
-  @media screen and (max-width: 900px) {
-    justify-content: center;
-  }
-`;
-
-const EmptyWrapper = styled.section`
-  width: 100%;
-  height: 10vh;
-`;
 
 export default Navbar;
