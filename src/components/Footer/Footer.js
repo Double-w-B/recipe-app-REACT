@@ -1,9 +1,9 @@
 import React from "react";
-import styled from "styled-components";
+import StyledFooter from "./style/Footer.style";
 
 const Footer = () => {
   return (
-    <Wrapper>
+    <StyledFooter>
       <p>
         Copyright &copy; {new Date().getFullYear()} Foodie Mood. All rights
         reserved.
@@ -15,25 +15,11 @@ const Footer = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <span>Władysław Balandin</span>
+          Władysław Balandin
         </a>
       </p>
-    </Wrapper>
+    </StyledFooter>
   );
 };
-
-const Wrapper = styled.footer`
-  font-size: 0.8rem;
-  width: 100%;
-  color: rgba(0, 0, 0, 0.8);
-
-  height: 5vh;
-  display: grid;
-  justify-items: center;
-  a {
-    color: #d1031b;
-    font-weight: bold;
-  }
-`;
 
 export default Footer;
