@@ -1,11 +1,10 @@
 import React, { useContext, useState } from "react";
-import styled from "styled-components";
-import { StyledResultsWrapper } from "../QueryResults/QueryResultsPage";
 import { AppContext } from "../../../context/context";
-import * as FiltersModule from "./Filters";
+import * as Component from "./index";
+import StyledHomePage from "./style";
 
 const Home = () => {
-  const { email, isModal, minInput, maxInput, changePreferences } =
+  const { email, minInput, maxInput, changePreferences } =
     useContext(AppContext);
   const { changeThePath } = useContext(AppContext);
 
@@ -41,7 +40,7 @@ const Home = () => {
       e.target.value <= 1000 &&
         changePreferences("maxInput", e.target.value.replace(/^0+/, ""));
 
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         Number(e.target.value) <= Number(minInput) &&
           changePreferences("maxInput", Number(minInput) + gap);
 
@@ -51,6 +50,7 @@ const Home = () => {
       }, 700);
 
       !e.target.value && changePreferences("maxInput", "1000");
+      return () => clearTimeout(timer);
     }
   };
 
@@ -89,97 +89,32 @@ const Home = () => {
     }
   };
 
-  if (!isModal && email) {
+  const initialState = {
+    handlePrefChange,
+    handleInput,
+    checkRangeValue,
+    minPercent,
+    maxPercent,
+  };
+
+  if (!email) {
     return (
       <main>
-        <StyledFiltersWrapper>
-          <StyledFiltersContainer className=" no-select">
-            <FiltersModule.PreferencesFilter
-              handlePrefChange={handlePrefChange}
-            />
-            <FiltersModule.RangeFilter
-              handleInput={handleInput}
-              checkRangeValue={checkRangeValue}
-              minPercent={minPercent}
-              maxPercent={maxPercent}
-            />
-          </StyledFiltersContainer>
-        </StyledFiltersWrapper>
+        <StyledHomePage />
       </main>
     );
   }
 
   return (
     <main>
-      <StyledEmptyWrapper />
+      <StyledHomePage>
+        <StyledHomePage.Container className=" no-select">
+          <Component.Preferences {...initialState} />
+          <Component.Range {...initialState} />
+        </StyledHomePage.Container>
+      </StyledHomePage>
     </main>
   );
 };
-
-const StyledFiltersWrapper = styled(StyledResultsWrapper)``;
-
-const StyledFiltersContainer = styled.div`
-  width: 80%;
-  margin: 0 auto;
-  display: grid;
-  grid-gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
-  justify-items: center;
-
-  @media screen and (max-width: 1920px) {
-    width: 70%;
-  }
-
-  @media screen and (max-width: 1800px) {
-    grid-gap: 1rem;
-  }
-
-  @media screen and (max-width: 1700px) {
-    grid-gap: 0;
-    width: 75%;
-  }
-
-  @media screen and (max-width: 1530px) {
-    width: 85%;
-  }
-
-  @media screen and (max-width: 1300px) {
-    width: 92%;
-  }
-
-  @media screen and (max-width: 1200px) {
-    width: 95%;
-  }
-
-  @media screen and (max-width: 1100px) {
-    width: 100%;
-  }
-
-  @media screen and (max-width: 945px) {
-    width: 80%;
-  }
-
-  @media screen and (max-width: 900px) {
-    width: 95%;
-  }
-
-  @media screen and (max-width: 700px) {
-    width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  }
-
-  @media screen and (max-width: 600px) {
-    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
-  }
-
-  @media screen and (max-width: 430px) {
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  }
-`;
-
-const StyledEmptyWrapper = styled.section`
-  padding: 4rem 7rem 3rem 7rem;
-  min-height: 84vh;
-`;
 
 export default Home;

@@ -1,104 +1,8 @@
-import React, { useContext } from "react";
 import styled from "styled-components";
-import { AppContext } from "../../../../context/context";
-import { BiRefresh, HiOutlineCalculator } from "../../../index";
 
-const RangeFilter = ({
-  checkRangeValue,
-  handleInput,
-  minPercent,
-  maxPercent,
-}) => {
-  const { changePreferences, minInput, maxInput } = useContext(AppContext);
-
-  const defaultRange = minInput > 0 || maxInput < 1000;
-
-  const cleanUpCalories = () => {
-    changePreferences("calories", "");
-    changePreferences("minInput", "0");
-    changePreferences("maxInput", "1000");
-  };
-
-  return (
-    <Wrapper className={defaultRange && "show"}>
-      <div
-        htmlFor="calories"
-        className={defaultRange ? "lastLabel show" : "lastLabel"}
-      >
-        <HiOutlineCalculator />
-        Kcal
-        <br /> <sup className={defaultRange ? "show" : ""}>
-          (per serving)
-        </sup>{" "}
-      </div>
-      <div className={defaultRange ? "inputs-wrapper show" : "inputs-wrapper"}>
-        <div className="num-inp-con">
-          <div className="field">
-            <input
-              type="number"
-              name="input-min"
-              value={minInput}
-              onChange={checkRangeValue}
-              onClick={(e) => e.target.select()}
-            />
-          </div>
-          <div className="field">
-            <input
-              type="number"
-              name="input-max"
-              value={maxInput}
-              onChange={checkRangeValue}
-              onClick={(e) => e.target.select()}
-            />
-          </div>
-        </div>
-
-        <div className="slider-con">
-          <div className="slider">
-            <div
-              className="progress"
-              style={{
-                left: `${minPercent}%`,
-                right: `${maxPercent}%`,
-              }}
-            ></div>
-          </div>
-
-          <div className="range-inputs">
-            <input
-              type="range"
-              name="range-min"
-              min="0"
-              max="1000"
-              value={minInput}
-              step="10"
-              onChange={handleInput}
-            />
-            <input
-              type="range"
-              name="range-max"
-              min="0"
-              max="1000"
-              value={maxInput}
-              step="10"
-              onChange={handleInput}
-            />
-          </div>
-        </div>
-      </div>
-      {defaultRange && (
-        <div className="icon" onClick={cleanUpCalories}>
-          <BiRefresh />
-        </div>
-      )}
-    </Wrapper>
-  );
-};
-
-const Wrapper = styled.div`
-  width: 20rem;
-  min-width: 20rem;
-  min-height: 17rem;
+export const Range = styled.div`
+  width: 15.5rem;
+  height: 14rem;
   margin: 1rem;
   background-color: rgba(245, 245, 245, 0.6);
   font-size: 3rem;
@@ -107,12 +11,14 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-around;
   text-align: center;
-  border: 2px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--yellow-clr);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   position: relative;
+
   &.show {
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   }
+
   .icon {
     font-size: 2rem;
     position: absolute;
@@ -120,6 +26,7 @@ const Wrapper = styled.div`
     right: 0;
     color: var(--red-clr);
     cursor: pointer;
+
     &:active {
       transform: scale(0.5);
     }
@@ -130,7 +37,7 @@ const Wrapper = styled.div`
     margin-top: 2rem;
     display: block;
     align-items: center;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     color: rgba(0, 0, 0, 0.7);
     transform: translateY(3rem);
 
@@ -160,7 +67,6 @@ const Wrapper = styled.div`
     margin-top: 1.5rem;
     color: var(--yellow-clr);
     font-weight: bold;
-    /* background-color: rgba(0, 0, 0, 0.8); */
 
     .num-inp-con {
       width: 100%;
@@ -168,7 +74,6 @@ const Wrapper = styled.div`
       display: flex;
       align-items: center;
       justify-content: space-between;
-      /* background-color: red; */
       .field {
         width: 44%;
         height: 80%;
@@ -209,7 +114,6 @@ const Wrapper = styled.div`
     .slider-con {
       width: 100%;
       height: 50%;
-      /* background-color: rgba(0, 0, 0, 0.5); */
       padding: 1rem;
 
       .slider {
@@ -296,19 +200,7 @@ const Wrapper = styled.div`
     }
   }
 
-  @media screen and (max-width: 1700px) {
-    width: 17.5rem;
-    min-width: 17.5rem;
-    min-height: 14.5rem;
-  }
-
   @media screen and (max-width: 1530px) {
-    width: 16rem;
-    min-width: 16rem;
-    min-height: 13rem;
-    .lastLabel {
-      font-size: 2.1rem;
-    }
     &:hover {
       .lastLabel {
         transform: translateY(1.1rem);
@@ -317,8 +209,6 @@ const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 1200px) {
-    border: 3px solid rgba(255, 255, 255, 0.1);
-
     & .inputs-wrapper .num-inp-con .field {
       height: 80%;
       input {
@@ -327,7 +217,7 @@ const Wrapper = styled.div`
     }
 
     .lastLabel {
-      font-size: 2rem;
+      font-size: 1.7rem;
     }
 
     &:hover {
@@ -337,17 +227,21 @@ const Wrapper = styled.div`
     }
   }
 
+  @media screen and (max-width: 1140px) {
+    width: 14rem;
+    height: 13rem;
+  }
   @media screen and (max-width: 900px) {
+    width: 14.5rem;
+    height: 13rem;
     .lastLabel {
       & *:first-child {
-        font-size: 2.5rem;
+        font-size: 2rem;
       }
     }
   }
 
   @media screen and (max-width: 768px) {
-    border: 2px solid rgba(255, 255, 255, 0.4);
-
     .lastLabel {
       font-size: 1.8rem;
       transform: none;
@@ -375,10 +269,6 @@ const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 700px) {
-    width: 15rem;
-    min-width: 15rem;
-    min-height: 13rem;
-
     .lastLabel {
       margin-top: 3rem;
     }
@@ -395,21 +285,14 @@ const Wrapper = styled.div`
     }
   }
 
-  @media screen and (max-width: 600px) {
-    width: 19rem;
-    min-width: 19rem;
-    min-height: 16rem;
+  @media screen and (max-width: 645px) {
+    width: 17.5rem;
+    height: 14rem;
+  }
 
+  @media screen and (max-width: 600px) {
     .lastLabel {
       font-size: 2rem;
     }
   }
-
-  @media screen and (max-width: 430px) {
-    width: 17rem;
-    min-width: 17rem;
-    min-height: 15rem;
-  }
 `;
-
-export default RangeFilter;

@@ -1,53 +1,9 @@
-import React, { useContext } from "react";
 import styled from "styled-components";
-import { preferencesData } from "../../../../data/foodTypes";
-import { AppContext } from "../../../../context/context";
-import { BiRefresh } from "../../../index";
 import sortIco from "../../../../images/sort-down.svg";
 
-const PreferencesFilter = ({ handlePrefChange }) => {
-  const { diet, health, meal, cuisine, dish, changePreferences } =
-    useContext(AppContext);
-
-  const filter = [diet, health, meal, cuisine, dish];
-
-  return preferencesData.map((preference, index) => {
-    const { label, id, name, icon, options } = preference;
-    return (
-      <Wrapper className={`${filter[index] && "show"}`} key={index}>
-        <label htmlFor={id} className={filter[index] && "show"}>
-          {icon}
-          {label}
-        </label>
-        <select
-          className={filter[index] && "show"}
-          name={name}
-          id={id}
-          value={filter[index]}
-          onChange={handlePrefChange}
-        >
-          {options.map((item, index) => {
-            return (
-              <option value={item} key={index}>
-                {item}
-              </option>
-            );
-          })}
-        </select>
-        {filter[index] && (
-          <div className="icon" onClick={() => changePreferences(id, "")}>
-            <BiRefresh />
-          </div>
-        )}
-      </Wrapper>
-    );
-  });
-};
-
-const Wrapper = styled.div`
-  width: 20rem;
-  min-width: 20rem;
-  min-height: 17rem;
+export const Preferences = styled.div`
+  width: 15.5rem;
+  height: 14rem;
   margin: 1rem;
   background-color: rgba(245, 245, 245, 0.6);
   font-size: 3rem;
@@ -56,7 +12,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-around;
   text-align: center;
-  border: 2px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--yellow-clr);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   position: relative;
   &.show {
@@ -106,7 +62,7 @@ const Wrapper = styled.div`
     line-height: 1;
     display: flex;
     align-items: center;
-    font-size: 2.1rem;
+    font-size: 1.8rem;
     color: rgba(0, 0, 0, 0.7);
     transform: translateY(3rem);
 
@@ -136,19 +92,7 @@ const Wrapper = styled.div`
     transform: translateY(1.1rem);
   }
 
-  @media screen and (max-width: 1700px) {
-    width: 17.5rem;
-    min-width: 17.5rem;
-    min-height: 14.5rem;
-  }
-
   @media screen and (max-width: 1530px) {
-    width: 16rem;
-    min-width: 16rem;
-    min-height: 13rem;
-    label {
-      font-size: 2.1rem;
-    }
     &:hover {
       label {
         transform: translateY(1.1rem);
@@ -157,10 +101,8 @@ const Wrapper = styled.div`
   }
 
   @media screen and (max-width: 1200px) {
-    border: 3px solid rgba(255, 255, 255, 0.1);
-
     label {
-      font-size: 2rem;
+      font-size: 1.7rem;
     }
     select {
       font-size: 1rem;
@@ -172,17 +114,22 @@ const Wrapper = styled.div`
       }
     }
 
+    @media screen and (max-width: 1140px) {
+      width: 14rem;
+      height: 13rem;
+    }
+
     @media screen and (max-width: 900px) {
+      width: 14.5rem;
+      height: 13rem;
       label {
         & *:first-child {
-          font-size: 2.5rem;
+          font-size: 2rem;
         }
       }
     }
 
     @media screen and (max-width: 768px) {
-      border: 2px solid rgba(255, 255, 255, 0.4);
-
       label {
         font-size: 1.8rem;
         transform: none;
@@ -205,27 +152,14 @@ const Wrapper = styled.div`
         transform: none;
       }
     }
-    @media screen and (max-width: 700px) {
-      width: 15rem;
-      min-width: 15rem;
-      min-height: 13rem;
+    @media screen and (max-width: 645px) {
+      width: 17.5rem;
+      height: 14rem;
     }
     @media screen and (max-width: 600px) {
-      width: 19rem;
-      min-width: 19rem;
-      min-height: 16rem;
-
       label {
         font-size: 2rem;
       }
     }
-
-    @media screen and (max-width: 430px) {
-      width: 17rem;
-      min-width: 17rem;
-      min-height: 15rem;
-    }
   }
 `;
-
-export default PreferencesFilter;
