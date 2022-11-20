@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { bounce } from "../../../styles/shared/Keyframes.style";
+import { bounce } from "../../../../styles/shared/Keyframes.style";
 
 export const Form = styled.form`
   margin: 0 auto;

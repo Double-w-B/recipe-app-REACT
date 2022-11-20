@@ -67,3 +67,14 @@ export const shake = keyframes`
     transform: translate(0, 0);
   }
 `;
+
+export const sideSlide = keyframes`
+from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  `;

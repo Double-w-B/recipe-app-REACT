@@ -1,11 +1,10 @@
 /* Components */
 import Home from "./Pages/Home/HomePage";
-import Footer from "./Pages/Footer/Footer";
+import Footer from "./Footer/Footer";
 import QueryResults from "./Pages/QueryResults/QueryResultsPage";
 import Loading from "./Pages/Loading/Loading";
 import Error from "./Pages/Error/Error";
 import SavedRecipesResults from "./Pages/SavedRecipes/SavedRecipesPage";
-import SavedRecipesBtn from "./shared/SavedRecipesButton";
 
 /* Icons */
 
@@ -24,7 +23,6 @@ export {
   QueryResults,
   Loading,
   Error,
-  SavedRecipesBtn,
   SavedRecipesResults,
   GiRiceCooker,
   FiExternalLink,

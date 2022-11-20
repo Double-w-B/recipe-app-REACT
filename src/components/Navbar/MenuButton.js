@@ -1,11 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-import { ImMenu } from "react-icons/im";
+import { HiMenu } from "react-icons/hi";
+import { AppContext } from "../../context/context";
 
 const MenuButton = () => {
+  const { handleMenu, handleModal } = React.useContext(AppContext);
+
+  const handleClick = () => {
+    handleModal();
+    handleMenu();
+  };
+
   return (
     <StyledContainer>
-      <ImMenu />
+      <HiMenu onClick={handleClick} />
     </StyledContainer>
   );
 };
@@ -19,12 +27,12 @@ const StyledContainer = styled.div`
 
   svg {
     font-size: 2rem;
-    color: rgba(0, 0, 0, 0.7);
     color: var(--yellow-clr);
+    color: rgba(255, 255, 255, 0.8);
     margin-right: 3rem;
     cursor: pointer;
     transition: all 0.3s linear;
-    border-radius: 0.2rem;
+    border-radius: 0.3rem;
     background-color: rgba(0, 0, 0, 0.3);
 
     &:active {

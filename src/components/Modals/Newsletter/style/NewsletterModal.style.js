@@ -1,39 +1,8 @@
 import styled from "styled-components";
-import BackgroundImg from "../../../images/greeting_bckg.webp";
-import { CloseBtn } from "./CloseBtn.style";
-import { Form, Button } from "./Form.style";
 
-const StyledNewsletterModal = styled.div`
-  width: 65vw;
-  height: 80vh;
-  text-align: center;
-  display: grid;
-  place-items: center;
-  background: #fff url(${BackgroundImg}) no-repeat fixed;
-  background-size: cover;
-  color: var(--red-clr);
-  position: relative;
-
-  @media screen and (max-width: 1200px) {
-    width: 75vw;
-  }
-
-  @media screen and (max-width: 900px) {
-    width: 85vw;
-  }
-
-  @media screen and (max-width: 700px) {
-    height: 70vh;
-  }
-
-  @media screen and (max-width: 480px) {
-    width: 95vw;
-  }
-`;
-
-const Content = styled.div`
+export const Content = styled.div`
   width: 90%;
-  height: 85%;
+  height: 90%;
   display: grid;
   align-items: center;
   justify-content: center;
@@ -66,7 +35,7 @@ const Content = styled.div`
 
   @media screen and (max-width: 900px) {
     img {
-      width: 160px;
+      width: 230px;
     }
 
     h1 {
@@ -85,7 +54,7 @@ const Content = styled.div`
 
   @media screen and (max-width: 600px) {
     img {
-      width: 150px;
+      width: 200px;
     }
     h1 {
       font-size: 1.6rem;
@@ -114,10 +83,3 @@ const Content = styled.div`
     height: 88%;
   }
 `;
-
-StyledNewsletterModal.Content = Content;
-StyledNewsletterModal.CloseBtn = CloseBtn;
-StyledNewsletterModal.Form = Form;
-StyledNewsletterModal.Button = Button;
-
-export default StyledNewsletterModal;

@@ -4,7 +4,7 @@ import { AppContext } from "../../context/context";
 import * as Component from "./index";
 
 const Navbar = () => {
-  const { email, isModal, lastQuery } = useContext(AppContext);
+  const { email, lastQuery } = useContext(AppContext);
   const { loadingToFalse, handleError } = useContext(AppContext);
   const { clearQuery, handleQuery } = useContext(AppContext);
 
@@ -36,17 +36,17 @@ const Navbar = () => {
     handleError(false);
   };
 
-  if (!isModal && email) {
-    return (
-      <StyledSection>
-        <Component.Logo clickEvent={handleClick} />
-        <Component.SearchForm changeQuery={changeQuery} />
-        <Component.MenuButton />
-      </StyledSection>
-    );
+  if (!email) {
+    return <EmptyWrapper />;
   }
 
-  return <EmptyWrapper />;
+  return (
+    <StyledSection>
+      <Component.Logo clickEvent={handleClick} />
+      <Component.SearchForm changeQuery={changeQuery} />
+      <Component.MenuButton />
+    </StyledSection>
+  );
 };
 
 const StyledSection = styled.section`

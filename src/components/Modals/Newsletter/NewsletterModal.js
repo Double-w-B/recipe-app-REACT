@@ -1,9 +1,9 @@
 import React from "react";
-import Modal from "./Modal";
-import StyledNewsletterModal from "./style/NewsletterModal.style";
+import Modal from "../Modal";
+import StyledNewsletterModal from "./style";
 import * as Component from "./index";
 
-const NewsletterModal1 = () => {
+const NewsletterModal = () => {
   const [passedEmail, setPassedEmail] = React.useState("");
 
   const emailInitialState = {
@@ -14,14 +14,14 @@ const NewsletterModal1 = () => {
   return (
     <Modal>
       <StyledNewsletterModal>
+        <Component.CloseButton {...emailInitialState} />
         <StyledNewsletterModal.Content className="no-select">
           <Component.Content {...emailInitialState} />
           <Component.Form {...emailInitialState} />
         </StyledNewsletterModal.Content>
-        <Component.CloseBtn {...emailInitialState} />
       </StyledNewsletterModal>
     </Modal>
   );
 };
 
-export default NewsletterModal1;
+export default NewsletterModal;

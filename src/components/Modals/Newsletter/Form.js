@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { HiOutlineMail } from "../index";
-import { AppContext } from "../../context/context";
-import StyledNewsletterModal from "./style/NewsletterModal.style";
+import { HiOutlineMail } from "../../index";
+import StyledNewsletterModal from "./style";
+import { AppContext } from "../../../context/context";
 
 const Form = ({ setPassedEmail, passedEmail }) => {
   const { showHideModal, saveEmail } = useContext(AppContext);
@@ -17,7 +17,6 @@ const Form = ({ setPassedEmail, passedEmail }) => {
 
   const handleChange = (e) => {
     const regExp =
-      // eslint-disable-next-line
       /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     regExp.test(String(e.target.value).toLowerCase())

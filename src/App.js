@@ -1,14 +1,14 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import * as Component from "./components";
-import NewsletterModal from "./components/Modal/NewsletterModal";
+import * as Modal from "./components/Modals";
 import { Navbar } from "./components/Navbar";
 import { AppContext } from "./context/context";
 import Recipe from "./components/shared/Recipe/Recipe";
 
 function App() {
   const { path, queryPath, localStrPath } = React.useContext(AppContext);
-  const { isModal } = React.useContext(AppContext);
+  const { isModal, isNewsletter, isMenu } = React.useContext(AppContext);
 
   isModal
     ? document.body.classList.add("no-scrolling")
@@ -17,7 +17,8 @@ function App() {
   return (
     <Router>
       {/* Modal */}
-      {isModal && <NewsletterModal />}
+      {isModal && isNewsletter && <Modal.NewsletterModal />}
+      {isModal && isMenu && <Modal.MenuModal />}
       <Navbar />
       <Routes>
         <Route exact path="/" element={<Component.Home />} />
@@ -43,7 +44,6 @@ function App() {
         />
         <Route exact path="*" element={<Component.Error />} />
       </Routes>
-      <Component.SavedRecipesBtn />
       <Component.Footer />
     </Router>
   );

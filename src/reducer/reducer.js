@@ -148,6 +148,26 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === actions.SHOW_NEWSLETTER) {
+    return {
+      ...state,
+      isNewsletter: action.payload,
+    };
+  }
+
+  if (action.type === actions.HIDE_NEWSLETTER) {
+    return {
+      ...state,
+      isNewsletter: action.payload,
+    };
+  }
+  if (action.type === actions.HANDLE_MENU) {
+    return {
+      ...state,
+      isMenu: action.payload,
+    };
+  }
+
   if (action.type === actions.SAVE_EMAIL) {
     return {
       ...state,
