@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { AppContext } from "../../context/context";
+import StyledNavigation from "./style/Navigation.style";
 
 const Navigation = ({ query, amount, page, title }) => {
   const { queryPath } = React.useContext(AppContext);
@@ -24,37 +24,36 @@ const Navigation = ({ query, amount, page, title }) => {
   const setNavigationPath = () => {
     if (page === "query") {
       return (
-        <p title={filterQuery(query).join(", ")}>
-          {`${changeQuery(query)} (${amount} ${
-            amount.split(" ").join("") > 1 ? "recipes" : "recipe"
-          })`}
-        </p>
+        <>
+          <span title={filterQuery(query).join(", ")}>
+            {changeQuery(query)}
+          </span>
+          <span className="amount">
+            {` (${amount} ${
+              amount.split(" ").join("") > 1 ? "recipes" : "recipe"
+            })`}
+          </span>
+        </>
       );
     }
 
     if (page === "query-recipe") {
       return (
-        <p>
-          <Link
-            to={`/recipes/${queryPath}`}
-            title={filterQuery(query).join(", ")}
-          >
-            {changeQuery(query)}
-          </Link>
-        </p>
+        <Link
+          to={`/recipes/${queryPath}`}
+          title={filterQuery(query).join(", ")}
+        >
+          {changeQuery(query)}
+        </Link>
       );
     }
 
     if (page === "saved-recipe") {
-      return (
-        <p>
-          <Link to={`/savedrecipes`}>Saved Recipes</Link>
-        </p>
-      );
+      return <Link to={`/savedrecipes`}>Saved Recipes</Link>;
     }
 
     if (page === "storage") {
-      return <p>Saved Recipes</p>;
+      return "Saved Recipes";
     }
   };
 
@@ -64,67 +63,18 @@ const Navigation = ({ query, amount, page, title }) => {
         <Link to="/" draggable="false">
           Home
         </Link>
+
+        <span className="arrow">&gt;</span>
+        {setNavigationPath()}
+        {title && (
+          <>
+            <span className="arrow">&gt;</span>
+            {title}
+          </>
+        )}
       </p>
-      <p className="arrow">&gt;</p>
-      {setNavigationPath()}
-      {title && (
-        <>
-          <p className="arrow">&gt;</p>
-          <p>
-            <span>{title}</span>
-          </p>
-        </>
-      )}
     </StyledNavigation>
   );
 };
 
-const StyledNavigation = styled.nav`
-  width: 65%;
-  margin: 3rem auto;
-  display: flex;
-  color: var(--red-clr);
-  /* background-color: gray; */
-
-  a {
-    color: var(--red-clr);
-    font-weight: bold;
-    transition: all 0.3s linear;
-    position: relative;
-
-    &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0px;
-      height: 100%;
-      display: block;
-      transition: 300ms;
-      background-color: var(--light-grey-bcg-clr);
-      z-index: -1;
-    }
-
-    &:hover::after {
-      width: 100%;
-    }
-  }
-
-  p {
-    font-size: 1.4rem;
-    color: var(--red-clr);
-    font-weight: bold;
-    cursor: default;
-
-    &:nth-child(2) {
-    }
-
-    &.arrow {
-      font-size: 1.4rem;
-      color: rgba(0, 0, 0, 0.7);
-      margin: 0 0.5rem;
-      font-weight: normal;
-    }
-  }
-`;
 export default Navigation;
