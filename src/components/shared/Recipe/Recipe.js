@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
-import styled from "styled-components";
 import { AppContext } from "../../../context/context";
 import * as Component from "./index";
 import { useLocation } from "react-router-dom";
 import Navigation from "../Navigation";
+import StyledRecipe from "./style";
 
 const Recipe = () => {
   const location = useLocation();
@@ -28,9 +28,6 @@ const Recipe = () => {
     return uri.split("_")[1] === localStrPath;
   });
 
-  // console.log(path);
-  // console.log(localStrPath);
-
   React.useEffect(() => {
     if (location.state === "query") {
       changeThePath(window.location.pathname);
@@ -42,7 +39,7 @@ const Recipe = () => {
     if (location.state === "query") {
       Object.values(localStrRecipes).find(
         (item) =>
-          item.recipe.uri.substring(51) === found.recipe.uri.substring(51) &&
+          item.recipe.uri.split("_")[1] === found.recipe.uri.split("_")[1] &&
           setChecked(true)
       );
     }
@@ -52,7 +49,7 @@ const Recipe = () => {
     const filteredStorage = () =>
       Object.values(localStrRecipes).filter(
         (item) =>
-          item.recipe.uri.substring(51) !== found.recipe.uri.substring(51)
+          item.recipe.uri.split("_")[1] !== found.recipe.uri.split("_")[1]
       );
 
     if (location.state === "query" && checked) {
@@ -95,124 +92,19 @@ const Recipe = () => {
         page={checkPage()}
         title={found.recipe.label}
       />
-      <StyledRecipeWrapper>
-        <StyledRecipeContainer>
-          <StyledRecipeImg>
+      <StyledRecipe>
+        <StyledRecipe.Container>
+          <StyledRecipe.Image>
             <img src={image} alt="" />
-          </StyledRecipeImg>
+          </StyledRecipe.Image>
 
           <Component.MainInfo {...initialState} type={location.state} />
           <Component.Nutrition found={found} />
           <Component.Ingredients found={found} />
-        </StyledRecipeContainer>
-      </StyledRecipeWrapper>
+        </StyledRecipe.Container>
+      </StyledRecipe>
     </>
   );
 };
-
-export const StyledRecipeWrapper = styled.article`
-  /* padding: 3rem 7rem 3rem 7rem; */
-  width: 70%;
-  min-height: 84vh;
-  margin: 0 auto;
-
-  @media screen and (max-width: 1300px) {
-    /* padding: 4rem 4.5rem 3rem 4.5rem; */
-  }
-
-  @media screen and (max-width: 1200px) {
-    /* padding: 4rem 2.5rem 3rem 2.5rem; */
-  }
-
-  @media screen and (max-width: 900px) {
-    /* padding: 6rem 2.5rem 3rem 2.5rem; */
-  }
-
-  @media screen and (max-width: 550px) {
-    /* padding: 6rem 1rem 3rem 1rem; */
-  }
-
-  @media screen and (max-width: 400px) {
-    /* padding: 6rem 0.5rem 3rem 0.5rem; */
-  }
-`;
-
-export const StyledRecipeContainer = styled.div`
-  width: 100%;
-  /* margin: 0 auto; */
-  display: grid;
-  padding: 1rem;
-  gap: 1rem;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 4;
-  background-color: var(--light-grey-bcg-clr);
-  color: #000;
-  box-shadow: var(--secondary-shadow);
-
-  @media screen and (max-width: 1800px) {
-    /* width: 100%; */
-  }
-
-  @media screen and (max-width: 1700px) {
-    /* width: 80%; */
-  }
-
-  @media screen and (max-width: 1530px) {
-    /* width: 85%; */
-  }
-
-  @media screen and (max-width: 1100px) {
-    /* width: 90%; */
-  }
-
-  @media screen and (max-width: 992px) {
-    /* width: 95%; */
-  }
-
-  @media screen and (max-width: 900px) {
-    /* width: 100%; */
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(auto-fill, minmax(300px, 1fr));
-  }
-
-  @media screen and (max-width: 480px) {
-    padding: 0.5rem;
-  }
-`;
-
-export const StyledRecipeImg = styled.div`
-  grid-column: 1/2;
-  grid-row: 1/2;
-  border: 2px solid rgba(0, 0, 0, 0.6);
-  border-radius: 0.2rem;
-  box-shadow: var(--primary-shadow);
-
-  img {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-  }
-
-  @media screen and (max-width: 900px) {
-    grid-column: 2/5;
-    grid-row: 2/3;
-    max-height: 300px;
-    margin: 0.5rem 0;
-  }
-
-  @media screen and (max-width: 700px) {
-    grid-column: 1/6;
-    margin: 0.5rem 4rem;
-  }
-
-  @media screen and (max-width: 600px) {
-    margin: 0.5rem 2rem;
-  }
-
-  @media screen and (max-width: 550px) {
-    margin: 0.5rem 0;
-  }
-`;
 
 export default Recipe;
