@@ -9,7 +9,6 @@ const StyledMenuModal = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   padding: 0.5rem 0.5rem 30px 0.5rem;
   position: absolute;
   top: 0;
@@ -21,6 +20,7 @@ const StyledMenuModal = styled.div`
   animation: ${sideSlide} 350ms ease-out forwards;
   background: #fff url(${BackgroundImg}) no-repeat fixed;
   background-size: cover;
+  box-shadow: var(--primary-shadow);
 
   @media screen and (max-width: 1350px) {
     width: 30%;
@@ -43,11 +43,11 @@ const StyledMenuModal = styled.div`
   }
 
   @media screen and (max-width: 600px) {
-    width: 55%;
+    width: 60%;
   }
 
   @media screen and (max-width: 480px) {
-    width: 60%;
+    width: 65%;
   }
 `;
 

@@ -72,7 +72,6 @@ export const Info = styled.div`
 export const SaveButton = styled.div`
   width: 45px;
   height: 45px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 50%;
   display: flex;
   flex-direction: column;
@@ -84,20 +83,28 @@ export const SaveButton = styled.div`
 
   &:hover {
     p {
-      opacity: 0.5;
+      opacity: 0.3;
     }
   }
 
   a {
     display: grid;
     place-items: center;
+
+    svg {
+      color: var(--red-clr);
+      filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
+    }
   }
 
   svg {
-    font-size: 2rem;
-    color: var(--red-clr);
+    font-size: 2.5rem;
+    color: ${(props) =>
+      props.saved ? "var(--red-clr)" : "rgba(0, 0, 0, 0.2)"};
     cursor: pointer;
     transition: all 0.3s linear;
+    filter: ${(props) =>
+      props.saved && "drop-shadow(0 0 2px rgba(0, 0, 0, 0.3))"};
 
     &:active {
       transform: scale(0.7);
@@ -107,6 +114,8 @@ export const SaveButton = styled.div`
   p {
     cursor: default;
     font-size: 0.9rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
     position: absolute;
     bottom: -1.5rem;
     left: 50;

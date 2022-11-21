@@ -69,7 +69,7 @@ export const StyledLoadMoreButton = styled.div`
   }
 
   @media screen and (max-width: 430px) {
-    width: 17em;
+    width: 17rem;
     height: 15rem;
   }
 `;

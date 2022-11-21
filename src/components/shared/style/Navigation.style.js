@@ -33,8 +33,6 @@ const StyledNavigation = styled.nav`
   p {
     width: 100%;
     font-size: 1.4rem;
-    padding: 0 0.3rem;
-    margin: 0.1rem 0;
     color: var(--red-clr);
     font-weight: bold;
     cursor: default;

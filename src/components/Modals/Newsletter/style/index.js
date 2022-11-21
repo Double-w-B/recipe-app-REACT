@@ -14,7 +14,6 @@ const StyledNewsletterModal = styled.div`
   background-size: cover;
   color: var(--red-clr);
   position: relative;
-  background-color: tomato;
 
   @media screen and (max-width: 1200px) {
     width: 75vw;

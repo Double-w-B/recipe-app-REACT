@@ -69,6 +69,10 @@ export const SearchForm = styled.form`
 
     & svg {
       transform: translateY(2px);
+
+      &:active {
+        transform: scale(0.8);
+      }
     }
   }
 

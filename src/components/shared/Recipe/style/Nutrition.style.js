@@ -27,27 +27,35 @@ export const Nutrition = styled.div`
 
 export const Nutrients = styled.div`
   width: 100%;
-  padding: 0 0.5rem;
+  padding: 0 1.3rem;
 
   p {
     letter-spacing: 0.5px;
     font-size: 1.1rem;
-    margin-left: 0.5rem;
     line-height: 1.3;
     transition: all 0.3s linear;
     cursor: default;
     opacity: 0.8;
 
     span {
-      color: var(--yellow-clr);
-    }
+      &:not(.dot) {
+        &:first-child {
+          margin: 0 0.2rem 0 0;
+        }
+        margin: 0 0.2rem;
+      }
 
-    &:hover {
-      opacity: 1;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+      .dot {
+        color: var(--yellow-clr);
+      }
 
-      span {
-        color: var(--red-clr);
+      &:hover {
+        opacity: 1;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+
+        .dot {
+          color: var(--red-clr);
+        }
       }
     }
   }
@@ -58,8 +66,10 @@ export const Nutrients = styled.div`
     }
   }
   @media screen and (max-width: 900px) {
-    display: flex;
-    flex-wrap: wrap;
+    p {
+      text-align: justify;
+      overflow-wrap: break-word;
+    }
   }
   @media screen and (max-width: 420px) {
     flex-direction: column;

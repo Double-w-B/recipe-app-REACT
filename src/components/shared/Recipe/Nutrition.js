@@ -25,9 +25,10 @@ const Nutrition = ({ found }) => {
   const showNutrients = () => {
     return nutrients.map((item, index) => {
       return (
-        <p key={index}>
-          <span>•</span> {item.label}: {Math.round(item.quantity)} {item.unit}
-        </p>
+        <span key={index}>
+          <span className="dot">•</span> {item.label}:{" "}
+          {Math.round(item.quantity)} {item.unit}
+        </span>
       );
     });
   };
@@ -37,7 +38,9 @@ const Nutrition = ({ found }) => {
       <h2>Nutrition ({checkNutrients(totalNutrients).length}) </h2>
       <div className="underline"></div>
 
-      <StyledRecipe.Nutrients>{showNutrients()}</StyledRecipe.Nutrients>
+      <StyledRecipe.Nutrients>
+        <p>{showNutrients()}</p>
+      </StyledRecipe.Nutrients>
 
       <StyledRecipe.ShowMoreButton onClick={handleBtnClick}>
         {showMore ? "hide" : "show more"}

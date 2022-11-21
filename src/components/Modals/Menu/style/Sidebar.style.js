@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 export const Sidebar = styled.div`
   width: 80%;
-  height: calc(100% - 30px);
-  padding: 1rem;
+  margin: 2rem auto;
+  padding: 2rem 1rem 3rem 1rem;
   display: flex;
   flex-direction: column;
   background-color: rgba(255, 255, 255, 0.7);
-  margin: 0 auto;
+  box-shadow: var(--primary-shadow);
 
   p {
     text-align: right;

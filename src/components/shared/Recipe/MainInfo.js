@@ -60,7 +60,7 @@ const MainInfo = ({ checked, setChecked, checkStorage, found, type }) => {
   return (
     <StyledRecipe.Info>
       <StyledRecipe.SaveButton
-        checked={checked}
+        saved={checked}
         currentPath={currentPath}
         className="no-select"
       >
