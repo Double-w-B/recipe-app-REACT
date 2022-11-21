@@ -22,31 +22,17 @@ const reducer = (state, action) => {
     };
   }
 
-  if (action.type === actions.ROTATE_STAR) {
-    return {
-      ...state,
-      rotate: true,
-    };
-  }
-
-  if (action.type === actions.REFRESH_STAR) {
-    return {
-      ...state,
-      rotate: false,
-    };
-  }
-
   if (action.type === actions.NEXT_PAGE_LOADING) {
     return {
       ...state,
-      nextPageLoading: true,
+      isNextPageLoading: true,
     };
   }
 
   if (action.type === actions.NEXT_PAGE_LOADED) {
     return {
       ...state,
-      nextPageLoading: false,
+      isNextPageLoading: false,
     };
   }
 

@@ -7,21 +7,21 @@ import { StyledLoadMoreButton } from "./style/LoadMoreButton.style";
 const LoadMoreButton = () => {
   const {
     setNextPageLoading,
-    changeThePage,
+    changePage,
     fetchRecipes,
-    nextPageLoading,
+    isNextPageLoading,
     page,
   } = React.useContext(AppContext);
 
   const handleClick = () => {
     setNextPageLoading();
-    changeThePage(page + 1);
+    changePage(page + 1);
     fetchRecipes();
   };
   return (
     <StyledLoadMoreButton>
       <div onClick={handleClick}>
-        {nextPageLoading ? (
+        {isNextPageLoading ? (
           <LoadingAnimation />
         ) : (
           <>

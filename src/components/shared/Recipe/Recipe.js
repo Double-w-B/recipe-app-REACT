@@ -7,7 +7,7 @@ import StyledRecipe from "./style";
 
 const Recipe = () => {
   const location = useLocation();
-  const { path, recipes, setRecipe, changeThePath } = useContext(AppContext);
+  const { path, recipes, setRecipe, changePath } = useContext(AppContext);
   const { localStrPath, newLocalStrPath } = useContext(AppContext);
   const { updateLocalStrRecipes, localStrRecipes, rotateStar } =
     useContext(AppContext);
@@ -24,13 +24,12 @@ const Recipe = () => {
   const found = allRecipes.find((item) => {
     const { uri } = item.recipe;
     if (location.state === "query") return uri.split("_")[1] === path;
-    console.log(uri.split("_")[1]);
     return uri.split("_")[1] === localStrPath;
   });
 
   React.useEffect(() => {
     if (location.state === "query") {
-      changeThePath(window.location.pathname);
+      changePath(window.location.pathname);
     }
     // eslint-disable-next-line
   }, []);

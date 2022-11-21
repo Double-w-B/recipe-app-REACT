@@ -6,7 +6,7 @@ import StyledNavbar from "./style";
 const Navbar = () => {
   const { email, lastQuery } = useContext(AppContext);
   const { loadingToFalse, handleError } = useContext(AppContext);
-  const { clearQuery, handleQuery } = useContext(AppContext);
+  const { clearQuery, handleLastQuery } = useContext(AppContext);
 
   const filterQuery = (text) => {
     const newQuery = text
@@ -30,7 +30,7 @@ const Navbar = () => {
   };
 
   const handleClick = () => {
-    handleQuery("");
+    handleLastQuery("");
     clearQuery();
     loadingToFalse();
     handleError(false);

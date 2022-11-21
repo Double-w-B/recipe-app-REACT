@@ -8,7 +8,7 @@ import StyledError from "./style/Error.style";
 const Error = () => {
   const [seconds, setSeconds] = React.useState(5);
 
-  const { recipes, lastQuery, handleError, currentPath, handleQuery } =
+  const { recipes, lastQuery, handleError, currentPath, handleLastQuery } =
     React.useContext(AppContext);
   const { diet, health, meal, cuisine, dish, calories } =
     React.useContext(AppContext);
@@ -24,7 +24,7 @@ const Error = () => {
         currentPath === "/savedrecipes"
           ? navigate("/savedrecipes")
           : navigate("/");
-        handleQuery("");
+        handleLastQuery("");
         sessionStorage.setItem("lastQuery", JSON.stringify(""));
         handleError(false);
       }
@@ -47,6 +47,7 @@ const Error = () => {
             {(diet || health || meal || cuisine || dish || calories) &&
               "and your preferences."}
           </h2>
+          <p>... redirect after {seconds} sec</p>
         </StyledError>
       </main>
     );

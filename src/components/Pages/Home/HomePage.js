@@ -6,13 +6,13 @@ import StyledHomePage from "./style";
 const Home = () => {
   const { email, minInput, maxInput, changePreferences } =
     useContext(AppContext);
-  const { changeThePath } = useContext(AppContext);
+  const { changePath } = useContext(AppContext);
 
   const [minPercent, setMinPercent] = useState("0");
   const [maxPercent, setMaxPercent] = useState("0");
 
   React.useEffect(() => {
-    changeThePath(window.location.pathname);
+    changePath(window.location.pathname);
     // eslint-disable-next-line
   }, []);
 
@@ -85,7 +85,7 @@ const Home = () => {
         break;
 
       default:
-        console.log("Switch in a Checkboxes");
+        throw new Error("Switch in a Checkboxes");
     }
   };
 

@@ -8,11 +8,12 @@ const clientID = `${process.env.REACT_APP_ID_KEY}`;
 const accessKey = `${process.env.REACT_APP_ACCESS_KEY}`;
 
 const initialState = {
-  rotate: false,
   isLoading: false,
   isError: false,
   isModal: false,
-  nextPageLoading: false,
+  isNewsletter: false,
+  isMenu: false,
+  isNextPageLoading: false,
   query: "",
   lastQuery: JSON.parse(sessionStorage.getItem("lastQuery")) || "",
   page: JSON.parse(sessionStorage.getItem("page")) || 1,
@@ -40,72 +41,104 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const rotateStar = () => {
-    dispatch({ type: actions.ROTATE_STAR });
-    setTimeout(() => {
-      dispatch({ type: actions.REFRESH_STAR });
-    }, 300);
-  };
+  React.useEffect(() => {
+    if (!state.email) {
+      handleModal();
+      showNewsletter();
+    }
+    // eslint-disable-next-line
+  }, []);
 
-  const handleError = (action) => {
-    dispatch({ type: actions.HANDLE_ERROR, payload: action });
-  };
+  React.useEffect(() => {
+    state.query && dispatch({ type: actions.CHANGE_THE_PAGE, payload: 1 });
+  }, [state.query]);
 
-  const loadingToFalse = () => {
-    dispatch({ type: actions.GET_RECIPES_SUCCESS });
-  };
-  const setNextPageLoading = () => {
-    dispatch({ type: actions.NEXT_PAGE_LOADING });
-  };
+  React.useEffect(() => {
+    if (state.minInput > 0 || state.maxInput < 1000) {
+      const range = `${state.minInput}-${state.maxInput}`;
+      dispatch({ type: actions.CHANGE_CALORIES, payload: range });
+    }
+  }, [state.minInput, state.maxInput]);
+
+  React.useEffect(() => {
+    const data = JSON.stringify(state.localStrRecipes);
+    sessionStorage.setItem("saved-recipes", data);
+  }, [state.localStrRecipes, state.setLocalStrRecipes]);
+
+  /* Query */
   const createQuery = (someQuery) => {
     dispatch({ type: actions.CREATE_A_QUERY, payload: someQuery });
   };
   const clearQuery = () => {
     dispatch({ type: actions.CLEAR_THE_QUERY });
   };
-
-  const handleQuery = (lastQuery) => {
+  const handleLastQuery = (lastQuery) => {
     dispatch({ type: actions.HANDLE_LAST_QUERY, payload: lastQuery });
   };
+  /* Query */
 
-  const changeThePage = (number) => {
+  /* Page */
+  const changePage = (number) => {
     dispatch({ type: actions.CHANGE_THE_PAGE, payload: number });
   };
-
-  const changeThePath = (newPath) => {
-    dispatch({ type: actions.CHANGE_CURRENT_PATH, payload: newPath });
+  const setNextPageLoading = () => {
+    dispatch({ type: actions.NEXT_PAGE_LOADING });
   };
+  /* Page */
 
+  /* Path */
   const newPath = (newPath) => {
     dispatch({ type: actions.SET_PATH, payload: newPath });
   };
-
+  const changePath = (newPath) => {
+    dispatch({ type: actions.CHANGE_CURRENT_PATH, payload: newPath });
+  };
   const newQueryPath = (newPath) => {
     dispatch({ type: actions.SET_QUERY_PATH, payload: newPath });
   };
   const newLocalStrPath = (newPath) => {
     dispatch({ type: actions.SET_LOCALSTR_PATH, payload: newPath });
   };
+  /* Path */
 
+  /* Recipe */
   const setRecipe = (newRecipe) => {
-    dispatch({
-      type: actions.GET_RECIPE,
-      payload: !newRecipe ? "recipe" : newRecipe,
-    });
+    const recipe = !newRecipe ? "recipe" : newRecipe;
+    dispatch({ type: actions.GET_RECIPE, payload: recipe });
   };
+  /* Recipe */
+
+  /* Email */
+  const saveEmail = (email) => {
+    dispatch({ type: actions.SAVE_EMAIL, payload: email });
+  };
+  /* Email */
+
+  /* Storage */
   const updateLocalStrRecipes = (newRecipe) => {
     dispatch({
       type: actions.UPDATE_LOCALSTR_RECIPES,
       payload: newRecipe,
     });
   };
+  /* Storage */
+
+  /* Modals */
   const handleModal = () => {
     dispatch({ type: actions.HANDLE_MODAL, payload: !state.isModal });
   };
-  const saveEmail = (email) => {
-    dispatch({ type: actions.SAVE_EMAIL, payload: email });
+  const showNewsletter = () => {
+    dispatch({ type: actions.SHOW_NEWSLETTER, payload: true });
   };
+  const hideNewsletter = () => {
+    dispatch({ type: actions.HIDE_NEWSLETTER, payload: false });
+  };
+  const handleMenu = () => {
+    dispatch({ type: actions.HANDLE_MENU, payload: !state.isMenu });
+  };
+  /* Modals */
 
+  /* Filters */
   const changePreferences = (type, change) => {
     type === "calories" &&
       dispatch({ type: actions.CHANGE_CALORIES, payload: change });
@@ -121,44 +154,25 @@ const AppProvider = ({ children }) => {
     type === "maxInput" &&
       dispatch({ type: actions.CHANGE_MAXINPUT, payload: change });
   };
+  /* Filters */
 
-  React.useEffect(() => {
-    !state.email &&
-      dispatch({
-        type: actions.HANDLE_MODAL,
-        payload: !state.isModal,
-      });
-    // eslint-disable-next-line
-  }, [state.email]);
+  /* Error/Loading */
+  const handleError = (action) => {
+    dispatch({ type: actions.HANDLE_ERROR, payload: action });
+  };
+  const loadingToFalse = () => {
+    dispatch({ type: actions.GET_RECIPES_SUCCESS });
+  };
+  /* Error/Loading */
 
-  React.useEffect(() => {
-    state.query && dispatch({ type: actions.CHANGE_THE_PAGE, payload: 1 });
-  }, [state.query]);
-
-  React.useEffect(() => {
-    (state.minInput > 0 || state.maxInput < 1000) &&
-      dispatch({
-        type: actions.CHANGE_CALORIES,
-        payload: `${state.minInput}-${state.maxInput}`,
-      });
-  }, [state.minInput, state.maxInput]);
-
-  React.useEffect(() => {
-    sessionStorage.setItem(
-      "saved-recipes",
-      JSON.stringify(state.localStrRecipes)
-    );
-  }, [state.localStrRecipes, state.setLocalStrRecipes]);
-
-  let endpointUrl = `${mainUrl}&q=${
-    state.query
-  }&app_id=${clientID}&app_key=${accessKey}${
-    state.diet && "&diet=" + state.diet
-  }${state.health && "&health=" + state.health}${
-    state.cuisine && "&cuisineType=" + state.cuisine
-  }${state.meal && "&mealType=" + state.meal}${
-    state.dish && "&dishType=" + state.dish
-  }${state.calories && "&calories=" + state.calories}`;
+  const endpointUrl = `
+  ${mainUrl}&q=${state.query}&app_id=${clientID}&app_key=${accessKey}
+  ${state.diet && "&diet=" + state.diet}
+  ${state.health && "&health=" + state.health}
+  ${state.cuisine && "&cuisineType=" + state.cuisine}
+  ${state.meal && "&mealType=" + state.meal}
+  ${state.dish && "&dishType=" + state.dish}
+  ${state.calories && "&calories=" + state.calories}`;
 
   let url;
 
@@ -180,14 +194,9 @@ const AppProvider = ({ children }) => {
         dispatch({ type: actions.SET_NEXT_PAGE, payload: "" });
         sessionStorage.setItem("nextPage", JSON.stringify(""));
       } else {
-        dispatch({
-          type: actions.SET_NEXT_PAGE,
-          payload: someData._links.next.href,
-        });
-        sessionStorage.setItem(
-          "nextPage",
-          JSON.stringify(someData._links.next.href)
-        );
+        const data = someData._links.next.href;
+        dispatch({ type: actions.SET_NEXT_PAGE, payload: data });
+        sessionStorage.setItem("nextPage", JSON.stringify(data));
       }
     };
 
@@ -205,34 +214,26 @@ const AppProvider = ({ children }) => {
         const data = await response.json();
         const recipesArray = data.hits;
         const nextPageLink = Object.keys(data._links).length;
+        const page = state.page + 1;
+        const path = window.location.pathname;
 
-        dispatch({
-          type: actions.CHANGE_THE_PAGE,
-          payload: state.page + 1,
-        });
+        dispatch({ type: actions.CHANGE_THE_PAGE, payload: page });
 
         pageNData(state.page, data);
         saveQuery(state.query);
 
-        // console.log(data);
-
         nextPage(data, nextPageLink);
 
-        dispatch({
-          type: actions.GET_ALL_RECIPES,
-          payload: recipesArray,
-        });
+        dispatch({ type: actions.GET_ALL_RECIPES, payload: recipesArray });
         sessionStorage.setItem("recipes", JSON.stringify([...recipesArray]));
 
-        data.hits.length === 0 &&
-          dispatch({ type: actions.HANDLE_ERROR, payload: true });
-
-        dispatch({
-          type: actions.CHANGE_CURRENT_PATH,
-          payload: window.location.pathname,
-        });
+        dispatch({ type: actions.CHANGE_CURRENT_PATH, payload: path });
 
         dispatch({ type: actions.GET_RECIPES_SUCCESS });
+
+        if (data.hits.length === 0) {
+          dispatch({ type: actions.HANDLE_ERROR, payload: true });
+        }
       }
 
       if (state.page >= 1 && !state.query) {
@@ -240,27 +241,23 @@ const AppProvider = ({ children }) => {
         const data = await response.json();
         const recipesArray = data.hits;
         const nextPageLink = Object.keys(data._links).length;
+        const recipes = [...state.recipes, ...recipesArray];
+
+        if (data.hits.length === 0) {
+          dispatch({ type: actions.HANDLE_ERROR, payload: true });
+        }
 
         pageNData(state.page, data);
 
         nextPage(data, nextPageLink);
 
-        dispatch({
-          type: actions.GET_ALL_RECIPES,
-          payload: [...state.recipes, ...recipesArray],
-        });
+        dispatch({ type: actions.GET_ALL_RECIPES, payload: recipes });
+        sessionStorage.setItem("recipes", JSON.stringify(recipes));
 
-        sessionStorage.setItem(
-          "recipes",
-          JSON.stringify([...state.recipes, ...recipesArray])
-        );
-
-        data.hits.length === 0 &&
-          dispatch({ type: actions.HANDLE_ERROR, payload: true });
         dispatch({ type: actions.NEXT_PAGE_LOADED });
       }
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
     }
   };
 
@@ -270,22 +267,24 @@ const AppProvider = ({ children }) => {
         ...state,
         fetchRecipes,
         setNextPageLoading,
-        rotateStar,
         loadingToFalse,
         createQuery,
         clearQuery,
-        changeThePage,
-        changeThePath,
+        changePage,
+        changePath,
         newPath,
         newQueryPath,
         newLocalStrPath,
         setRecipe,
         updateLocalStrRecipes,
         handleModal,
+        showNewsletter,
+        hideNewsletter,
+        handleMenu,
         saveEmail,
         changePreferences,
         handleError,
-        handleQuery,
+        handleLastQuery,
       }}
     >
       {children}

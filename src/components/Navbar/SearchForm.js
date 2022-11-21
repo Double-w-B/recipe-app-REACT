@@ -8,7 +8,7 @@ const SearchForm = (props) => {
   const { changeQuery } = props;
   const { fetchRecipes, query, createQuery } = useContext(AppContext);
   const { newQueryPath, isLoading, isError } = useContext(AppContext);
-  const { clearQuery, handleQuery } = useContext(AppContext);
+  const { clearQuery, handleLastQuery } = useContext(AppContext);
 
   const handleSubmit = (e) => {
     if (!query) {
@@ -16,7 +16,7 @@ const SearchForm = (props) => {
       return;
     }
 
-    handleQuery(changeQuery(query));
+    handleLastQuery(changeQuery(query));
     newQueryPath(changeQuery(query));
     sessionStorage.setItem("queryPath", JSON.stringify(changeQuery(query)));
 

@@ -1,12 +1,10 @@
 export const GET_RECIPES_BEGIN = "GET_PRODUCTS_BEGIN";
 export const GET_RECIPES_SUCCESS = "GET_PRODUCTS_SUCCESS";
 
-export const ROTATE_STAR = "ROTATE_STAR";
-export const REFRESH_STAR = "REFRESH_STAR";
-
 export const HANDLE_ERROR = "HANDLE_ERROR";
 
 export const SET_NEXT_PAGE = "SET_NEXT_PAGE";
+
 export const NEXT_PAGE_LOADING = "NEXT_PAGE_LOADING";
 export const NEXT_PAGE_LOADED = "NEXT_PAGE_LOADED";
 

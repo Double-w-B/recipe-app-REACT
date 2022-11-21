@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
-import { Loading, Error } from "../../index";
-import SingleRecipeResult from "../../shared/SingleRecipeResult";
-import { AppContext } from "../../../context/context";
-import Navigation from "../../shared/Navigation";
 import * as Component from "./index";
+import { Loading, Error } from "../../index";
+import Navigation from "../../shared/Navigation";
+import { AppContext } from "../../../context/context";
+import SingleRecipeResult from "../../shared/SingleRecipeResult";
 import { SharedSection } from "../../../styles/shared/SharedSection.style";
 import { SharedContainer } from "../../../styles/shared/SharedContainer.style";
 
 const QueryResults = () => {
   const { recipes, isLoading, isError } = useContext(AppContext);
-  const { nextPage, changeThePath } = useContext(AppContext);
+  const { nextPage, changePath } = useContext(AppContext);
   const { lastQuery, recipesData } = useContext(AppContext);
 
   const recipesAmount = recipesData?.count
@@ -17,9 +17,9 @@ const QueryResults = () => {
     .replace(/(?!^)(?=(?:\d{3})+(?:\.|$))/gm, " ");
 
   React.useEffect(() => {
-    changeThePath("");
+    changePath("");
     const timer = setTimeout(() => {
-      changeThePath(window.location.pathname);
+      changePath(window.location.pathname);
     }, 500);
     return () => clearTimeout(timer);
     // eslint-disable-next-line
