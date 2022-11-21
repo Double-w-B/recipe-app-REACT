@@ -1,23 +1,21 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
-import * as StyledModule from "../QueryResults/QueryResultsPage";
-import { Link } from "react-router-dom";
 import SingleRecipeResult from "../../shared/SingleRecipeResult";
 import { AppContext } from "../../../context/context";
-import recipeImg from "../../../images/recipe.png";
-import { shake } from "../../../styles/shared/Keyframes.style";
 import Navigation from "../../shared/Navigation";
+import { SharedContainer } from "../../../styles/shared/SharedContainer.style";
+import { SharedSection } from "../../../styles/shared/SharedSection.style";
+import * as Component from "./index";
 
 const SavedRecipesResults = () => {
-  const { localStrRecipes, changeThePath, currentPath } =
-    useContext(AppContext);
+  const { localStrRecipes, changePath, currentPath } = useContext(AppContext);
 
   React.useEffect(() => {
     if (currentPath !== "/savedrecipes") {
-      changeThePath("");
-      setTimeout(() => {
-        changeThePath(window.location.pathname);
+      changePath("");
+      const timer = setTimeout(() => {
+        changePath(window.location.pathname);
       }, 500);
+      return () => clearTimeout(timer);
     }
     // eslint-disable-next-line
   }, []);
@@ -25,16 +23,7 @@ const SavedRecipesResults = () => {
   if (localStrRecipes.length < 1) {
     return (
       <main>
-        <StyledNoRecipesContainer>
-          <div>
-            <h1>
-              Add your first recipe to have it <br /> always by your side!
-            </h1>
-            <Link to="/">
-              <img src={recipeImg} alt="icon" />
-            </Link>
-          </div>
-        </StyledNoRecipesContainer>
+        <Component.NoRecipes />
       </main>
     );
   }
@@ -43,10 +32,10 @@ const SavedRecipesResults = () => {
     return (
       <main>
         <Navigation page={"storage"} />
-        <StyledSavedRecipesWrapper>
-          <StyledSavedRecipesContainer className="no-select">
+        <SharedSection>
+          <SharedContainer className="no-select">
             {Object.values(localStrRecipes).map((item) => {
-              const id = item.recipe.uri.substring(51);
+              const id = item.recipe.uri.split("_")[1];
               return (
                 <SingleRecipeResult
                   key={id}
@@ -56,44 +45,11 @@ const SavedRecipesResults = () => {
                 />
               );
             })}
-          </StyledSavedRecipesContainer>
-        </StyledSavedRecipesWrapper>
+          </SharedContainer>
+        </SharedSection>
       </main>
     );
   }
 };
-
-const StyledSavedRecipesWrapper = styled(StyledModule.StyledResultsWrapper)``;
-const StyledSavedRecipesContainer = styled(
-  StyledModule.StyledResultsContainer
-)``;
-
-const StyledNoRecipesContainer = styled.section`
-  height: 84vh;
-  h1 {
-    margin-top: 3rem;
-    text-align: center;
-    font-size: 2rem;
-    opacity: 0.7;
-    text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.7);
-  }
-  div {
-    width: 85%;
-    height: 100%;
-    margin: 0 auto;
-    display: grid;
-    place-items: center;
-  }
-  img {
-    width: 130px;
-    opacity: 0.7;
-    cursor: pointer;
-    -webkit-animation: ${shake} 4.72s ease infinite;
-    -moz-animation: ${shake} 4.72s ease infinite;
-    -o-animation: ${shake} 4.72s ease infinite;
-    animation: ${shake} 4.72s ease infinite;
-    background-color: rgba(255, 255, 255, 0.5);
-  }
-`;
 
 export default SavedRecipesResults;
