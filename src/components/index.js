@@ -5,9 +5,10 @@ import QueryResults from "./Pages/QueryResults/QueryResultsPage";
 import Loading from "./Pages/Loading/Loading";
 import Error from "./Pages/Error/Error";
 import SavedRecipesResults from "./Pages/SavedRecipes/SavedRecipesPage";
+import Recipe from "./shared/Recipe/Recipe";
+import Navbar from "../components/Navbar/Navbar";
 
 /* Icons */
-
 import { FiExternalLink } from "react-icons/fi";
 import { HiOutlineCalculator } from "react-icons/hi";
 import { BiRefresh } from "react-icons/bi";
@@ -32,4 +33,6 @@ export {
   HiOutlineMail,
   FaRegWindowClose,
   FaSearch,
+  Recipe,
+  Navbar,
 };

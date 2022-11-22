@@ -1,10 +1,11 @@
 import React from "react";
-import Modal from "../Modal";
 import StyledNewsletterModal from "./style";
 import * as Component from "./index";
+import { AppContext } from "../../../context/context";
 
 const NewsletterModal = () => {
   const [passedEmail, setPassedEmail] = React.useState("");
+  const { isNewsletter } = React.useContext(AppContext);
 
   const emailInitialState = {
     passedEmail,
@@ -12,15 +13,13 @@ const NewsletterModal = () => {
   };
 
   return (
-    <Modal>
-      <StyledNewsletterModal>
-        <Component.CloseButton {...emailInitialState} />
-        <StyledNewsletterModal.Content className="no-select">
-          <Component.Content {...emailInitialState} />
-          <Component.Form {...emailInitialState} />
-        </StyledNewsletterModal.Content>
-      </StyledNewsletterModal>
-    </Modal>
+    <StyledNewsletterModal show={isNewsletter}>
+      <Component.CloseButton {...emailInitialState} />
+      <StyledNewsletterModal.Content className="no-select">
+        <Component.Content {...emailInitialState} />
+        <Component.Form {...emailInitialState} />
+      </StyledNewsletterModal.Content>
+    </StyledNewsletterModal>
   );
 };
 

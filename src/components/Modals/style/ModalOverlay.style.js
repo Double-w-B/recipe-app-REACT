@@ -6,10 +6,13 @@ const StyledModalOverlay = styled.div`
   display: grid;
   place-items: center;
   position: fixed;
+  visibility: ${(props) => (props.show ? "visible" : "hidden")};
+  opacity: ${(props) => (props.show ? "1" : "0")};
   top: 0;
   left: 0;
-  z-index: 10;
+  z-index: 11;
   background-color: rgba(0, 0, 0, 0.55);
+  transition: all 0.3s linear;
 `;
 
 export default StyledModalOverlay;

@@ -13,7 +13,14 @@ const StyledNewsletterModal = styled.div`
   background: #fff url(${BackgroundImg}) no-repeat fixed;
   background-size: cover;
   color: var(--red-clr);
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  visibility: ${(props) => (props.show ? "visible" : "hidden")};
+  opacity: ${(props) => (props.show ? "1" : "0")};
+  transition: all 0.1s ease-out;
+  z-index: 11;
 
   @media screen and (max-width: 1200px) {
     width: 75vw;

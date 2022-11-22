@@ -1,4 +1,5 @@
-import MenuModal from "./Menu/MenuModal";
-import NewsletterModal from "./Newsletter/NewsletterModal";
+import Menu from "./Menu/MenuModal";
+import Newsletter from "./Newsletter/NewsletterModal";
+import ModalOverlay from "./ModalOverlay";
 
-export { NewsletterModal, MenuModal };
+export { Newsletter, Menu, ModalOverlay };

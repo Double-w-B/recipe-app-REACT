@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { Sidebar } from "./Sidebar.style";
 import { CloseButton } from "./CloseButton.style";
 import BackgroundImg from "../../../../images/greeting_bckg.webp";
-import { sideSlide } from "../../../../styles/shared/Keyframes.style";
 
 const StyledMenuModal = styled.div`
   width: 25%;
@@ -10,17 +9,15 @@ const StyledMenuModal = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0.5rem 0.5rem 30px 0.5rem;
+  visibility: ${(props) => (props.show ? "visible" : "hidden")};
   position: absolute;
-  top: 0;
+  bottom: 0;
   right: ${(props) => (props.show ? "0" : " -100%")};
-  transition: all 0.3s linear;
-  -webkit-animation: ${sideSlide} 350ms ease-out forwards;
-  -moz-animation: ${sideSlide} 350ms ease-out forwards;
-  -o-animation: ${sideSlide} 350ms ease-out forwards;
-  animation: ${sideSlide} 350ms ease-out forwards;
+  transition: all 0.5s ease-out;
   background: #fff url(${BackgroundImg}) no-repeat fixed;
   background-size: cover;
   box-shadow: var(--primary-shadow);
+  z-index: 11;
 
   @media screen and (max-width: 1350px) {
     width: 30%;

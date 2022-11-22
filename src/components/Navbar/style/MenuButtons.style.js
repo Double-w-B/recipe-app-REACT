@@ -9,7 +9,6 @@ export const MenuButton = styled.div`
 
   svg {
     font-size: 2rem;
-    color: var(--yellow-clr);
     color: rgba(255, 255, 255, 0.8);
     margin-right: 3rem;
     cursor: pointer;

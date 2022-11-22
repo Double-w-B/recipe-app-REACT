@@ -36,6 +36,8 @@ export const Nutrients = styled.div`
     transition: all 0.3s linear;
     cursor: default;
     opacity: 0.8;
+    display: flex;
+    flex-direction: column;
 
     span {
       &:not(.dot) {
@@ -67,11 +69,13 @@ export const Nutrients = styled.div`
   }
   @media screen and (max-width: 900px) {
     p {
+      display: block;
       text-align: justify;
       overflow-wrap: break-word;
     }
   }
   @media screen and (max-width: 420px) {
+    display: flex;
     flex-direction: column;
   }
 `;

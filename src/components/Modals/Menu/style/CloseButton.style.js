@@ -3,8 +3,9 @@ import styled from "styled-components";
 export const CloseButton = styled.div`
   width: 30px;
   height: 30px;
-  color: var(--red-clr);
+
   svg {
+    color: var(--red-clr);
     width: 100%;
     height: 100%;
     cursor: pointer;
