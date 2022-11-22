@@ -7,6 +7,7 @@ import Error from "./Pages/Error/Error";
 import SavedRecipesResults from "./Pages/SavedRecipes/SavedRecipesPage";
 import Recipe from "./shared/Recipe/Recipe";
 import Navbar from "../components/Navbar/Navbar";
+import ScrollButton from "./shared/ScrollButton";
 
 /* Icons */
 import { FiExternalLink } from "react-icons/fi";
@@ -35,4 +36,5 @@ export {
   FaSearch,
   Recipe,
   Navbar,
+  ScrollButton,
 };

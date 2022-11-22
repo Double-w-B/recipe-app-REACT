@@ -40,7 +40,7 @@ function App() {
         />
         <Route exact path="*" element={<Component.Error />} />
       </Routes>
-
+      <Component.ScrollButton />
       <Component.Footer />
     </Router>
   );

@@ -16,7 +16,7 @@ const Recipe = () => {
   const [checked, setChecked] = useState(false);
 
   React.useEffect(() => {
-    document.body.scrollTo(0, 0);
+    document.getElementById("root").scrollTo(0, 0);
   });
 
   const allRecipes = location.state === "query" ? recipes : localStrRecipes;
