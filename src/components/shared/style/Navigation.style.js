@@ -39,22 +39,30 @@ const StyledNavigation = styled.nav`
     overflow-wrap: break-word;
 
     .arrow {
-      font-size: 1.4rem;
-      color: rgba(0, 0, 0, 0.7);
-      margin: 0 0.5rem;
+      margin: 0 1rem 0 1.5rem;
       font-weight: normal;
+
+      img {
+        -webkit-transform: rotate(45deg) translateY(7px);
+        transform: rotate(45deg) translateY(7px);
+      }
     }
 
     .amount {
       color: rgba(0, 0, 0, 0.6);
+      margin-left: 0.5rem;
     }
   }
 
   @media screen and (max-width: 1250px) {
     width: 80%;
-    p,
-    p .arrow {
-      font-size: 1.3rem;
+    p {
+      .arrow {
+        font-size: 1.3rem;
+        img {
+          width: 28px;
+        }
+      }
     }
   }
 
@@ -65,16 +73,21 @@ const StyledNavigation = styled.nav`
   @media screen and (max-width: 900px) {
     width: 80%;
 
-    p,
-    p .arrow {
-      font-size: 1.2rem;
+    p {
+      .arrow {
+        font-size: 1.2rem;
+      }
     }
   }
 
   @media screen and (max-width: 768px) {
-    p,
-    p .arrow {
-      font-size: 1.1rem;
+    p {
+      .arrow {
+        font-size: 1.1rem;
+        img {
+          width: 25px;
+        }
+      }
     }
   }
 

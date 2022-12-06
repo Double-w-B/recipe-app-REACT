@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../context/context";
 import StyledNavigation from "./style/Navigation.style";
+import iconKnife from "../../images/knife.png";
 
 const Navigation = ({ query, amount, page, title }) => {
   const { queryPath } = React.useContext(AppContext);
@@ -29,7 +30,7 @@ const Navigation = ({ query, amount, page, title }) => {
             {changeQuery(query)}
           </span>
           <span className="amount">
-            {` (${amount} ${
+            {`(${amount} ${
               amount.split(" ").join("") > 1 ? "recipes" : "recipe"
             })`}
           </span>
@@ -64,11 +65,15 @@ const Navigation = ({ query, amount, page, title }) => {
           Home
         </Link>
 
-        <span className="arrow">&gt;</span>
+        <span className="arrow">
+          <img src={iconKnife} alt="" />
+        </span>
         {setNavigationPath()}
         {title && (
           <>
-            <span className="arrow">&gt;</span>
+            <span className="arrow">
+              <img src={iconKnife} alt="" />
+            </span>
             {title}
           </>
         )}
