@@ -166,13 +166,13 @@ const AppProvider = ({ children }) => {
   /* Error/Loading */
 
   const endpointUrl = `
-  ${mainUrl}&q=${state.query}&app_id=${clientID}&app_key=${accessKey}
-  ${state.diet && "&diet=" + state.diet}
-  ${state.health && "&health=" + state.health}
-  ${state.cuisine && "&cuisineType=" + state.cuisine}
-  ${state.meal && "&mealType=" + state.meal}
-  ${state.dish && "&dishType=" + state.dish}
-  ${state.calories && "&calories=" + state.calories}`;
+  ${mainUrl}&q=${state.query}&app_id=${clientID}&app_key=${accessKey}${
+    state.diet && "&diet=" + state.diet
+  }${state.health && "&health=" + state.health}${
+    state.cuisine && "&cuisineType=" + state.cuisine
+  }${state.meal && "&mealType=" + state.meal}${
+    state.dish && "&dishType=" + state.dish
+  }${state.calories && "&calories=" + state.calories}`;
 
   let url;
 
