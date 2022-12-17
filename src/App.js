@@ -13,6 +13,7 @@ function App() {
       <ModalOverlay>
         <Modal.Newsletter />
         <Modal.Menu />
+        <Modal.Auth />
       </ModalOverlay>
 
       <Component.Navbar />

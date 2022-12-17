@@ -13,6 +13,7 @@ const initialState = {
   isModal: false,
   isNewsletter: false,
   isMenu: false,
+  isAuth: false,
   isNextPageLoading: false,
   query: "",
   lastQuery: JSON.parse(sessionStorage.getItem("lastQuery")) || "",
@@ -135,6 +136,12 @@ const AppProvider = ({ children }) => {
   };
   const handleMenu = () => {
     dispatch({ type: actions.HANDLE_MENU, payload: !state.isMenu });
+  };
+  const showAuthModal = () => {
+    dispatch({ type: actions.SHOW_AUTH, payload: true });
+  };
+  const hideAuthModal = () => {
+    dispatch({ type: actions.HIDE_AUTH, payload: false });
   };
   /* Modals */
 
@@ -285,6 +292,8 @@ const AppProvider = ({ children }) => {
         changePreferences,
         handleError,
         handleLastQuery,
+        showAuthModal,
+        hideAuthModal,
       }}
     >
       {children}

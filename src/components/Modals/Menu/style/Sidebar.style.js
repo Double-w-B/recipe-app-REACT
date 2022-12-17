@@ -7,14 +7,19 @@ export const Sidebar = styled.div`
   display: flex;
   flex-direction: column;
   background-color: rgba(255, 255, 255, 0.7);
-  box-shadow: var(--primary-shadow);
+  box-shadow: var(--secondary-shadow);
 
   p {
     text-align: right;
     margin: 0.5rem 0;
+
+    &:last-child {
+      cursor: pointer;
+    }
   }
 
-  a {
+  a,
+  p span {
     font-size: 1.2rem;
     padding: 0 0.3rem;
     color: var(--red-clr);
@@ -29,8 +34,7 @@ export const Sidebar = styled.div`
       height: 100%;
       display: block;
       transition: 300ms;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: -1;
+      background-color: rgba(0, 0, 0, 0.1);
     }
 
     &:hover::after {

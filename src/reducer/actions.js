@@ -29,6 +29,8 @@ export const SHOW_NEWSLETTER = "SHOW_NEWSLETTER";
 export const HIDE_NEWSLETTER = "HIDE_NEWSLETTER";
 export const HANDLE_MENU = "HANDLE_MENU";
 export const SAVE_EMAIL = "SAVE_EMAIL";
+export const SHOW_AUTH = "SHOW_AUTH";
+export const HIDE_AUTH = "HIDE_AUTH";
 
 export const CHANGE_CALORIES = "CHANGE_CALORIES";
 

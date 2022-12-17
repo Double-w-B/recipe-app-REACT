@@ -160,6 +160,18 @@ const reducer = (state, action) => {
       email: action.payload,
     };
   }
+  if (action.type === actions.SHOW_AUTH) {
+    return {
+      ...state,
+      isAuth: action.payload,
+    };
+  }
+  if (action.type === actions.HIDE_AUTH) {
+    return {
+      ...state,
+      isAuth: action.payload,
+    };
+  }
 
   /* Preferences */
   if (action.type === actions.CHANGE_CALORIES) {
