@@ -61,16 +61,14 @@ If the localStorage is empty, then the user will see that information during vis
 
 If a key word was passed with a mistake or there is no such recipe or ingredient in an API data, then the app will show suitable information and automatically redirect to a home page.
 
-![9](https://user-images.githubusercontent.com/75247773/206041656-f5881f01-ed90-402c-93ba-c4f0ec8d2b3f.jpg)
+![9](https://user-images.githubusercontent.com/75247773/208324411-d23d3a49-36b0-464c-ab38-e5d433d0a8ce.jpg)
 
 If there is no a page the user is looking for then the app will inform about that and automatically redirect to a home page.
 
-![10](https://user-images.githubusercontent.com/75247773/206041662-93ff1daf-a5c2-4ca7-87cb-4389a2e7b798.jpg)
+![10](https://user-images.githubusercontent.com/75247773/208324422-80d234b0-a053-4d66-b645-2b061bc95e04.jpg)
 
 ## RWD
 
 Responsive web design approach gives the possibility to use the app on the devices with a different screen sizes.
 
-![11](https://user-images.githubusercontent.com/75247773/206042417-32225e6d-9f3f-4283-aadf-4dda2cc9634f.jpg)
-
-![12](https://user-images.githubusercontent.com/75247773/206042156-093199e9-7234-442d-9bf9-01c37e3e0edb.jpg)
+![13](https://user-images.githubusercontent.com/75247773/208324512-22c3c606-5978-4bac-a028-f40b3c6a0a8e.png)
