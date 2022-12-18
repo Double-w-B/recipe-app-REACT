@@ -173,6 +173,21 @@ const reducer = (state, action) => {
     };
   }
 
+  /* User data */
+  if (action.type === actions.SAVE_USER_DATA) {
+    return {
+      ...state,
+      userData: action.payload,
+    };
+  }
+  if (action.type === actions.REMOVE_USER_DATA) {
+    return {
+      ...state,
+      userData: "",
+    };
+  }
+  /* User data */
+
   /* Preferences */
   if (action.type === actions.CHANGE_CALORIES) {
     return {

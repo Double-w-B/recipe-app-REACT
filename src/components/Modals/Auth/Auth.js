@@ -1,21 +1,55 @@
-import React from "react";
+import React, { Fragment } from "react";
 import StyledAuthModal from "./style";
-import { AppContext } from "../../../context/context";
 import { VscSignIn } from "react-icons/vsc";
 import { IoIosPersonAdd } from "react-icons/io";
 import { BsFillEyeFill } from "react-icons/bs";
+import { AppContext } from "../../../context/context";
+import loadingSpinner from "../../../images/loading.gif";
 
 const Auth = () => {
-  const { isAuth, hideAuthModal, handleModal } = React.useContext(AppContext);
+  const { isAuth, hideAuthModal, handleModal, saveUserData, userData } =
+    React.useContext(AppContext);
 
   const [authAction, setAuthAction] = React.useState("Log in");
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
-  const isLogin = authAction === "Log in";
+  const isLogIn = authAction === "Log in";
+  const [errorMsg, setErrorMsg] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLogInGreeting, setIsLogInGreeting] = React.useState(false);
+  const [isRegisterSuccess, setIsRegisterSuccess] = React.useState(false);
+  const userName =
+    userData?.name?.substring(0, 1).toUpperCase() +
+    userData?.name?.substring(1);
 
-  const handleCancelButton = () => {
+  const authState = {
+    show: isAuth,
+    isLogIn,
+    isLoading,
+    isLogInGreeting,
+    isRegisterSuccess,
+  };
+
+  React.useEffect(() => {
+    if (errorMsg) {
+      const timer = setTimeout(() => {
+        setErrorMsg("");
+      }, 3500);
+      return () => clearTimeout(timer);
+    }
+  }, [errorMsg]);
+
+  React.useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLogInGreeting(false);
+      setIsRegisterSuccess(false);
+    }, 3850);
+    return () => clearTimeout(timer);
+  }, [isLogInGreeting, isRegisterSuccess]);
+
+  const closeModal = () => {
     handleModal();
     hideAuthModal();
     setName("");
@@ -23,16 +57,80 @@ const Auth = () => {
     setPassword("");
   };
 
-  const handleAuth = () => {
-    handleModal();
-    hideAuthModal();
-    setName("");
-    setEmail("");
-    setPassword("");
+  const handleAuth = async () => {
+    const user = {
+      name,
+      email,
+      password,
+    };
+
+    setIsLoading(true);
+
+    if (authAction === "Register") {
+      try {
+        const url = "api/v1/auth/register";
+        const requestOptions = {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        };
+
+        const response = await fetch(url, requestOptions);
+        const data = await response.json();
+
+        if (!response.ok) {
+          setIsLoading(false);
+          setErrorMsg(data.msg);
+          return;
+        }
+
+        setIsLoading(false);
+        setIsRegisterSuccess(true);
+        const timer = setTimeout(() => {
+          closeModal();
+          setAuthAction("Log in");
+        }, 3500);
+        return () => clearTimeout(timer);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    if (authAction === "Log in") {
+      try {
+        const url = "api/v1/auth/login";
+        const requestOptions = {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        };
+
+        const response = await fetch(url, requestOptions);
+        const data = await response.json();
+
+        if (!response.ok) {
+          setIsLoading(false);
+          setErrorMsg(data.msg);
+          return;
+        }
+
+        setIsLoading(false);
+        setIsLogInGreeting(true);
+        saveUserData(data.user);
+        const timer = setTimeout(() => closeModal(), 3500);
+        return () => clearTimeout(timer);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   return (
-    <StyledAuthModal show={isAuth} isLogin={isLogin}>
+    <StyledAuthModal {...authState}>
       <div className="authAction">
         <div className="log-in" onClick={() => setAuthAction("Log in")}>
           <VscSignIn /> Log in
@@ -42,49 +140,75 @@ const Auth = () => {
         </div>
       </div>
 
-      <form action="">
-        <label htmlFor="">
-          Name:
-          <input
-            type="text"
-            autoComplete={false}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </label>
+      <form>
+        {!isLogInGreeting && !isRegisterSuccess && (
+          <Fragment>
+            <label>
+              Name:
+              <input
+                type="text"
+                value={name}
+                autoComplete="false"
+                onChange={(e) => setName(e.target.value)}
+              />
+            </label>
 
-        <label htmlFor="">
-          Email:
-          <input
-            type="email"
-            autoComplete={false}
-            value={email}
-            autoFocus={true}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
+            <label>
+              Email:
+              <input
+                type="email"
+                value={email}
+                autoFocus={true}
+                autoComplete="false"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </label>
 
-        <label htmlFor="">
-          Password:
-          <input
-            type={isPasswordVisible ? "text" : "password"}
-            autoComplete={false}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          {password && (
-            <BsFillEyeFill
-              onClick={() => setIsPasswordVisible(!isPasswordVisible)}
-            />
-          )}
-        </label>
+            <label>
+              Password:
+              <input
+                value={password}
+                autoComplete="false"
+                type={isPasswordVisible ? "text" : "password"}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              {password && (
+                <BsFillEyeFill
+                  onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+                />
+              )}
+            </label>
+          </Fragment>
+        )}
+        {isLogInGreeting && (
+          <Fragment>
+            <p>
+              Hello, <span>{userName}</span>!
+            </p>
+            <p>Let's find recipes for your mood!</p>
+          </Fragment>
+        )}
+        {isRegisterSuccess && (
+          <Fragment>
+            <p>
+              New account was created <span>successfully</span>!
+            </p>
+            <p>Log in to record your mood recipes!</p>
+          </Fragment>
+        )}
+        {errorMsg && <p className="errorMsg">{errorMsg}</p>}
       </form>
 
       <div className="buttons">
-        <button onClick={handleAuth}>
-          {authAction === "Log in" ? "Log in" : "Register"}
-        </button>
-        <button onClick={handleCancelButton}>Close</button>
+        {!isLogInGreeting && !isRegisterSuccess && (
+          <Fragment>
+            <button onClick={handleAuth}>
+              {!isLoading && (authAction === "Log in" ? "Log in" : "Register")}
+              {isLoading && <img src={loadingSpinner} alt="" />}
+            </button>
+            <button onClick={closeModal}>Close</button>
+          </Fragment>
+        )}
       </div>
     </StyledAuthModal>
   );

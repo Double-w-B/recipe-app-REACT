@@ -32,6 +32,9 @@ export const SAVE_EMAIL = "SAVE_EMAIL";
 export const SHOW_AUTH = "SHOW_AUTH";
 export const HIDE_AUTH = "HIDE_AUTH";
 
+export const SAVE_USER_DATA = "SAVE_USER_DATA";
+export const REMOVE_USER_DATA = "REMOVE_USER_DATA";
+
 export const CHANGE_CALORIES = "CHANGE_CALORIES";
 
 export const CHANGE_DIET = "CHANGE_DIET";

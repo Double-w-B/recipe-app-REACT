@@ -45,42 +45,46 @@ const StyledAuthModal = styled.div`
 
     .log-in {
       margin: 0.5rem 0 0 0.5rem;
-      font-weight: ${(props) => !props.isLogin && "normal"};
-      color: ${(props) => !props.isLogin && "rgba(255, 255, 255, 0.7)"};
-      cursor: ${(props) => (props.isLogin ? "default" : "pointer")};
-      box-shadow: ${(props) => props.isLogin && "0 0 8px rgba(0, 0, 0, 0.5)"};
-      clip-path: ${(props) => props.isLogin && "inset(-5px 0px 0px -5px)"};
+      font-weight: ${(props) => !props.isLogIn && "normal"};
+      color: ${(props) => !props.isLogIn && "rgba(255, 255, 255, 0.7)"};
+      cursor: ${(props) => (props.isLogIn ? "default" : "pointer")};
+      pointer-events: ${(props) =>
+        (props.isLogInGreeting || props.isRegisterSuccess) && "none"};
+      box-shadow: ${(props) => props.isLogIn && "0 0 8px rgba(0, 0, 0, 0.5)"};
+      clip-path: ${(props) => props.isLogIn && "inset(-5px 0px 0px -5px)"};
       background-color: ${(props) =>
-        props.isLogin ? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.55)"};
+        props.isLogIn ? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.55)"};
 
       svg {
-        color: ${(props) => props.isLogin && "var(--yellow-clr)"};
+        color: ${(props) => props.isLogIn && "var(--yellow-clr)"};
       }
 
       &:hover {
         svg {
-          color: ${(props) => !props.isLogin && "var(--yellow-clr)"};
+          color: ${(props) => !props.isLogIn && "var(--yellow-clr)"};
         }
       }
     }
 
     .register {
       margin: 0.5rem 0.5rem 0 0;
-      font-weight: ${(props) => props.isLogin && "normal"};
-      color: ${(props) => props.isLogin && "rgba(255, 255, 255, 0.7)"};
-      cursor: ${(props) => (!props.isLogin ? "default" : "pointer")};
-      box-shadow: ${(props) => !props.isLogin && "0 0 8px rgba(0, 0, 0, 0.5)"};
-      clip-path: ${(props) => !props.isLogin && "inset(-5px -5px 0px 0px)"};
+      font-weight: ${(props) => props.isLogIn && "normal"};
+      color: ${(props) => props.isLogIn && "rgba(255, 255, 255, 0.7)"};
+      cursor: ${(props) => (!props.isLogIn ? "default" : "pointer")};
+      pointer-events: ${(props) =>
+        (props.isLogInGreeting || props.isRegisterSuccess) && "none"};
+      box-shadow: ${(props) => !props.isLogIn && "0 0 8px rgba(0, 0, 0, 0.5)"};
+      clip-path: ${(props) => !props.isLogIn && "inset(-5px -5px 0px 0px)"};
       background-color: ${(props) =>
-        !props.isLogin ? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.55)"};
+        !props.isLogIn ? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.55)"};
 
       svg {
-        color: ${(props) => !props.isLogin && "var(--yellow-clr)"};
+        color: ${(props) => !props.isLogIn && "var(--yellow-clr)"};
       }
 
       &:hover {
         svg {
-          color: ${(props) => props.isLogin && "var(--yellow-clr)"};
+          color: ${(props) => props.isLogIn && "var(--yellow-clr)"};
         }
       }
     }
@@ -95,26 +99,57 @@ const StyledAuthModal = styled.div`
     justify-content: space-around;
     background-color: rgba(255, 255, 255, 0.5);
     margin: 0 0.5rem;
-    padding: ${(props) => (props.isLogin ? "1.5rem 0" : "0.5rem 0")};
+    padding: ${(props) => (props.isLogIn ? "1.5rem 0" : "0.5rem 0 1rem 0")};
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
     clip-path: inset(0px -5px 0px -5px);
+    position: relative;
+
+    p:not(.errorMsg) {
+      text-align: center;
+      font-size: 1.2rem;
+      color: rgba(0, 0, 0, 0.7);
+
+      &:first-child {
+        font-size: 1.3rem;
+      }
+      span {
+        font-weight: bold;
+        color: var(--yellow-clr);
+      }
+    }
+
+    p.errorMsg {
+      width: 100%;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--red-clr);
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 11;
+    }
 
     label {
       width: 75%;
       color: rgba(0, 0, 0, 0.65);
       display: flex;
       flex-direction: column;
-      transition: 0.3s linear;
+      transition: 0.35s linear;
       position: relative;
 
       &:first-child {
-        display: ${(props) => (props.isLogin ? "none" : "flex")};
+        display: ${(props) => (props.isLogIn ? "none" : "flex")};
+      }
+
+      &:last-child input {
+        padding: 0 28px 0 0.5rem;
       }
 
       svg {
         position: absolute;
         bottom: 5px;
-        right: 5px;
+        right: 8px;
         cursor: pointer;
 
         &:active {
@@ -135,13 +170,6 @@ const StyledAuthModal = styled.div`
       padding: 0 0.5rem;
       background-color: rgba(255, 255, 255, 0.4);
     }
-  }
-
-  p {
-    width: 100%;
-    height: 10%;
-    text-align: center;
-    cursor: pointer;
   }
 
   .buttons {
@@ -166,6 +194,20 @@ const StyledAuthModal = styled.div`
       background-color: rgba(0, 0, 0, 0.55);
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
       cursor: pointer;
+
+      &:first-child {
+        pointer-events: ${(props) => props.isLoading && "none"};
+        cursor: ${(props) => props.isLoading && "default"};
+      }
+
+      img {
+        width: 40px;
+        width: 22px;
+        height: calc(38px - 1rem);
+        display: block;
+        object-fit: fill;
+        margin: 0 auto;
+      }
 
       &:hover {
         color: var(--yellow-clr);

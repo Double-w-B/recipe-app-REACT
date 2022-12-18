@@ -15,6 +15,7 @@ const initialState = {
   isMenu: false,
   isAuth: false,
   isNextPageLoading: false,
+  userData: "",
   query: "",
   lastQuery: JSON.parse(sessionStorage.getItem("lastQuery")) || "",
   page: JSON.parse(sessionStorage.getItem("page")) || 1,
@@ -144,6 +145,15 @@ const AppProvider = ({ children }) => {
     dispatch({ type: actions.HIDE_AUTH, payload: false });
   };
   /* Modals */
+
+  /* Authorization */
+  const saveUserData = (action) => {
+    dispatch({ type: actions.SAVE_USER_DATA, payload: action });
+  };
+  const removeUserData = (action) => {
+    dispatch({ type: actions.REMOVE_USER_DATA, payload: action });
+  };
+  /* Authorization */
 
   /* Filters */
   const changePreferences = (type, change) => {
@@ -294,6 +304,8 @@ const AppProvider = ({ children }) => {
         handleLastQuery,
         showAuthModal,
         hideAuthModal,
+        saveUserData,
+        removeUserData,
       }}
     >
       {children}
