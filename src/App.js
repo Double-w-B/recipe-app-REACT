@@ -6,7 +6,23 @@ import { AppContext } from "./context/context";
 import ModalOverlay from "./components/Modals/Modal";
 
 function App() {
-  const { path, queryPath, localStrPath } = React.useContext(AppContext);
+  const { path, queryPath, localStrPath, saveUserData } =
+    React.useContext(AppContext);
+
+  React.useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const url = "api/v1/users/checkUser";
+        const response = await fetch(url, { method: "GET" });
+        const data = await response.json();
+        saveUserData(data.user);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    checkUser();
+  }, []);
 
   return (
     <Router>
