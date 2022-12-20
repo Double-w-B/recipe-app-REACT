@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const StyledNavigation = styled.nav`
-  width: 70%;
-  margin: 3rem auto 2rem auto;
+  width: 50%;
+  margin: 0 auto 4rem auto;
   display: flex;
   color: var(--red-clr);
 
@@ -32,7 +32,7 @@ const StyledNavigation = styled.nav`
 
   p {
     width: 100%;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     color: var(--red-clr);
     font-weight: bold;
     cursor: default;
@@ -40,53 +40,46 @@ const StyledNavigation = styled.nav`
 
     .arrow {
       margin: 0 1rem 0 1.5rem;
-      font-weight: normal;
 
       img {
-        -webkit-transform: rotate(45deg) translateY(7px);
-        transform: rotate(45deg) translateY(7px);
+        -webkit-transform: rotate(45deg) translateY(12px);
+        transform: rotate(45deg) translateY(12px);
       }
     }
 
     .amount {
+      font-size: 1.1rem;
       color: rgba(0, 0, 0, 0.6);
       margin-left: 0.5rem;
     }
   }
 
   @media screen and (max-width: 1250px) {
-    width: 80%;
     p {
-      .arrow {
-        font-size: 1.3rem;
-        img {
-          width: 28px;
-        }
+      font-size: 1.2rem;
+      .arrow img {
+        width: 28px;
+        -webkit-transform: rotate(45deg) translateY(10px);
+        transform: rotate(45deg) translateY(10px);
       }
     }
   }
 
-  @media screen and (max-width: 1060px) {
-    width: 85%;
-  }
-
   @media screen and (max-width: 900px) {
     width: 80%;
+    margin: 1rem auto 4rem auto;
 
     p {
-      .arrow {
-        font-size: 1.2rem;
-      }
+      font-size: 1.15rem;
     }
   }
 
   @media screen and (max-width: 768px) {
     p {
-      .arrow {
-        font-size: 1.1rem;
-        img {
-          width: 25px;
-        }
+      .arrow img {
+        width: 25px;
+        -webkit-transform: rotate(45deg) translateY(8px);
+        transform: rotate(45deg) translateY(8px);
       }
     }
   }

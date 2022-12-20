@@ -23,6 +23,7 @@ const SavedRecipesResults = () => {
   if (localStrRecipes.length < 1) {
     return (
       <main>
+        <Navigation page={"storage"} />
         <Component.NoRecipes />
       </main>
     );
@@ -31,7 +32,6 @@ const SavedRecipesResults = () => {
   if (localStrRecipes.length > 0) {
     return (
       <main>
-        <Navigation page={"storage"} />
         <SharedSection>
           <SharedContainer className="no-select">
             {Object.values(localStrRecipes).map((item) => {

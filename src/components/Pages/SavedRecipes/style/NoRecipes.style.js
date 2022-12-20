@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { shake } from "../../../../styles/shared/Keyframes.style";
 
 export const StyledNoRecipes = styled.section`
-  height: 85vh;
+  height: calc(85vh - 50px - 5rem);
+
   h1 {
-    margin-top: 3rem;
     text-align: center;
     font-size: 2rem;
     opacity: 0.7;
@@ -27,5 +27,29 @@ export const StyledNoRecipes = styled.section`
     -o-animation: ${shake} 4.72s ease infinite;
     animation: ${shake} 4.72s ease infinite;
     background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  @media screen and (max-width: 900px) {
+    height: calc(85vh - 50px - 8rem);
+
+    h1 {
+      font-size: 1.8rem;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    h1 {
+      font-size: 1.6rem;
+    }
+
+    img {
+      width: 110px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    h1 {
+      font-size: 1.5rem;
+    }
   }
 `;
