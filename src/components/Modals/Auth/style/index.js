@@ -49,7 +49,7 @@ const StyledAuthModal = styled.div`
       color: ${(props) => !props.isLogIn && "rgba(255, 255, 255, 0.7)"};
       cursor: ${(props) => (props.isLogIn ? "default" : "pointer")};
       pointer-events: ${(props) =>
-        (props.isLogInGreeting || props.isRegisterSuccess) && "none"};
+        (props.userName || props.isLoading) && "none"};
       box-shadow: ${(props) => props.isLogIn && "0 0 8px rgba(0, 0, 0, 0.5)"};
       clip-path: ${(props) => props.isLogIn && "inset(-5px 0px 0px -5px)"};
       background-color: ${(props) =>
@@ -72,7 +72,7 @@ const StyledAuthModal = styled.div`
       color: ${(props) => props.isLogIn && "rgba(255, 255, 255, 0.7)"};
       cursor: ${(props) => (!props.isLogIn ? "default" : "pointer")};
       pointer-events: ${(props) =>
-        (props.isLogInGreeting || props.isRegisterSuccess) && "none"};
+        (props.isLogInGreeting || props.isLoading) && "none"};
       box-shadow: ${(props) => !props.isLogIn && "0 0 8px rgba(0, 0, 0, 0.5)"};
       clip-path: ${(props) => !props.isLogIn && "inset(-5px -5px 0px 0px)"};
       background-color: ${(props) =>
@@ -99,7 +99,8 @@ const StyledAuthModal = styled.div`
     justify-content: space-around;
     background-color: rgba(255, 255, 255, 0.5);
     margin: 0 0.5rem;
-    padding: ${(props) => (props.isLogIn ? "1.5rem 0" : "0.5rem 0 1rem 0")};
+    padding: ${(props) =>
+      props.isLogIn ? "1.5rem 0.5rem" : "0.5rem 0.5rem 1rem 0.5rem"};
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
     clip-path: inset(0px -5px 0px -5px);
     position: relative;
@@ -133,13 +134,17 @@ const StyledAuthModal = styled.div`
     label {
       width: 75%;
       color: rgba(0, 0, 0, 0.65);
-      display: flex;
+      display: ${(props) =>
+        props.isLogInGreeting || props.isRegisterSuccess ? "none" : "flex"};
       flex-direction: column;
       transition: 0.35s linear;
       position: relative;
 
       &:first-child {
-        display: ${(props) => (props.isLogIn ? "none" : "flex")};
+        display: ${(props) =>
+          props.isLogIn || props.isLogInGreeting || props.isRegisterSuccess
+            ? "none"
+            : "flex"};
       }
 
       &:last-child input {
@@ -196,6 +201,8 @@ const StyledAuthModal = styled.div`
       cursor: pointer;
 
       &:first-child {
+        display: ${(props) =>
+          (props.isLogInGreeting || props.isRegisterSuccess) && "none"};
         pointer-events: ${(props) => props.isLoading && "none"};
         cursor: ${(props) => props.isLoading && "default"};
       }

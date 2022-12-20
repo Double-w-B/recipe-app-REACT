@@ -30,6 +30,7 @@ const Auth = () => {
     isLoading,
     isLogInGreeting,
     isRegisterSuccess,
+    userName,
   };
 
   React.useEffect(() => {
@@ -41,20 +42,15 @@ const Auth = () => {
     }
   }, [errorMsg]);
 
-  React.useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLogInGreeting(false);
-      setIsRegisterSuccess(false);
-    }, 3850);
-    return () => clearTimeout(timer);
-  }, [isLogInGreeting, isRegisterSuccess]);
-
   const closeModal = () => {
     handleModal();
     hideAuthModal();
     setName("");
     setEmail("");
     setPassword("");
+    setAuthAction("Log in");
+    setIsRegisterSuccess(false);
+    setIsLogInGreeting(false);
   };
 
   const handleAuth = async () => {
@@ -88,11 +84,6 @@ const Auth = () => {
 
         setIsLoading(false);
         setIsRegisterSuccess(true);
-        const timer = setTimeout(() => {
-          closeModal();
-          setAuthAction("Log in");
-        }, 3500);
-        return () => clearTimeout(timer);
       } catch (error) {
         console.log(error);
       }
@@ -121,65 +112,75 @@ const Auth = () => {
         setIsLoading(false);
         setIsLogInGreeting(true);
         saveUserData(data.user);
-        const timer = setTimeout(() => closeModal(), 3500);
-        return () => clearTimeout(timer);
       } catch (error) {
         console.log(error);
       }
     }
   };
 
+  const handleLogInClick = () => {
+    setAuthAction("Log in");
+    setIsRegisterSuccess(false);
+    setName("");
+    setEmail("");
+    setPassword("");
+  };
+
+  const handleRegisterClick = () => {
+    setAuthAction("Register");
+    setIsLogInGreeting(false);
+    setEmail("");
+    setPassword("");
+  };
+
   return (
     <StyledAuthModal {...authState}>
-      <div className="authAction">
-        <div className="log-in" onClick={() => setAuthAction("Log in")}>
+      <div className="authAction no-select">
+        <div className="log-in" onClick={handleLogInClick}>
           <VscSignIn /> Log in
         </div>
-        <div className="register" onClick={() => setAuthAction("Register")}>
+        <div className="register" onClick={handleRegisterClick}>
           <IoIosPersonAdd /> Register
         </div>
       </div>
 
       <form>
-        {!isLogInGreeting && !isRegisterSuccess && (
-          <Fragment>
-            <label>
-              Name:
-              <input
-                type="text"
-                value={name}
-                autoComplete="false"
-                onChange={(e) => setName(e.target.value)}
-              />
-            </label>
+        <label>
+          Name:
+          <input
+            type="text"
+            value={name}
+            autoComplete="false"
+            onChange={(e) => setName(e.target.value)}
+          />
+        </label>
 
-            <label>
-              Email:
-              <input
-                type="email"
-                value={email}
-                autoFocus={true}
-                autoComplete="false"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </label>
+        <label>
+          Email:
+          <input
+            type="email"
+            value={email}
+            autoFocus={true}
+            autoComplete="false"
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </label>
 
-            <label>
-              Password:
-              <input
-                value={password}
-                autoComplete="false"
-                type={isPasswordVisible ? "text" : "password"}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              {password && (
-                <BsFillEyeFill
-                  onClick={() => setIsPasswordVisible(!isPasswordVisible)}
-                />
-              )}
-            </label>
-          </Fragment>
-        )}
+        <label>
+          Password:
+          <input
+            value={password}
+            autoComplete="false"
+            type={isPasswordVisible ? "text" : "password"}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {password && (
+            <BsFillEyeFill
+              onClick={() => setIsPasswordVisible(!isPasswordVisible)}
+            />
+          )}
+        </label>
+
         {isLogInGreeting && (
           <Fragment>
             <p>
@@ -200,15 +201,11 @@ const Auth = () => {
       </form>
 
       <div className="buttons">
-        {!isLogInGreeting && !isRegisterSuccess && (
-          <Fragment>
-            <button onClick={handleAuth}>
-              {!isLoading && (authAction === "Log in" ? "Log in" : "Register")}
-              {isLoading && <img src={loadingSpinner} alt="" />}
-            </button>
-            <button onClick={closeModal}>Close</button>
-          </Fragment>
-        )}
+        <button onClick={handleAuth}>
+          {!isLoading && (authAction === "Log in" ? "Log in" : "Register")}
+          {isLoading && <img src={loadingSpinner} alt="" />}
+        </button>
+        <button onClick={closeModal}>Close</button>
       </div>
     </StyledAuthModal>
   );
