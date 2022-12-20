@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { Form, Button } from "./Form.style";
-import { CloseButton } from "./CloseButton.style";
-import { Content } from "./NewsletterModal.style";
+import { Content, CloseButton } from "./NewsletterModal.style";
 import BackgroundImg from "../../../../images/greeting_bckg.webp";
 
 const StyledNewsletterModal = styled.div`
   width: 65vw;
   height: 80vh;
+  padding: 1rem;
   text-align: center;
   display: grid;
   place-items: center;
@@ -32,6 +32,7 @@ const StyledNewsletterModal = styled.div`
 
   @media screen and (max-width: 700px) {
     height: 70vh;
+    padding: 0.5rem;
   }
 
   @media screen and (max-width: 480px) {

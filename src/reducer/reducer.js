@@ -155,6 +155,7 @@ const reducer = (state, action) => {
   }
 
   if (action.type === actions.SAVE_EMAIL) {
+    sessionStorage.setItem("newsletter", JSON.stringify(action.payload));
     return {
       ...state,
       email: action.payload,

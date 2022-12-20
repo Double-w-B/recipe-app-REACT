@@ -1,23 +1,35 @@
 import React from "react";
-import StyledNewsletterModal from "./style";
 import * as Component from "./index";
+import StyledNewsletterModal from "./style";
+import { MdOutlineClose } from "react-icons/md";
 import { AppContext } from "../../../context/context";
 
 const NewsletterModal = () => {
-  const [passedEmail, setPassedEmail] = React.useState("");
-  const { isNewsletter } = React.useContext(AppContext);
+  const { isNewsletter, saveEmail, handleModal, hideNewsletterModal } =
+    React.useContext(AppContext);
 
-  const emailInitialState = {
-    passedEmail,
-    setPassedEmail,
+  const [newsletterEmail, setNewsletterEmail] = React.useState("");
+
+  const emailState = {
+    newsletterEmail,
+    setNewsletterEmail,
+  };
+
+  const handleCloseButton = () => {
+    saveEmail("user_denied");
+    hideNewsletterModal();
+    handleModal();
   };
 
   return (
     <StyledNewsletterModal show={isNewsletter}>
-      <Component.CloseButton {...emailInitialState} />
       <StyledNewsletterModal.Content className="no-select">
-        <Component.Content {...emailInitialState} />
-        <Component.Form {...emailInitialState} />
+        <Component.Info {...emailState} />
+        <Component.Form {...emailState} />
+
+        <StyledNewsletterModal.CloseButton className="no-select">
+          <MdOutlineClose onClick={handleCloseButton} />
+        </StyledNewsletterModal.CloseButton>
       </StyledNewsletterModal.Content>
     </StyledNewsletterModal>
   );

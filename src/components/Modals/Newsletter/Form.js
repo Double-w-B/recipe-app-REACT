@@ -1,42 +1,67 @@
 import React, { useContext } from "react";
 import { HiOutlineMail } from "../../index";
 import StyledNewsletterModal from "./style";
+import { checkEmail } from "./utils/shared";
 import { AppContext } from "../../../context/context";
 
-const Form = ({ setPassedEmail, passedEmail }) => {
-  const { showHideModal, saveEmail } = useContext(AppContext);
+const Form = ({ newsletterEmail, setNewsletterEmail }) => {
+  const { handleModal, hideNewsletterModal, saveEmail } =
+    useContext(AppContext);
+  const [errorMsg, setErrorMsg] = React.useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (passedEmail) {
-      sessionStorage.setItem("newsletter", JSON.stringify(passedEmail));
-      saveEmail(passedEmail);
-      showHideModal();
+  React.useEffect(() => {
+    if (errorMsg) {
+      const timer = setTimeout(() => {
+        setErrorMsg("");
+      }, 3000);
+      return () => clearTimeout(timer);
     }
-  };
+  }, [errorMsg]);
 
-  const handleChange = (e) => {
-    const regExp =
-      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    regExp.test(String(e.target.value).toLowerCase())
-      ? setPassedEmail(e.target.value)
-      : setPassedEmail("");
+    const url = "api/v1/newsletter/add";
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ email: newsletterEmail }),
+    };
+
+    try {
+      const response = await fetch(url, requestOptions);
+      const data = await response.json();
+
+      if (!response.ok) {
+        setErrorMsg(data.msg);
+        return;
+      }
+      saveEmail(newsletterEmail);
+      hideNewsletterModal();
+      handleModal();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <StyledNewsletterModal.Form onSubmit={handleSubmit}>
       <input
-        type="email"
+        type="text"
         placeholder="email@mail.com"
         onFocus={(e) => (e.target.placeholder = "")}
         onBlur={(e) => (e.target.placeholder = "email@mail.com")}
-        onChange={handleChange}
-        required
+        onChange={(e) => setNewsletterEmail(e.target.value.toLowerCase())}
       />
-      <StyledNewsletterModal.Button type="submit" email={passedEmail}>
+      <StyledNewsletterModal.Button
+        type="submit"
+        email={checkEmail(newsletterEmail)}
+      >
         <HiOutlineMail className="no-select" />
       </StyledNewsletterModal.Button>
+      {errorMsg && <p className="errorMsg">{errorMsg}</p>}
     </StyledNewsletterModal.Form>
   );
 };

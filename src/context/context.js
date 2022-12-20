@@ -46,7 +46,7 @@ const AppProvider = ({ children }) => {
   React.useEffect(() => {
     if (!state.email) {
       handleModal();
-      showNewsletter();
+      showNewsletterModal();
     }
     // eslint-disable-next-line
   }, []);
@@ -129,10 +129,10 @@ const AppProvider = ({ children }) => {
   const handleModal = () => {
     dispatch({ type: actions.HANDLE_MODAL, payload: !state.isModal });
   };
-  const showNewsletter = () => {
+  const showNewsletterModal = () => {
     dispatch({ type: actions.SHOW_NEWSLETTER, payload: true });
   };
-  const hideNewsletter = () => {
+  const hideNewsletterModal = () => {
     dispatch({ type: actions.HIDE_NEWSLETTER, payload: false });
   };
   const handleMenu = () => {
@@ -295,8 +295,8 @@ const AppProvider = ({ children }) => {
         setRecipe,
         updateLocalStrRecipes,
         handleModal,
-        showNewsletter,
-        hideNewsletter,
+        showNewsletterModal,
+        hideNewsletterModal,
         handleMenu,
         saveEmail,
         changePreferences,

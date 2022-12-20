@@ -1,5 +1,4 @@
 import Form from "./Form";
-import Content from "./Content";
-import CloseButton from "./CloseButton";
+import Info from "./Info";
 
-export { Form, CloseButton, Content };
+export { Form, Info };

@@ -1,23 +1,26 @@
 import styled, { css } from "styled-components";
-import { bounce } from "../../../../styles/shared/Keyframes.style";
+import { shake } from "../../../../styles/shared/Keyframes.style";
 
 export const Form = styled.form`
   margin: 0 auto;
   width: 70%;
   min-width: 400px;
   height: 40px;
-  background-color: #fff;
   display: flex;
   border: 2px solid var(--yellow-clr);
+  background-color: rgba(255, 255, 255, 0.5);
+  position: relative;
 
   input {
     height: 100%;
     width: 90%;
     border: none;
     outline: none;
+    padding-left: 10%;
     text-align: center;
     font-size: 1.2rem;
-    color: var(--red-clr);
+    color: rgba(0, 0, 0, 0.7);
+    background-color: transparent;
 
     &::placeholder {
       /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -37,6 +40,23 @@ export const Form = styled.form`
     }
   }
 
+  p.errorMsg {
+    width: 100%;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--red-clr);
+    position: absolute;
+    bottom: -1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  @media screen and (max-width: 768px) {
+    input {
+      text-align: left;
+      padding-left: 0.5rem;
+    }
+  }
   @media screen and (max-width: 600px) {
     width: 60%;
     min-width: 350px;
@@ -72,8 +92,9 @@ export const Button = styled.button`
     animation: ${(props) =>
       props.email &&
       css`
-        ${bounce} 1.3s linear infinite;
+        ${shake} 6.5s linear infinite;
       `};
+    animation-delay: 1s;
 
     &:active {
       transform: scale(0.9);
