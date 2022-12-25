@@ -1,26 +1,55 @@
-import React, { useContext } from "react";
-import SingleRecipeResult from "../../shared/SingleRecipeResult";
-import { AppContext } from "../../../context/context";
-import Navigation from "../../shared/Navigation";
-import { SharedContainer } from "../../../styles/shared/SharedContainer.style";
-import { SharedSection } from "../../../styles/shared/SharedSection.style";
+import React from "react";
 import * as Component from "./index";
+import Loading from "../Loading/Loading";
+import StyledSavedRecipesSection from "./style";
+import Navigation from "../../shared/Navigation";
+import SingleRecipeResult from "../../shared/SingleRecipeResult";
+import { SharedContainer } from "../../../styles/shared/SharedContainer.style";
 
 const SavedRecipesResults = () => {
-  const { localStrRecipes, changePath, currentPath } = useContext(AppContext);
+  const [isRecipesLoading, setIsRecipesLoading] = React.useState(true);
+  const [savedRecipes, setSavedRecipes] = React.useState([]);
 
   React.useEffect(() => {
-    if (currentPath !== "/savedrecipes") {
-      changePath("");
-      const timer = setTimeout(() => {
-        changePath(window.location.pathname);
-      }, 500);
-      return () => clearTimeout(timer);
-    }
+    getSavedRecipesFromDB();
     // eslint-disable-next-line
   }, []);
 
-  if (localStrRecipes.length < 1) {
+  //! API Request - Start
+  const getSavedRecipesFromDB = async () => {
+    const apiUrl = "/api/v1/recipes/";
+    setIsRecipesLoading(true);
+    try {
+      const response = await fetch(apiUrl, { method: "GET" });
+      const data = await response.json();
+
+      if (!response.ok) {
+        const timer = setTimeout(() => {
+          setIsRecipesLoading(false);
+        }, 1000);
+        return () => clearTimeout(timer);
+      }
+
+      const recipes = data.recipes.map((item) => {
+        return { recipe: item };
+      });
+
+      const timer = setTimeout(() => {
+        setSavedRecipes(recipes);
+        setIsRecipesLoading(false);
+      }, 1000);
+      return () => clearTimeout(timer);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //! API Request - End
+
+  if (isRecipesLoading) {
+    return <Loading />;
+  }
+
+  if (savedRecipes.length < 1) {
     return (
       <main>
         <Navigation page={"storage"} />
@@ -29,24 +58,23 @@ const SavedRecipesResults = () => {
     );
   }
 
-  if (localStrRecipes.length > 0) {
+  if (savedRecipes.length > 0) {
     return (
       <main>
-        <SharedSection>
+        <Navigation page={"storage"} />
+        <StyledSavedRecipesSection>
           <SharedContainer className="no-select">
-            {Object.values(localStrRecipes).map((item) => {
-              const id = item.recipe.uri.split("_")[1];
+            {Object.values(savedRecipes).map((item) => {
               return (
                 <SingleRecipeResult
-                  key={id}
+                  key={item.recipe.recipeID}
                   item={item}
-                  id={id}
                   type={"saved"}
                 />
               );
             })}
           </SharedContainer>
-        </SharedSection>
+        </StyledSavedRecipesSection>
       </main>
     );
   }
