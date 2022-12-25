@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import StyledAuthModal from "./style";
 import { VscSignIn } from "react-icons/vsc";
-import { IoIosPersonAdd } from "react-icons/io";
 import { BsFillEyeFill } from "react-icons/bs";
+import { IoIosPersonAdd } from "react-icons/io";
 import { AppContext } from "../../../context/context";
 import loadingSpinner from "../../../images/loading.gif";
 
@@ -42,17 +42,7 @@ const Auth = () => {
     }
   }, [errorMsg]);
 
-  const closeModal = () => {
-    handleModal();
-    hideAuthModal();
-    setName("");
-    setEmail("");
-    setPassword("");
-    setAuthAction("Log in");
-    setIsRegisterSuccess(false);
-    setIsLogInGreeting(false);
-  };
-
+  //! API Requests - Start
   const handleAuth = async () => {
     const user = {
       name,
@@ -64,7 +54,7 @@ const Auth = () => {
 
     if (authAction === "Register") {
       try {
-        const url = "api/v1/auth/register";
+        const url = "/api/v1/auth/register";
         const requestOptions = {
           method: "POST",
           headers: {
@@ -81,9 +71,11 @@ const Auth = () => {
           setErrorMsg(data.msg);
           return;
         }
-
-        setIsLoading(false);
-        setIsRegisterSuccess(true);
+        const timer = setTimeout(() => {
+          setIsLoading(false);
+          setIsRegisterSuccess(true);
+        }, 1000);
+        return () => clearTimeout(timer);
       } catch (error) {
         console.log(error);
       }
@@ -91,7 +83,7 @@ const Auth = () => {
 
     if (authAction === "Log in") {
       try {
-        const url = "api/v1/auth/login";
+        const url = "/api/v1/auth/login";
         const requestOptions = {
           method: "POST",
           headers: {
@@ -109,13 +101,32 @@ const Auth = () => {
           return;
         }
 
-        setIsLoading(false);
-        setIsLogInGreeting(true);
-        saveUserData(data.user);
+        const timer = setTimeout(() => {
+          setIsLoading(false);
+          setIsLogInGreeting(true);
+          saveUserData(data.user);
+        }, 1000);
+        return () => clearTimeout(timer);
       } catch (error) {
         console.log(error);
       }
     }
+  };
+  //! API Requests - End
+
+  const closeModal = () => {
+    handleModal();
+    hideAuthModal();
+
+    const timer = setTimeout(() => {
+      setName("");
+      setEmail("");
+      setPassword("");
+      setAuthAction("Log in");
+      setIsRegisterSuccess(false);
+      setIsLogInGreeting(false);
+    }, 1000);
+    return () => clearTimeout(timer);
   };
 
   const handleLogInClick = () => {
@@ -124,6 +135,7 @@ const Auth = () => {
     setName("");
     setEmail("");
     setPassword("");
+    setIsPasswordVisible(false);
   };
 
   const handleRegisterClick = () => {
@@ -131,6 +143,7 @@ const Auth = () => {
     setIsLogInGreeting(false);
     setEmail("");
     setPassword("");
+    setIsPasswordVisible(false);
   };
 
   return (
@@ -162,7 +175,7 @@ const Auth = () => {
             value={email}
             autoFocus={true}
             autoComplete="false"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value.trim())}
           />
         </label>
 
@@ -172,7 +185,7 @@ const Auth = () => {
             value={password}
             autoComplete="false"
             type={isPasswordVisible ? "text" : "password"}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value.trim())}
           />
           {password && (
             <BsFillEyeFill
@@ -182,17 +195,18 @@ const Auth = () => {
         </label>
 
         {isLogInGreeting && (
-          <Fragment>
+          <Fragment className="no-select">
             <p>
-              Hello, <span>{userName}</span>!
+              Hello, <span>{userName}</span>
             </p>
             <p>Let's find recipes for your mood!</p>
           </Fragment>
         )}
         {isRegisterSuccess && (
-          <Fragment>
+          <Fragment className="no-select">
             <p>
-              New account was created <span>successfully</span>!
+              New account was created <br />
+              <span>successfully</span>
             </p>
             <p>Log in to record your mood recipes!</p>
           </Fragment>
@@ -205,7 +219,7 @@ const Auth = () => {
           {!isLoading && (authAction === "Log in" ? "Log in" : "Register")}
           {isLoading && <img src={loadingSpinner} alt="" />}
         </button>
-        <button onClick={closeModal}>Close</button>
+        <button onClick={closeModal}>{isLogInGreeting ? "Ok" : "Close"}</button>
       </div>
     </StyledAuthModal>
   );

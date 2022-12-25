@@ -1,9 +1,10 @@
 import React from "react";
 import StyledMenuModal from "./style";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AppContext } from "../../../context/context";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
   const {
     clearQuery,
     handleModal,
@@ -13,33 +14,30 @@ const Sidebar = () => {
     removeUserData,
   } = React.useContext(AppContext);
 
-  const handleLinkClick = () => {
-    clearQuery();
-    handleModal();
-    handleMenu();
-  };
-
+  //! API Requests - Start
   const handleAuthClick = async () => {
     if (userData) {
       try {
-        const url = "api/v1/auth/logout";
-        const response = await fetch(url, { method: "GET" });
-        const data = await response.json();
+        const url = "/api/v1/auth/logout";
+        await fetch(url, { method: "GET" });
         removeUserData();
-        console.log(data);
+        navigate("/");
       } catch (error) {
         console.log(error);
       }
     }
-
     clearQuery();
     handleMenu();
-    if (userData) {
-      handleModal();
-    }
-    if (!userData) {
-      showAuthModal();
-    }
+
+    if (userData) handleModal();
+    if (!userData) showAuthModal();
+  };
+  //! API Requests - End
+
+  const handleLinkClick = () => {
+    clearQuery();
+    handleModal();
+    handleMenu();
   };
 
   return (
