@@ -23,7 +23,7 @@ const NewsletterModal = () => {
 
   return (
     <StyledNewsletterModal show={isNewsletter}>
-      <StyledNewsletterModal.Content className="no-select">
+      <StyledNewsletterModal.Content className="no-select" show={isNewsletter}>
         <Component.Info {...emailState} />
         <Component.Form {...emailState} />
 

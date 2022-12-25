@@ -1,19 +1,19 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { AppContext } from "../../../context/context";
-import errorImg from "../../../images/error.png";
-import errorSearch from "../../../images/errorSearch.png";
 import StyledError from "./style/Error.style";
+import { useNavigate } from "react-router-dom";
+import errorImg from "../../../images/error.png";
+import { AppContext } from "../../../context/context";
+import errorSearch from "../../../images/errorSearch.png";
 
 const Error = () => {
+  const navigate = useNavigate();
+  const location = window.location.pathname;
   const [seconds, setSeconds] = React.useState(5);
 
-  const { recipes, lastQuery, handleError, currentPath, handleLastQuery } =
+  const { recipes, lastQuery, handleError, handleLastQuery } =
     React.useContext(AppContext);
   const { diet, health, meal, cuisine, dish, calories } =
     React.useContext(AppContext);
-
-  const navigate = useNavigate();
 
   React.useEffect(() => {
     let interval = setInterval(() => {
@@ -21,9 +21,7 @@ const Error = () => {
         setSeconds(seconds - 1);
       } else {
         clearInterval(interval);
-        currentPath === "/savedrecipes"
-          ? navigate("/savedrecipes")
-          : navigate("/");
+        navigateUser();
         handleLastQuery("");
         sessionStorage.setItem("lastQuery", JSON.stringify(""));
         handleError(false);
@@ -31,6 +29,13 @@ const Error = () => {
     }, 1000);
     return () => clearInterval(interval);
   });
+
+  const navigateUser = () => {
+    if (location.split("/").includes("savedrecipes")) {
+      return navigate("/savedrecipes");
+    }
+    navigate("/");
+  };
 
   if (recipes.length === 0 && lastQuery) {
     return (

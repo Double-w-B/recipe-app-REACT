@@ -1,20 +1,14 @@
-import React, { useContext, useState } from "react";
-import { AppContext } from "../../../context/context";
+import React from "react";
 import * as Component from "./index";
 import StyledHomePage from "./style";
+import { AppContext } from "../../../context/context";
 
 const Home = () => {
   const { email, minInput, maxInput, changePreferences } =
-    useContext(AppContext);
-  const { changePath } = useContext(AppContext);
+    React.useContext(AppContext);
 
-  const [minPercent, setMinPercent] = useState("0");
-  const [maxPercent, setMaxPercent] = useState("0");
-
-  React.useEffect(() => {
-    changePath(window.location.pathname);
-    // eslint-disable-next-line
-  }, []);
+  const [minPercent, setMinPercent] = React.useState("0");
+  const [maxPercent, setMaxPercent] = React.useState("0");
 
   React.useEffect(() => {
     const maxRange = 1000;

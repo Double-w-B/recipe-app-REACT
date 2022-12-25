@@ -20,13 +20,8 @@ const initialState = {
   lastQuery: JSON.parse(sessionStorage.getItem("lastQuery")) || "",
   page: JSON.parse(sessionStorage.getItem("page")) || 1,
   nextPage: JSON.parse(sessionStorage.getItem("nextPage")) || "",
-  currentPath: window.location.pathname,
-  path: JSON.parse(sessionStorage.getItem("path")) || "path",
   queryPath: JSON.parse(sessionStorage.getItem("queryPath")) || "",
-  localStrPath: "recipes",
-  localStrRecipes: JSON.parse(sessionStorage.getItem("saved-recipes") || "[]"),
   recipesData: JSON.parse(sessionStorage.getItem("recipes-data")) || "",
-  recipe: "recipe",
   recipes: JSON.parse(sessionStorage.getItem("recipes")) || "",
   email: JSON.parse(sessionStorage.getItem("newsletter")) || "",
   diet: "",
@@ -62,11 +57,6 @@ const AppProvider = ({ children }) => {
     }
   }, [state.minInput, state.maxInput]);
 
-  React.useEffect(() => {
-    const data = JSON.stringify(state.localStrRecipes);
-    sessionStorage.setItem("saved-recipes", data);
-  }, [state.localStrRecipes, state.setLocalStrRecipes]);
-
   /* Query */
   const createQuery = (someQuery) => {
     dispatch({ type: actions.CREATE_A_QUERY, payload: someQuery });
@@ -89,41 +79,16 @@ const AppProvider = ({ children }) => {
   /* Page */
 
   /* Path */
-  const newPath = (newPath) => {
-    dispatch({ type: actions.SET_PATH, payload: newPath });
-  };
-  const changePath = (newPath) => {
-    dispatch({ type: actions.CHANGE_CURRENT_PATH, payload: newPath });
-  };
   const newQueryPath = (newPath) => {
     dispatch({ type: actions.SET_QUERY_PATH, payload: newPath });
   };
-  const newLocalStrPath = (newPath) => {
-    dispatch({ type: actions.SET_LOCALSTR_PATH, payload: newPath });
-  };
   /* Path */
-
-  /* Recipe */
-  const setRecipe = (newRecipe) => {
-    const recipe = !newRecipe ? "recipe" : newRecipe;
-    dispatch({ type: actions.GET_RECIPE, payload: recipe });
-  };
-  /* Recipe */
 
   /* Email */
   const saveEmail = (email) => {
     dispatch({ type: actions.SAVE_EMAIL, payload: email });
   };
   /* Email */
-
-  /* Storage */
-  const updateLocalStrRecipes = (newRecipe) => {
-    dispatch({
-      type: actions.UPDATE_LOCALSTR_RECIPES,
-      payload: newRecipe,
-    });
-  };
-  /* Storage */
 
   /* Modals */
   const handleModal = () => {
@@ -232,7 +197,6 @@ const AppProvider = ({ children }) => {
         const recipesArray = data.hits;
         const nextPageLink = Object.keys(data._links).length;
         const page = state.page + 1;
-        const path = window.location.pathname;
 
         dispatch({ type: actions.CHANGE_THE_PAGE, payload: page });
 
@@ -243,8 +207,6 @@ const AppProvider = ({ children }) => {
 
         dispatch({ type: actions.GET_ALL_RECIPES, payload: recipesArray });
         sessionStorage.setItem("recipes", JSON.stringify([...recipesArray]));
-
-        dispatch({ type: actions.CHANGE_CURRENT_PATH, payload: path });
 
         dispatch({ type: actions.GET_RECIPES_SUCCESS });
 
@@ -288,12 +250,7 @@ const AppProvider = ({ children }) => {
         createQuery,
         clearQuery,
         changePage,
-        changePath,
-        newPath,
         newQueryPath,
-        newLocalStrPath,
-        setRecipe,
-        updateLocalStrRecipes,
         handleModal,
         showNewsletterModal,
         hideNewsletterModal,

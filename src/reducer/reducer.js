@@ -71,31 +71,10 @@ const reducer = (state, action) => {
     };
   }
 
-  if (action.type === actions.SET_PATH) {
-    return {
-      ...state,
-      path: action.payload,
-    };
-  }
-
   if (action.type === actions.SET_QUERY_PATH) {
     return {
       ...state,
       queryPath: action.payload,
-    };
-  }
-
-  if (action.type === actions.SET_LOCALSTR_PATH) {
-    return {
-      ...state,
-      localStrPath: action.payload,
-    };
-  }
-
-  if (action.type === actions.CHANGE_CURRENT_PATH) {
-    return {
-      ...state,
-      currentPath: action.payload,
     };
   }
 
@@ -106,24 +85,10 @@ const reducer = (state, action) => {
     };
   }
 
-  if (action.type === actions.GET_RECIPE) {
-    return {
-      ...state,
-      recipe: action.payload,
-    };
-  }
-
   if (action.type === actions.GET_ALL_RECIPES) {
     return {
       ...state,
       recipes: action.payload,
-    };
-  }
-
-  if (action.type === actions.UPDATE_LOCALSTR_RECIPES) {
-    return {
-      ...state,
-      localStrRecipes: action.payload,
     };
   }
 
@@ -147,6 +112,7 @@ const reducer = (state, action) => {
       isNewsletter: action.payload,
     };
   }
+
   if (action.type === actions.HANDLE_MENU) {
     return {
       ...state,
@@ -161,12 +127,14 @@ const reducer = (state, action) => {
       email: action.payload,
     };
   }
+
   if (action.type === actions.SHOW_AUTH) {
     return {
       ...state,
       isAuth: action.payload,
     };
   }
+
   if (action.type === actions.HIDE_AUTH) {
     return {
       ...state,
@@ -181,6 +149,7 @@ const reducer = (state, action) => {
       userData: action.payload,
     };
   }
+
   if (action.type === actions.REMOVE_USER_DATA) {
     return {
       ...state,
@@ -196,42 +165,49 @@ const reducer = (state, action) => {
       calories: action.payload,
     };
   }
+
   if (action.type === actions.CHANGE_DIET) {
     return {
       ...state,
       diet: action.payload,
     };
   }
+
   if (action.type === actions.CHANGE_HEALTH) {
     return {
       ...state,
       health: action.payload,
     };
   }
+
   if (action.type === actions.CHANGE_MEAL) {
     return {
       ...state,
       meal: action.payload,
     };
   }
+
   if (action.type === actions.CHANGE_CUISINE) {
     return {
       ...state,
       cuisine: action.payload,
     };
   }
+
   if (action.type === actions.CHANGE_DISH) {
     return {
       ...state,
       dish: action.payload,
     };
   }
+
   if (action.type === actions.CHANGE_MININPUT) {
     return {
       ...state,
       minInput: action.payload,
     };
   }
+
   if (action.type === actions.CHANGE_MAXINPUT) {
     return {
       ...state,

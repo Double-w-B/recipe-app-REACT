@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../context/context";
 import StyledNavigation from "./style/Navigation.style";
@@ -25,7 +25,7 @@ const Navigation = ({ query, amount, page, title }) => {
   const setNavigationPath = () => {
     if (page === "query") {
       return (
-        <>
+        <Fragment>
           <span title={filterQuery(query).join(", ")}>
             {changeQuery(query)}
           </span>
@@ -34,7 +34,7 @@ const Navigation = ({ query, amount, page, title }) => {
               amount.split(" ").join("") > 1 ? "recipes" : "recipe"
             })`}
           </span>
-        </>
+        </Fragment>
       );
     }
 
@@ -70,12 +70,12 @@ const Navigation = ({ query, amount, page, title }) => {
         </span>
         {setNavigationPath()}
         {title && (
-          <>
+          <Fragment>
             <span className="arrow">
               <img src={iconKnife} alt="" />
             </span>
             {title}
-          </>
+          </Fragment>
         )}
       </p>
     </StyledNavigation>

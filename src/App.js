@@ -1,28 +1,30 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import * as Component from "./components";
 import * as Modal from "./components/Modals";
 import { AppContext } from "./context/context";
 import ModalOverlay from "./components/Modals/Modal";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const { path, queryPath, localStrPath, saveUserData } =
-    React.useContext(AppContext);
+  const { saveUserData } = React.useContext(AppContext);
 
   React.useEffect(() => {
-    const checkUser = async () => {
-      try {
-        const url = "api/v1/users/checkUser";
-        const response = await fetch(url, { method: "GET" });
-        const data = await response.json();
-        saveUserData(data.user);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     checkUser();
+    // eslint-disable-next-line
   }, []);
+
+  //! API Requests - Start
+  const checkUser = async () => {
+    try {
+      const url = "/api/v1/users/checkUser";
+      const response = await fetch(url, { method: "GET" });
+      const data = await response.json();
+      saveUserData(data.user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  //! API Requests - End
 
   return (
     <Router>
@@ -37,12 +39,12 @@ function App() {
         <Route exact path="/" element={<Component.Home />} />
         <Route
           exact
-          path={`/recipes/${queryPath}`}
+          path={"/recipes/:query"}
           element={<Component.QueryResults />}
         />
         <Route
           exact
-          path={`/recipes/${queryPath}/${path}`}
+          path={"/recipes/:query/:id"}
           element={<Component.Recipe />}
         />
         <Route
@@ -52,7 +54,7 @@ function App() {
         />
         <Route
           exact
-          path={`/savedrecipes/${localStrPath}`}
+          path={`/savedrecipes/:id`}
           element={<Component.Recipe />}
         />
         <Route exact path="*" element={<Component.Error />} />

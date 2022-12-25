@@ -18,10 +18,11 @@ const Form = ({ newsletterEmail, setNewsletterEmail }) => {
     }
   }, [errorMsg]);
 
+  //! API Requests - Start
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const url = "api/v1/newsletter/add";
+    const url = "/api/v1/newsletter/add";
     const requestOptions = {
       method: "POST",
       headers: {
@@ -45,6 +46,7 @@ const Form = ({ newsletterEmail, setNewsletterEmail }) => {
       console.log(error);
     }
   };
+  //! API Requests - End
 
   return (
     <StyledNewsletterModal.Form onSubmit={handleSubmit}>

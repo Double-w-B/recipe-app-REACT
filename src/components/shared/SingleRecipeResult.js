@@ -5,14 +5,15 @@ import { AppContext } from "../../context/context";
 import logoPreloader from "../../images/preloader.webp";
 import StyledSingleRecipeContainer from "./style/SingleRecipeResult.style";
 
-const SingleRecipeResult = ({ item, id, type }) => {
-  const { newPath, path, queryPath } = React.useContext(AppContext);
-  const { localStrPath, newLocalStrPath } = React.useContext(AppContext);
+const SingleRecipeResult = ({ item, type }) => {
+  const { queryPath } = React.useContext(AppContext);
   const [recipeImg, setRecipeImg] = React.useState(logoPreloader);
 
   const {
     recipe: { image, label, source },
   } = item;
+
+  const recipeID = item.recipe.uri.split("_")[1];
 
   const onLoad = React.useCallback(() => {
     setRecipeImg(image);
@@ -28,19 +29,10 @@ const SingleRecipeResult = ({ item, id, type }) => {
     return () => clearTimeout(timer);
   }, [image, onLoad]);
 
-  const handleMouseDown = () => {
-    if (type === "query") {
-      newPath(id);
-      sessionStorage.setItem("path", JSON.stringify(id));
-      return;
-    }
-    return newLocalStrPath(id);
-  };
-
   const setPath = () => {
-    if (type === "query") return `/recipes/${queryPath}/${path}`;
+    if (type === "query") return `/recipes/${queryPath}/${recipeID}`;
 
-    return `/savedrecipes/${localStrPath}`;
+    return `/savedrecipes/${recipeID}`;
   };
 
   const checkLength = (label) => {
@@ -49,7 +41,7 @@ const SingleRecipeResult = ({ item, id, type }) => {
   };
 
   return (
-    <StyledSingleRecipeContainer onMouseDown={handleMouseDown}>
+    <StyledSingleRecipeContainer>
       {<img src={recipeImg} alt="" />}
 
       <StyledSingleRecipeContainer.SingleRecipe>
@@ -58,7 +50,7 @@ const SingleRecipeResult = ({ item, id, type }) => {
           <p>from {source}</p>
         </div>
 
-        <Link to={setPath()} state={type}>
+        <Link to={setPath()} state={{ type, id: recipeID }}>
           <FiExternalLink />
         </Link>
       </StyledSingleRecipeContainer.SingleRecipe>
