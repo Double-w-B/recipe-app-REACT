@@ -18,6 +18,10 @@ const StyledAuthModal = styled.div`
   box-shadow: var(--primary-shadow);
   z-index: 11;
 
+  * {
+    transition: var(--transition);
+  }
+
   .authAction {
     width: 100%;
     height: 50px;

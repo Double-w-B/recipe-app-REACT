@@ -15,10 +15,6 @@ export const Container = styled.div`
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(auto-fill, minmax(300px, 1fr));
   }
-
-  @media screen and (max-width: 480px) {
-    padding: 0.5rem;
-  }
 `;
 
 export const Image = styled.div`

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { shake } from "../../../../styles/shared/Keyframes.style";
 
 export const StyledNoRecipes = styled.section`
-  height: calc(85vh - 50px - 5rem);
+  height: calc(85vh - 40px - 4rem);
 
   h1 {
     text-align: center;
@@ -10,6 +10,7 @@ export const StyledNoRecipes = styled.section`
     opacity: 0.7;
     text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.7);
   }
+
   div {
     width: 85%;
     height: 100%;
@@ -30,7 +31,7 @@ export const StyledNoRecipes = styled.section`
   }
 
   @media screen and (max-width: 900px) {
-    height: calc(85vh - 50px - 8rem);
+    height: calc(77vh - 40px - 5rem);
 
     h1 {
       font-size: 1.8rem;

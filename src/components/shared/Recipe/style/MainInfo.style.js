@@ -4,7 +4,7 @@ export const Info = styled.div`
   cursor: default;
   grid-column: 2/4;
   grid-row: 1/2;
-  padding: 0.5rem 0.5rem 0 0.5rem;
+  padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -33,7 +33,6 @@ export const Info = styled.div`
     grid-column: 1/6;
     grid-row: 1/2;
     margin-right: 0rem;
-    padding: 0.5rem;
     font-size: 1.2rem;
   }
 
@@ -46,18 +45,17 @@ export const Info = styled.div`
   }
 
   @media screen and (max-width: 600px) {
-    padding: 0;
     font-size: 1rem;
 
     h1 {
-      margin: 0.5rem 0 1rem 0;
+      width: 70%;
+      margin: 0 0 1rem 0;
       font-size: 1.6rem;
     }
   }
 
   @media screen and (max-width: 480px) {
     h1 {
-      margin: 0.5rem 0 1rem 0.5rem;
       font-size: 1.5rem;
     }
   }
@@ -69,76 +67,43 @@ export const Info = styled.div`
   }
 `;
 
-export const SaveButton = styled.div`
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+export const SaveButton = styled.button`
+  min-width: 77px;
+  min-height: 28px;
+  padding: 0.3rem 0.5rem;
+  outline: none;
+  border: none;
+  text-align: center;
+  font-size: 0.9rem;
+  transition: all 0.3s linear;
+  color: ${(props) =>
+    props.recipeStatus ? "var(--yellow-clr)" : "rgba(255, 255, 255, 0.7)"};
+  border-radius: 2px;
+  background-color: rgba(0, 0, 0, 0.55);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  pointer-events: ${(props) => props.isRecipeStatusLoading && "none"};
+  cursor: pointer;
   position: absolute;
   right: 0;
   top: 0;
 
+  img {
+    width: 1rem;
+    height: 1rem;
+    display: block;
+    margin: 0 auto;
+  }
+
   &:hover {
-    p {
-      opacity: 0.3;
-    }
+    color: var(--yellow-clr);
+  }
+  &:active {
+    transform: scale(0.9);
   }
 
-  a {
-    display: grid;
-    place-items: center;
-
-    svg {
-      color: var(--red-clr);
-      filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
-    }
-  }
-
-  svg {
-    font-size: 2.5rem;
-    color: ${(props) =>
-      props.saved ? "var(--red-clr)" : "rgba(0, 0, 0, 0.2)"};
-    cursor: pointer;
-    transition: all 0.3s linear;
-    filter: ${(props) =>
-      props.saved && "drop-shadow(0 0 2px rgba(0, 0, 0, 0.3))"};
-
-    &:active {
-      transform: scale(0.7);
-    }
-  }
-
-  p {
-    cursor: default;
-    font-size: 0.9rem;
-    font-weight: bold;
-    letter-spacing: 0.5px;
-    position: absolute;
-    bottom: -1.5rem;
-    left: 50;
-    opacity: 0;
-  }
-
-  @media screen and (max-width: 550px) {
-    max-height: 50px;
-    max-width: 50px;
-
-    img {
-      width: 30px;
-    }
-
-    p {
-      opacity: 0;
-    }
-  }
-
-  @media screen and (max-width: 400px) {
-    p {
-      font-size: 0.8rem;
-    }
+  @media screen and (max-width: 600px) {
+    right: 0;
+    top: 0;
   }
 `;
 
@@ -150,8 +115,11 @@ export const ShortInfo = styled.div`
   p {
     display: flex;
     align-items: center;
+    color: rgba(0, 0, 0, 0.8);
+    margin-left: 0.5rem;
 
     svg {
+      font-size: 1.4rem;
       margin-right: 0.5rem;
     }
   }
@@ -161,8 +129,10 @@ export const ShortInfo = styled.div`
     text-transform: lowercase;
   }
 
-  @media screen and (max-width: 480px) {
-    margin-left: 0.5rem;
+  @media screen and (max-width: 600px) {
+    p {
+      margin-left: 0;
+    }
   }
 `;
 
@@ -171,6 +141,7 @@ export const HealthLabels = styled.div`
   width: 100%;
   padding: 0.5rem;
   font-size: 1rem;
+  color: rgba(0, 0, 0, 0.8);
   background-color: var(--olive-clr);
   box-shadow: var(--checkBox-shadow);
 
@@ -191,13 +162,14 @@ export const HealthLabels = styled.div`
 export const Link = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 0.5rem;
+  margin: 0.5rem 0 0 0.5rem;
   align-items: center;
   font-size: 1.2rem;
 
   p {
     display: flex;
     align-items: center;
+    color: rgba(0, 0, 0, 0.8);
   }
 
   a {
@@ -208,24 +180,34 @@ export const Link = styled.div`
     display: flex;
     align-items: center;
 
-    & *:last-child {
+    svg {
       margin-left: 0.5rem;
     }
   }
 
   button {
     width: 80px;
-    padding: 0.3rem 0.2rem;
-    border: none;
-    border-radius: 0.1rem;
+    padding: 0.3rem 0.3rem;
     outline: none;
+    border: none;
     margin-left: 2rem;
     text-align: center;
-    cursor: pointer;
     font-size: 1rem;
-    background-color: var(--olive-clr);
-    box-shadow: var(--checkBox-shadow);
     transition: all 0.3s linear;
+    color: ${(props) =>
+      props.copied ? "var(--yellow-clr)" : "rgba(255, 255, 255, 0.7)"};
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.55);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--yellow-clr);
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
   }
 
   @media screen and (max-width: 1200px) {
@@ -242,5 +224,9 @@ export const Link = styled.div`
 
   @media screen and (max-width: 600px) {
     font-size: 1rem;
+    margin: 0.5rem 0 0 0;
+  }
+  @media screen and (max-width: 500px) {
+    justify-content: space-between;
   }
 `;

@@ -9,6 +9,7 @@ const StyledSingleRecipeContainer = styled.article`
   border: 6px solid var(--light-grey-bcg-clr);
   background-color: var(--light-grey-bcg-clr);
   box-shadow: var(--secondary-shadow);
+  transition: var(--transition);
 
   &:hover {
     box-shadow: var(--tertiary-shadow);
@@ -89,6 +90,7 @@ export const SingleRecipe = styled.div`
       width: 1.7rem;
       height: 1.7rem;
       margin: 0.1rem;
+      transition: var(--transition);
     }
   }
 

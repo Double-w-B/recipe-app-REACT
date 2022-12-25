@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 const StyledNavigation = styled.nav`
   width: 50%;
+  min-height: 40px;
   margin: 0 auto 4rem auto;
   display: flex;
   color: var(--red-clr);

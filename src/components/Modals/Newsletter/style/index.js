@@ -22,6 +22,10 @@ const StyledNewsletterModal = styled.div`
   transition: all 0.1s ease-out;
   z-index: 11;
 
+  * {
+    transition: var(--transition);
+  }
+
   @media screen and (max-width: 1200px) {
     width: 75vw;
   }

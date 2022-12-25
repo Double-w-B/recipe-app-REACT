@@ -3,7 +3,7 @@ import { rotate1 } from "../../../../styles/shared/Keyframes.style";
 
 const StyledError = styled.div`
   width: 100%;
-  height: 84vh;
+  height: 85vh;
   font-size: 1.4rem;
   margin: 0 auto;
   display: grid;

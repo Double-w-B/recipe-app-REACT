@@ -15,9 +15,11 @@ export const Preferences = styled.div`
   border: 1px solid var(--yellow-clr);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   position: relative;
+
   &.show {
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   }
+
   .icon {
     font-size: 2rem;
     position: absolute;
@@ -58,6 +60,7 @@ export const Preferences = styled.div`
   select option * {
     cursor: pointer;
   }
+
   label {
     line-height: 1;
     display: flex;
@@ -156,6 +159,7 @@ export const Preferences = styled.div`
       width: 17.5rem;
       height: 14rem;
     }
+
     @media screen and (max-width: 600px) {
       label {
         font-size: 2rem;

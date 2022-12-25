@@ -9,6 +9,10 @@ export const Container = styled.div`
   grid-gap: 2rem;
   grid-template-columns: repeat(3, minmax(15.5rem, 1fr));
 
+  * {
+    transition: var(--transition);
+  }
+
   @media screen and (max-width: 1630px) {
     width: 80%;
   }

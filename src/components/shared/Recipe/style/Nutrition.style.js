@@ -9,7 +9,7 @@ export const Nutrition = styled.div`
   box-shadow: var(--primary-shadow);
 
   h2 {
-    color: #000;
+    color: rgba(0, 0, 0, 0.8);
     margin-left: 0.5rem;
   }
 
@@ -29,21 +29,25 @@ export const Nutrients = styled.div`
   width: 100%;
   padding: 0 1.3rem;
 
+  * {
+    transition: var(--transition);
+  }
+
   p {
     letter-spacing: 0.5px;
     font-size: 1.1rem;
     line-height: 1.3;
-    transition: all 0.3s linear;
     cursor: default;
-    opacity: 0.8;
     display: flex;
     flex-direction: column;
+    color: rgba(0, 0, 0, 0.75);
 
     span {
       &:not(.dot) {
         &:first-child {
-          margin: 0 0.2rem 0 0;
+          margin: 0 0.2rem;
         }
+
         margin: 0 0.2rem;
       }
 
@@ -52,8 +56,7 @@ export const Nutrients = styled.div`
       }
 
       &:hover {
-        opacity: 1;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        color: rgba(0, 0, 0, 1);
 
         .dot {
           color: var(--red-clr);
@@ -67,13 +70,24 @@ export const Nutrients = styled.div`
       font-size: 1.05rem;
     }
   }
+
   @media screen and (max-width: 900px) {
     p {
       display: block;
       text-align: justify;
       overflow-wrap: break-word;
+      hyphens: auto;
+
+      span {
+        &:not(.dot) {
+          &:first-child {
+            margin: 0 0.2rem 0 0;
+          }
+        }
+      }
     }
   }
+
   @media screen and (max-width: 420px) {
     display: flex;
     flex-direction: column;
@@ -81,33 +95,26 @@ export const Nutrients = styled.div`
 `;
 
 export const ShowMoreButton = styled.button`
-  width: 50%;
-  padding: 0.2rem;
   text-align: center;
   text-transform: uppercase;
+  margin: 1rem auto;
+  display: block;
+  padding: 0.3rem 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
   font-size: 1rem;
   outline: none;
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 1rem auto;
-  background-color: transparent;
-  box-shadow: var(--checkBox-shadow);
-  transition: all 0.3s linear;
+  border: none;
+  border-radius: 2px;
+  background-color: rgba(0, 0, 0, 0.55);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: var(--transition);
+  cursor: pointer;
 
   &:hover {
-    cursor: pointer;
-    background-color: rgba(246, 186, 5, 0.6);
-    box-shadow: var(--secondary-shadow);
+    color: var(--yellow-clr);
   }
 
   &:active {
     transform: scale(0.9);
-  }
-
-  @media screen and (max-width: 900px) {
-    width: 30%;
-    background-color: rgba(246, 186, 5, 0.6);
   }
 `;

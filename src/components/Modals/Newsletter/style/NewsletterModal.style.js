@@ -24,17 +24,19 @@ export const Content = styled.div`
     text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.35);
   }
 
-  p:first-of-type:not(.errorMsg) {
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: var(--yellow-clr);
-    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.35);
-  }
+  p {
+    &:first-of-type:not(.errorMsg) {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: var(--yellow-clr);
+      text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.35);
+    }
 
-  p:last-of-type:not(.errorMsg) {
-    font-weight: bold;
-    color: var(--red-clr);
-    font-size: 1.5rem;
+    &:last-of-type:not(.errorMsg) {
+      font-weight: bold;
+      color: var(--red-clr);
+      font-size: 1.5rem;
+    }
   }
 
   @media screen and (max-width: 900px) {
@@ -46,13 +48,15 @@ export const Content = styled.div`
       font-size: 1.8rem;
     }
 
-    p:first-of-type:not(.errorMsg) {
-      font-size: 1.5rem;
-    }
+    p {
+      &:first-of-type:not(.errorMsg) {
+        font-size: 1.5rem;
+      }
 
-    p:last-of-type:not(.errorMsg) {
-      margin: 0 1rem;
-      font-size: 1.4rem;
+      &:last-of-type:not(.errorMsg) {
+        margin: 0 1rem;
+        font-size: 1.4rem;
+      }
     }
   }
 
@@ -72,12 +76,14 @@ export const Content = styled.div`
       font-size: 1.5rem;
     }
 
-    p:first-of-type:not(.errorMsg) {
-      font-size: 1.35rem;
-    }
+    p {
+      &:first-of-type:not(.errorMsg) {
+        font-size: 1.35rem;
+      }
 
-    p:last-of-type:not(.errorMsg) {
-      font-size: 1.3rem;
+      &:last-of-type:not(.errorMsg) {
+        font-size: 1.3rem;
+      }
     }
   }
 `;
@@ -102,7 +108,6 @@ export const CloseButton = styled.div`
     height: 100%;
     color: var(--red-clr);
     color: rgba(0, 0, 0, 0.5);
-
     cursor: pointer;
 
     &:active {

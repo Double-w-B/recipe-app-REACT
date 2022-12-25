@@ -27,20 +27,6 @@ export const rotate2 = keyframes`
     }
   `;
 
-export const bounce = keyframes`
-0% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.1);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-`;
-
 export const shake = keyframes`
   0% {
     transform: translate(0, 0);

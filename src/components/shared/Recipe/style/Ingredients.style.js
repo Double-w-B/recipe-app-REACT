@@ -7,7 +7,7 @@ export const Ingredients = styled.div`
 
   h2 {
     margin-left: 0.5rem;
-    color: #000;
+    color: rgba(0, 0, 0, 0.8);
   }
 
   @media screen and (max-width: 1200px) {
@@ -24,6 +24,11 @@ export const Ingredients = styled.div`
       font-size: 1.4rem;
     }
   }
+  @media screen and (max-width: 600px) {
+    h2 {
+      margin-left: 0;
+    }
+  }
 `;
 
 export const IngredientsContainer = styled.div`
@@ -36,6 +41,10 @@ export const IngredientsContainer = styled.div`
   grid-template-rows: repeat(auto-fit, minmax(100px, 290px));
   background-color: var(--light-grey-bcg-clr);
   box-shadow: var(--primary-shadow);
+
+  * {
+    transition: var(--transition);
+  }
 
   @media screen and (max-width: 1530px) {
     grid-template-columns: repeat(auto-fit, minmax(100px, 275px));

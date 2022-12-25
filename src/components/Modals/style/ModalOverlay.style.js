@@ -11,7 +11,7 @@ const StyledModalOverlay = styled.div`
   top: 0;
   left: 0;
   z-index: 11;
-  background-color: rgba(0, 0, 0, 0.55);
+  background-color: rgba(0, 0, 0, 0.65);
   transition: all 0.3s linear;
 `;
 
