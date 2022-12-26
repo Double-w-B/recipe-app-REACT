@@ -8,6 +8,7 @@ const Form = ({ newsletterEmail, setNewsletterEmail }) => {
   const { handleModal, hideNewsletterModal, saveEmail } =
     useContext(AppContext);
   const [errorMsg, setErrorMsg] = React.useState("");
+  const emailRegExp = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
 
   React.useEffect(() => {
     if (errorMsg) {
@@ -31,14 +32,24 @@ const Form = ({ newsletterEmail, setNewsletterEmail }) => {
       body: JSON.stringify({ email: newsletterEmail }),
     };
 
+    if (!newsletterEmail) {
+      return setErrorMsg("Please, provide email");
+    }
+
+    if (!newsletterEmail.match(emailRegExp)) {
+      return setErrorMsg("Please, provide valid email");
+    }
+
     try {
       const response = await fetch(url, requestOptions);
       const data = await response.json();
 
-      if (!response.ok) {
-        setErrorMsg(data.msg);
-        return;
+      if (!response.ok && data.msg === "Email already exists") {
+        return setErrorMsg(data.msg);
       }
+
+      if (!response.ok) return;
+
       saveEmail(newsletterEmail);
       hideNewsletterModal();
       handleModal();
