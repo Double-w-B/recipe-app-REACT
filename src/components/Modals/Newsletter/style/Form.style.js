@@ -78,21 +78,26 @@ export const Form = styled.form`
 export const Button = styled.button`
   width: 10%;
   height: 100%;
-  font-size: 2rem;
   display: grid;
   place-items: center;
   border: none;
   outline: none;
   background-color: transparent;
 
+  img {
+    width: 22px;
+    height: 22px;
+  }
+
   svg {
+    font-size: 1.5rem;
     transform: translateY(-0.5px);
     color: var(--yellow-clr);
     cursor: pointer;
     animation: ${(props) =>
       props.email &&
       css`
-        ${shake} 6.5s linear infinite;
+        ${shake} 6.5s linear 2;
       `};
     animation-delay: 1s;
 

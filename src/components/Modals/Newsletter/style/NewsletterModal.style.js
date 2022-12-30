@@ -13,7 +13,7 @@ export const Content = styled.div`
   clip-path: inset(-5px -5px -5px -5px);
   position: relative;
 
-  img {
+  img:not(button img) {
     width: 280px;
     margin: 0 auto;
   }

@@ -13,7 +13,7 @@ import ScrollButton from "./shared/ScrollButton";
 import { FiExternalLink } from "react-icons/fi";
 import { HiOutlineCalculator } from "react-icons/hi";
 import { BiRefresh } from "react-icons/bi";
-import { HiOutlineMail } from "react-icons/hi";
+import { TfiEmail } from "react-icons/tfi";
 import { FaRegWindowClose } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { GiKnifeFork } from "react-icons/gi";
@@ -31,7 +31,7 @@ export {
   HiOutlineCalculator,
   BiRefresh,
   GiKnifeFork,
-  HiOutlineMail,
+  TfiEmail,
   FaRegWindowClose,
   FaSearch,
   Recipe,

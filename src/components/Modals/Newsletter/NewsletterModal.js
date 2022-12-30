@@ -9,10 +9,13 @@ const NewsletterModal = () => {
     React.useContext(AppContext);
 
   const [newsletterEmail, setNewsletterEmail] = React.useState("");
+  const [isSubscribed, setIsSubscribed] = React.useState(false);
 
   const emailState = {
     newsletterEmail,
     setNewsletterEmail,
+    isSubscribed,
+    setIsSubscribed,
   };
 
   const handleCloseButton = () => {

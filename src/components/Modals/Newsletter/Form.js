@@ -1,14 +1,16 @@
 import React, { useContext } from "react";
-import { HiOutlineMail } from "../../index";
+import { TfiEmail } from "../../index";
 import StyledNewsletterModal from "./style";
 import { checkEmail } from "./utils/shared";
 import { AppContext } from "../../../context/context";
+import loadingSpinner from "../../../images/loading.gif";
 
-const Form = ({ newsletterEmail, setNewsletterEmail }) => {
-  const { handleModal, hideNewsletterModal, saveEmail } =
-    useContext(AppContext);
+const Form = (props) => {
+  const { newsletterEmail, setNewsletterEmail, setIsSubscribed } = props;
+
+  const { saveEmail } = useContext(AppContext);
   const [errorMsg, setErrorMsg] = React.useState("");
-  const emailRegExp = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+  const [isLoading, setIsLoading] = React.useState(false);
 
   React.useEffect(() => {
     if (errorMsg) {
@@ -36,43 +38,61 @@ const Form = ({ newsletterEmail, setNewsletterEmail }) => {
       return setErrorMsg("Please, provide email");
     }
 
-    if (!newsletterEmail.match(emailRegExp)) {
+    if (!checkEmail(newsletterEmail)) {
       return setErrorMsg("Please, provide valid email");
     }
+
+    setIsLoading(true);
 
     try {
       const response = await fetch(url, requestOptions);
       const data = await response.json();
 
       if (!response.ok && data.msg === "Email already exists") {
-        return setErrorMsg(data.msg);
+        const timer = setTimeout(() => {
+          setIsLoading(false);
+          setErrorMsg(data.msg);
+        }, 1000);
+        return () => clearTimeout(timer);
       }
 
       if (!response.ok) return;
 
-      saveEmail(newsletterEmail);
-      hideNewsletterModal();
-      handleModal();
+      const timer = setTimeout(() => {
+        setIsLoading(false);
+        setIsSubscribed(true);
+        setNewsletterEmail("");
+        saveEmail(newsletterEmail);
+      }, 1000);
+
+      return () => clearTimeout(timer);
     } catch (error) {
       console.log(error);
     }
   };
   //! API Requests - End
 
+  const handleInputChange = (e) => {
+    setNewsletterEmail(e.target.value.toLowerCase());
+    setIsSubscribed(false);
+  };
+
   return (
     <StyledNewsletterModal.Form onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="email@mail.com"
+        value={newsletterEmail}
         onFocus={(e) => (e.target.placeholder = "")}
         onBlur={(e) => (e.target.placeholder = "email@mail.com")}
-        onChange={(e) => setNewsletterEmail(e.target.value.toLowerCase())}
+        onChange={handleInputChange}
       />
       <StyledNewsletterModal.Button
         type="submit"
         email={checkEmail(newsletterEmail)}
       >
-        <HiOutlineMail className="no-select" />
+        {!isLoading && <TfiEmail className="no-select" />}
+        {isLoading && <img src={loadingSpinner} alt="" />}
       </StyledNewsletterModal.Button>
       {errorMsg && <p className="errorMsg">{errorMsg}</p>}
     </StyledNewsletterModal.Form>
