@@ -36,15 +36,15 @@ const StyledMenuModal = styled.div`
   }
 
   @media screen and (max-width: 768px) {
-    width: 50%;
+    width: 55%;
   }
 
   @media screen and (max-width: 600px) {
-    width: 60%;
+    width: 70%;
   }
 
   @media screen and (max-width: 480px) {
-    width: 65%;
+    width: 75%;
   }
 `;
 
