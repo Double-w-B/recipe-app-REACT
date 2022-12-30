@@ -14,6 +14,7 @@ const initialState = {
   isNewsletter: false,
   isMenu: false,
   isAuth: false,
+  isUserData: false,
   isNextPageLoading: false,
   userData: "",
   query: "",
@@ -108,6 +109,13 @@ const AppProvider = ({ children }) => {
   };
   const hideAuthModal = () => {
     dispatch({ type: actions.HIDE_AUTH, payload: false });
+  };
+
+  const showUserDataModal = () => {
+    dispatch({ type: actions.SHOW_USER_DATA, payload: true });
+  };
+  const hideUserDataModal = () => {
+    dispatch({ type: actions.HIDE_USER_DATA, payload: false });
   };
   /* Modals */
 
@@ -254,6 +262,8 @@ const AppProvider = ({ children }) => {
         handleModal,
         showNewsletterModal,
         hideNewsletterModal,
+        showUserDataModal,
+        hideUserDataModal,
         handleMenu,
         saveEmail,
         changePreferences,

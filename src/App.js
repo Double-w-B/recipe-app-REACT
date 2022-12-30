@@ -32,6 +32,7 @@ function App() {
         <Modal.Newsletter />
         <Modal.Menu />
         <Modal.Auth />
+        <Modal.UserData />
       </ModalOverlay>
 
       <Component.Navbar />

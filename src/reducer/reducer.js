@@ -142,6 +142,20 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === actions.SHOW_USER_DATA) {
+    return {
+      ...state,
+      isUserData: action.payload,
+    };
+  }
+
+  if (action.type === actions.HIDE_USER_DATA) {
+    return {
+      ...state,
+      isUserData: action.payload,
+    };
+  }
+
   /* User data */
   if (action.type === actions.SAVE_USER_DATA) {
     return {
