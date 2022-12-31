@@ -10,6 +10,26 @@ export const Form = styled.form`
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  position: relative;
+
+  p {
+    width: 100%;
+    text-align: center;
+    font-size: 0.9rem;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 11;
+
+    &.errorMsg {
+      color: var(--red-clr);
+    }
+
+    &.successMsg {
+      color: var(--green-clr);
+    }
+  }
 
   label {
     width: 80%;

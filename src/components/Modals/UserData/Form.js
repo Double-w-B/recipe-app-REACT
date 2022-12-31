@@ -5,16 +5,21 @@ import { BsFillEyeFill } from "react-icons/bs";
 
 const Form = (props) => {
   const { isNameUpdate, isEmailUpdate, isPasswordUpdate } = props;
+  const { newName, newEmail, password, newPassword } = props;
+  const { setNewName, setNewEmail, setPassword, setNewPassword } = props;
+  const { errorMsg, successMsg } = props;
+
   const { userData } = React.useContext(AppContext);
+
+  React.useEffect(() => {
+    console.log(userData);
+  }, [userData]);
 
   const userName =
     userData?.name?.substring(0, 1).toUpperCase() +
     userData?.name?.substring(1);
+  const userEmail = userData?.email;
 
-  const [newName, setNewName] = React.useState("");
-  const [newEmail, setNewEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [newPassword, setNewPassword] = React.useState("");
   const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
   const [isNewPasswordVisible, setIsNewPasswordVisible] = React.useState(false);
 
@@ -25,6 +30,7 @@ const Form = (props) => {
     setNewPassword("");
     setIsPasswordVisible("");
     setIsNewPasswordVisible("");
+    // eslint-disable-next-line
   }, [isNameUpdate, isEmailUpdate, isPasswordUpdate]);
 
   return (
@@ -33,11 +39,7 @@ const Form = (props) => {
         <Fragment>
           <label>
             Current name:
-            <input
-              type="text"
-              defaultValue={userName ? userName : ""}
-              disabled
-            />
+            <input type="text" value={userName ? userName : ""} disabled />
           </label>
           <label>
             New name:
@@ -55,7 +57,7 @@ const Form = (props) => {
         <Fragment>
           <label>
             Current email:
-            <input type="text" value={userData.email} disabled />
+            <input type="text" value={userEmail ? userEmail : ""} disabled />
           </label>
           <label>
             New email:
@@ -115,6 +117,9 @@ const Form = (props) => {
           </label>
         </Fragment>
       )}
+
+      {errorMsg && <p className="errorMsg">{errorMsg}</p>}
+      {successMsg && <p className="successMsg">{successMsg}</p>}
     </StyledUserDataModal.Form>
   );
 };

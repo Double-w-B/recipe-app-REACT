@@ -6,21 +6,28 @@ import { IoIosPerson } from "react-icons/io";
 
 const Labels = (props) => {
   const { setIsNameUpdate, setIsEmailUpdate, setIsPasswordUpdate } = props;
+  const { setErrorMsg, setSuccessMsg } = props;
 
   const handleNameClick = () => {
     setIsNameUpdate(true);
     setIsEmailUpdate(false);
     setIsPasswordUpdate(false);
+    setErrorMsg("");
+    setSuccessMsg("");
   };
   const handleEmailClick = () => {
     setIsNameUpdate(false);
     setIsEmailUpdate(true);
     setIsPasswordUpdate(false);
+    setErrorMsg("");
+    setSuccessMsg("");
   };
   const handlePasswordClick = () => {
     setIsNameUpdate(false);
     setIsEmailUpdate(false);
     setIsPasswordUpdate(true);
+    setErrorMsg("");
+    setSuccessMsg("");
   };
 
   return (

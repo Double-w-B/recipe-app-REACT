@@ -22,14 +22,11 @@ export const Buttons = styled.div`
     cursor: pointer;
 
     &:first-child {
-      display: ${(props) =>
-        (props.isLogInGreeting || props.isRegisterSuccess) && "none"};
-      pointer-events: ${(props) => props.isLoading && "none"};
-      cursor: ${(props) => props.isLoading && "default"};
+      pointer-events: ${(props) =>
+        (props.isLoading || props.errorMsg) && "none"};
     }
 
     img {
-      width: 40px;
       width: 22px;
       height: calc(38px - 1rem);
       display: block;
