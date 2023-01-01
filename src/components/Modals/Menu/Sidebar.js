@@ -8,7 +8,7 @@ import loadingSpinner from "../../../images/loading.gif";
 const Sidebar = (props) => {
   const navigate = useNavigate();
   const [isLogoutLoading, setIsLogoutLoading] = React.useState(false);
-
+  const [isUnsubscribeLoading, setIsUnsubscribeLoading] = React.useState(false);
   const {
     clearQuery,
     handleModal,
@@ -18,6 +18,8 @@ const Sidebar = (props) => {
     removeUserData,
     showNewsletterModal,
     showUserDataModal,
+    email,
+    saveEmail,
   } = React.useContext(AppContext);
 
   const userName =
@@ -38,6 +40,7 @@ const Sidebar = (props) => {
           setIsLogoutLoading(false);
           handleMenu();
           handleModal();
+          saveEmail("");
           props.setIsSubmenu(false);
           navigate("/");
         }, 1000);
@@ -52,6 +55,31 @@ const Sidebar = (props) => {
     handleMenu();
     showAuthModal();
     props.setIsSubmenu(false);
+  };
+
+  const handleUnsubscribe = async () => {
+    setIsUnsubscribeLoading(true);
+    try {
+      const url = "/api/v1/newsletter/remove";
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      };
+
+      await fetch(url, requestOptions);
+
+      const timer = setTimeout(() => {
+        setIsUnsubscribeLoading(false);
+        saveEmail("user_denied");
+      }, 500);
+
+      return () => clearTimeout(timer);
+    } catch (error) {
+      console.log(error);
+    }
   };
   //! API Requests - End
 
@@ -107,9 +135,15 @@ const Sidebar = (props) => {
             <li>
               <span onClick={handleChangeUserData}>Change my data</span> •
             </li>
-            <li>
-              <span>Unsubscribe me</span> •
-            </li>
+            {email?.includes("@") && (
+              <li>
+                <span onClick={handleUnsubscribe}>
+                  {isUnsubscribeLoading && <img src={loadingSpinner} alt="" />}
+                  Unsubscribe me
+                </span>{" "}
+                •
+              </li>
+            )}
             <li>
               <span>Delete account</span> •
             </li>
