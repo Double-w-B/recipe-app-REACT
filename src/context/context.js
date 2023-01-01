@@ -15,6 +15,7 @@ const initialState = {
   isMenu: false,
   isAuth: false,
   isUserData: false,
+  isDeleteData: false,
   isNextPageLoading: false,
   userData: "",
   query: "",
@@ -103,12 +104,17 @@ const AppProvider = ({ children }) => {
   const hideAuthModal = () => {
     dispatch({ type: actions.HIDE_AUTH, payload: false });
   };
-
   const showUserDataModal = () => {
     dispatch({ type: actions.SHOW_USER_DATA, payload: true });
   };
   const hideUserDataModal = () => {
     dispatch({ type: actions.HIDE_USER_DATA, payload: false });
+  };
+  const showDeleteDataModal = () => {
+    dispatch({ type: actions.SHOW_DELETE_DATA, payload: true });
+  };
+  const hideDeleteDataModal = () => {
+    dispatch({ type: actions.HIDE_DELETE_DATA, payload: false });
   };
   /* Modals */
 
@@ -266,6 +272,8 @@ const AppProvider = ({ children }) => {
         hideAuthModal,
         saveUserData,
         removeUserData,
+        showDeleteDataModal,
+        hideDeleteDataModal,
       }}
     >
       {children}

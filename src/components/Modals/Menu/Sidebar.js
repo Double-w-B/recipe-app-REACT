@@ -18,6 +18,7 @@ const Sidebar = (props) => {
     removeUserData,
     showNewsletterModal,
     showUserDataModal,
+    showDeleteDataModal,
     email,
     saveEmail,
   } = React.useContext(AppContext);
@@ -101,6 +102,11 @@ const Sidebar = (props) => {
     showUserDataModal();
   };
 
+  const handleDeleteDataClick = () => {
+    handleMenu();
+    showDeleteDataModal();
+  };
+
   return (
     <StyledMenuModal.Sidebar isSubmenu={props.isSubmenu} userData={userData}>
       <p>
@@ -145,7 +151,7 @@ const Sidebar = (props) => {
               </li>
             )}
             <li>
-              <span>Delete account</span> •
+              <span onClick={handleDeleteDataClick}>Delete account</span> •
             </li>
             <li>
               <span onClick={handleAuthClick}>

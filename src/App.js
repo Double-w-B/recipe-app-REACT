@@ -8,7 +8,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
   const { isModal, isMenu, handleModal, handleMenu, showNewsletterModal } =
     React.useContext(AppContext);
-  const { hideAuthModal, hideUserDataModal } = React.useContext(AppContext);
+  const { hideAuthModal, hideUserDataModal, hideDeleteDataModal } =
+    React.useContext(AppContext);
   const { userData, saveEmail, email, saveUserData } =
     React.useContext(AppContext);
 
@@ -31,6 +32,7 @@ function App() {
         isMenu && handleMenu();
         hideAuthModal();
         hideUserDataModal();
+        hideDeleteDataModal();
         showNewsletterModal();
       }, 20000);
       return () => clearTimeout(timer);
@@ -76,10 +78,11 @@ function App() {
   return (
     <Router>
       <ModalOverlay>
-        <Modal.Newsletter />
-        <Modal.Menu />
         <Modal.Auth />
+        <Modal.Menu />
         <Modal.UserData />
+        <Modal.Newsletter />
+        <Modal.DeleteData />
       </ModalOverlay>
 
       <Component.Navbar />

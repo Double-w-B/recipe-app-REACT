@@ -155,6 +155,18 @@ const reducer = (state, action) => {
       isUserData: action.payload,
     };
   }
+  if (action.type === actions.SHOW_DELETE_DATA) {
+    return {
+      ...state,
+      isDeleteData: action.payload,
+    };
+  }
+  if (action.type === actions.HIDE_DELETE_DATA) {
+    return {
+      ...state,
+      isDeleteData: action.payload,
+    };
+  }
 
   /* User data */
   if (action.type === actions.SAVE_USER_DATA) {
