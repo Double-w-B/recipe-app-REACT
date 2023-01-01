@@ -83,6 +83,7 @@ export const Button = styled.button`
   border: none;
   outline: none;
   background-color: transparent;
+  pointer-events: ${(props) => props.isLoading && "none"};
 
   img {
     width: 22px;

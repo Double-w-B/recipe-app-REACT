@@ -6,12 +6,38 @@ import ModalOverlay from "./components/Modals/Modal";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const { saveUserData } = React.useContext(AppContext);
+  const { isModal, isMenu, handleModal, handleMenu, showNewsletterModal } =
+    React.useContext(AppContext);
+  const { hideAuthModal, hideUserDataModal } = React.useContext(AppContext);
+  const { userData, saveEmail, email, saveUserData } =
+    React.useContext(AppContext);
 
   React.useEffect(() => {
     checkUser();
     // eslint-disable-next-line
   }, []);
+
+  React.useEffect(() => {
+    if (!email && userData?.email) {
+      checkNewsletterDB();
+    }
+    // eslint-disable-next-line
+  }, [userData]);
+
+  React.useEffect(() => {
+    if (!email) {
+      const timer = setTimeout(() => {
+        !isModal && handleModal();
+        isMenu && handleMenu();
+        hideAuthModal();
+        hideUserDataModal();
+        showNewsletterModal();
+      }, 20000);
+      return () => clearTimeout(timer);
+    }
+
+    // eslint-disable-next-line
+  }, [email, isMenu]);
 
   //! API Requests - Start
   const checkUser = async () => {
@@ -20,6 +46,27 @@ function App() {
       const response = await fetch(url, { method: "GET" });
       const data = await response.json();
       saveUserData(data.user);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const checkNewsletterDB = async () => {
+    try {
+      const url = "/api/v1/newsletter/checkEmail";
+      const requestOptions = {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({ email: userData.email }),
+      };
+
+      const response = await fetch(url, requestOptions);
+      const data = await response.json();
+
+      if (!response.ok) return;
+      saveEmail(data.email);
     } catch (error) {
       console.log(error);
     }

@@ -24,6 +24,7 @@ const Form = (props) => {
   //! API Requests - Start
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isLoading) return;
 
     const url = "/api/v1/newsletter/add";
     const requestOptions = {
@@ -90,6 +91,7 @@ const Form = (props) => {
       <StyledNewsletterModal.Button
         type="submit"
         email={checkEmail(newsletterEmail)}
+        isLoading={isLoading}
       >
         {!isLoading && <TfiEmail className="no-select" />}
         {isLoading && <img src={loadingSpinner} alt="" />}

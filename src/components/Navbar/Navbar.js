@@ -4,8 +4,7 @@ import * as Component from "./index";
 import StyledNavbar from "./style";
 
 const Navbar = () => {
-  const { email, lastQuery } = useContext(AppContext);
-  const { loadingToFalse, handleError } = useContext(AppContext);
+  const { lastQuery, loadingToFalse, handleError } = useContext(AppContext);
   const { clearQuery, handleLastQuery } = useContext(AppContext);
 
   const filterQuery = (text) => {
@@ -35,10 +34,6 @@ const Navbar = () => {
     loadingToFalse();
     handleError(false);
   };
-
-  if (!email) {
-    return <StyledNavbar />;
-  }
 
   return (
     <StyledNavbar>

@@ -40,14 +40,6 @@ const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   React.useEffect(() => {
-    if (!state.email) {
-      handleModal();
-      showNewsletterModal();
-    }
-    // eslint-disable-next-line
-  }, []);
-
-  React.useEffect(() => {
     state.query && dispatch({ type: actions.CHANGE_THE_PAGE, payload: 1 });
   }, [state.query]);
 
@@ -95,6 +87,7 @@ const AppProvider = ({ children }) => {
   const handleModal = () => {
     dispatch({ type: actions.HANDLE_MODAL, payload: !state.isModal });
   };
+
   const showNewsletterModal = () => {
     dispatch({ type: actions.SHOW_NEWSLETTER, payload: true });
   };

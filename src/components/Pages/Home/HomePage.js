@@ -4,7 +4,7 @@ import StyledHomePage from "./style";
 import { AppContext } from "../../../context/context";
 
 const Home = () => {
-  const { email, minInput, maxInput, changePreferences } =
+  const { minInput, maxInput, changePreferences } =
     React.useContext(AppContext);
 
   const [minPercent, setMinPercent] = React.useState("0");
@@ -90,14 +90,6 @@ const Home = () => {
     minPercent,
     maxPercent,
   };
-
-  if (!email) {
-    return (
-      <main>
-        <StyledHomePage />
-      </main>
-    );
-  }
 
   return (
     <main>

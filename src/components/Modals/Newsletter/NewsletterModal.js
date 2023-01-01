@@ -5,7 +5,7 @@ import { MdOutlineClose } from "react-icons/md";
 import { AppContext } from "../../../context/context";
 
 const NewsletterModal = () => {
-  const { isNewsletter, saveEmail, handleModal, hideNewsletterModal } =
+  const { isNewsletter, saveEmail, handleModal, hideNewsletterModal, email } =
     React.useContext(AppContext);
 
   const [newsletterEmail, setNewsletterEmail] = React.useState("");
@@ -19,7 +19,7 @@ const NewsletterModal = () => {
   };
 
   const handleCloseButton = () => {
-    saveEmail("user_denied");
+    if (!email?.includes("@")) saveEmail("user_denied");
     hideNewsletterModal();
     handleModal();
   };
