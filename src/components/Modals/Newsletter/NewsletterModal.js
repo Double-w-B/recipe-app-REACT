@@ -22,6 +22,7 @@ const NewsletterModal = () => {
     if (!email?.includes("@")) saveEmail("user_denied");
     hideNewsletterModal();
     handleModal();
+    setIsSubscribed(false);
   };
 
   return (

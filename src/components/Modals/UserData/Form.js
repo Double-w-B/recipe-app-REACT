@@ -11,10 +11,6 @@ const Form = (props) => {
 
   const { userData } = React.useContext(AppContext);
 
-  React.useEffect(() => {
-    console.log(userData);
-  }, [userData]);
-
   const userName =
     userData?.name?.substring(0, 1).toUpperCase() +
     userData?.name?.substring(1);

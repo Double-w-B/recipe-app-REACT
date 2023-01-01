@@ -13,7 +13,7 @@ const Buttons = (props) => {
         {isLoading && <img src={loadingSpinner} alt="" />}
       </button>
       <button onClick={handleCloseButton}>
-        {isLogInGreeting ? "Ok" : "Close"}
+        {isLogInGreeting ? "OK" : "Close"}
       </button>
     </StyledAuthModal.Buttons>
   );

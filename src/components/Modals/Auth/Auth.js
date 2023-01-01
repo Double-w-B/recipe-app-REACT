@@ -16,6 +16,7 @@ const Auth = () => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isLogInGreeting, setIsLogInGreeting] = React.useState(false);
   const [isRegisterSuccess, setIsRegisterSuccess] = React.useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
 
   const isLogIn = authAction === "Log in";
   const userName =
@@ -28,6 +29,7 @@ const Auth = () => {
     isLoading,
     isLogInGreeting,
     isRegisterSuccess,
+    isPasswordVisible,
     userName,
     name,
     email,
@@ -45,6 +47,7 @@ const Auth = () => {
     setIsLoading,
     setIsLogInGreeting,
     setIsRegisterSuccess,
+    setIsPasswordVisible,
   };
 
   React.useEffect(() => {

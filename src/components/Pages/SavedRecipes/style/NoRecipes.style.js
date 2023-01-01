@@ -27,6 +27,7 @@ export const StyledNoRecipes = styled.section`
     -moz-animation: ${shake} 4.72s ease infinite;
     -o-animation: ${shake} 4.72s ease infinite;
     animation: ${shake} 4.72s ease infinite;
+    animation-delay: 1s;
     background-color: rgba(255, 255, 255, 0.5);
   }
 

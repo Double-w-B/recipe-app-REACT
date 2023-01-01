@@ -3,9 +3,8 @@ import StyledAuthModal from "./style";
 import { BsFillEyeFill } from "react-icons/bs";
 
 const Form = (props) => {
-  const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
-
   const { isLogInGreeting, isRegisterSuccess } = props;
+  const { isPasswordVisible, setIsPasswordVisible } = props;
   const { name, email, password, errorMsg } = props;
   const { userName, setName, setEmail, setPassword } = props;
 
