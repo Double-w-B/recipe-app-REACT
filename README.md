@@ -2,6 +2,7 @@
 
 ## Table of contents
 
+- [Authorization](#authorization)
 - [Newsletter](#newsletter)
 - [Search filters](#search-filters)
 - [Search results](#search-results)
@@ -12,63 +13,72 @@
 
 ## General info
 
-An app with a recipe search feature and over the 60 diet and health filters to use for any popular diet or major health condition.
-User gets over 2.3 million recipes in English with the most accurate automated nutrition analysis. Detailed nutrition breakdown of each recipe with 25+ nutrients and appropriateness for all major diets. All that data comes from the Recipe Search API (https://developer.edamam.com/edamam-recipe-api).
+Full-stack web application with a recipe search feature and over the 60 diet and health filters to use for any popular diet or major health condition. User gets over 2.3 million recipes in English with the most accurate automated nutrition analysis. Detailed nutrition breakdown of each recipe with 25+ nutrients and appropriateness for all major diets. All that data comes from the Recipe Search API (https://developer.edamam.com/edamam-recipe-api).
 
-The main idea of the app is to find a recipe according the preferences, to check out the ingredients of a dish and to visit the web page of full recipe or to save the recipes to the localStorage for further purposes.
+The main idea of a project is to find a recipe according to the preferences and check out the ingredients of a dish. Create an account and save recipes in a database.
 
-#### Technology: <React.js + CSS + styled-components + RWD>
+Back-end part of a project: https://github.com/Double-w-B/recipe-app-API-NODE
 
-![2](https://user-images.githubusercontent.com/75247773/206032791-39f6e8c0-1cb2-4e3b-a214-c26e93741efd.jpg)
+#### Technology: <React.js + styled-components + API + RWD + Node.js + Express.js + MongoDB>
+
+![img-1](https://user-images.githubusercontent.com/75247773/210377850-77cd1b74-00f1-4b5d-a441-bf14136e0e41.jpg)
+
+## Authorization
+
+Authorized users can save recipes to a database and manage their personal data.
+
+![img-15](https://user-images.githubusercontent.com/75247773/210381627-69b3e70d-269a-47a0-9084-cb80f4b35b58.jpg)
+
+![img-14](https://user-images.githubusercontent.com/75247773/210381577-43fe8745-8e51-4716-b259-41572492eb72.jpg)
 
 ## Newsletter
 
-In the beginning user will be asked to share an his/her email address to sign up for a newsletter. The data will be saved to the localStorage. Currently that's only imitation of a service promotion to create an individual touch point with newsletter subscriber.
+Popup newsletter modal overlay to add an email address to a newsletter database.
 
-![1](https://user-images.githubusercontent.com/75247773/206033019-424ab40c-f573-4d34-860a-7f322c401560.jpg)
+![img-2](https://user-images.githubusercontent.com/75247773/210377803-ed254a7b-641f-4dd5-8762-9e2ab28e1ec1.jpg)
 
 ## Search filters
 
 There is a possibility to narrow down the search query by selecting preferences among over the 60 diet and health filters.
 
-![3](https://user-images.githubusercontent.com/75247773/206040632-cc7b4329-8b27-43f2-827e-167e6851bf79.jpg)
+![img-3](https://user-images.githubusercontent.com/75247773/210383318-5fe4a1e2-be38-49c7-9aca-1bf406170053.jpg)
 
 ## Search results
 
-The User gets the amount of recipes which are available in a database according to the query and selected filters.
+User gets the amount of recipes which are available in a database according to the query and selected filters.
 
-![4](https://user-images.githubusercontent.com/75247773/206040533-9cf38eed-6263-40ba-a81e-3abccf8e15be.jpg)
+![img-4](https://user-images.githubusercontent.com/75247773/210377713-46b46273-3795-408f-b56a-47ab4ecd813e.jpg)
 
 ## Recipe
 
 Each recipe includes an image, detailed information, link to the full recipe, nutritients and ingredients of a dish. To save the recipe to the localStorage, user has to click the star in a top right corner of the recipe.
 
-![5](https://user-images.githubusercontent.com/75247773/206040690-ee056407-dbd1-46e3-8eb9-d02c508fb317.jpg)
+![img-5](https://user-images.githubusercontent.com/75247773/210377887-4d65eb38-ad2a-4c85-8d4d-74bbadfde49b.jpg)
 
-![6](https://user-images.githubusercontent.com/75247773/206040694-6eda47cd-9956-46c8-8477-a4536f4f4325.jpg)
+![img-6](https://user-images.githubusercontent.com/75247773/210377894-e8e4f8a4-9244-45f4-a192-30cc3a67c028.jpg)
 
 ## Saved recipes
 
-All saved food recipes are stored in the localStorage. To see saved recipes the user has to click a menu button and then Saved Recipes.
+All saved food recipes are stored in a MongoDB database. To see saved recipes the user has to click a menu button and then Saved Recipes.
 
-![7](https://user-images.githubusercontent.com/75247773/206041048-bd732d26-6665-41d1-89f4-3caf9b78007f.jpg)
+![img-7](https://user-images.githubusercontent.com/75247773/210378509-956c99e0-dd85-4bef-9da4-32605f65eea0.jpg)
 
-If the localStorage is empty, then the user will see that information during visiting saved food recipes storage.
+If there are no recipes stored in a database, the user will see the proper information.
 
-![8](https://user-images.githubusercontent.com/75247773/206041408-3d856fc5-0bae-481e-91aa-6fdf9db78a1a.jpg)
+![img-8](https://user-images.githubusercontent.com/75247773/210378538-606721dd-2b18-49ab-b98b-89cac38311d0.jpg)
 
 ## Errors
 
 If a key word was passed with a mistake or there is no such recipe or ingredient in an API data, then the app will show suitable information and automatically redirect to a home page.
 
-![9](https://user-images.githubusercontent.com/75247773/208324411-d23d3a49-36b0-464c-ab38-e5d433d0a8ce.jpg)
+![img-9](https://user-images.githubusercontent.com/75247773/210379441-2251a6a8-8e9e-4226-9d3e-10d282f3faae.jpg)
 
 If there is no a page the user is looking for then the app will inform about that and automatically redirect to a home page.
 
-![10](https://user-images.githubusercontent.com/75247773/208324422-80d234b0-a053-4d66-b645-2b061bc95e04.jpg)
+![img-10](https://user-images.githubusercontent.com/75247773/210379507-1a00d0fe-bd43-4ba1-8a07-257dde836a2c.jpg)
 
 ## RWD
 
 Responsive web design approach gives the possibility to use the app on the devices with a different screen sizes.
 
-![13](https://user-images.githubusercontent.com/75247773/208324512-22c3c606-5978-4bac-a028-f40b3c6a0a8e.png)
+![img-13](https://user-images.githubusercontent.com/75247773/210380237-ca4093cb-08fd-49ae-b799-e149ae1f6f17.png)
