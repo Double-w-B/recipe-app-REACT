@@ -6,9 +6,7 @@ import ModalOverlay from "./components/Modals/Modal";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  const { isModal, isMenu, handleModal, handleMenu, showNewsletterModal } =
-    React.useContext(AppContext);
-  const { hideAuthModal, hideUserDataModal, hideDeleteDataModal } =
+  const { isModal, handleModal, showNewsletterModal } =
     React.useContext(AppContext);
   const { userData, saveEmail, email, saveUserData } =
     React.useContext(AppContext);
@@ -26,20 +24,15 @@ function App() {
   }, [userData]);
 
   React.useEffect(() => {
-    if (!email) {
+    if (!email && !isModal) {
       const timer = setTimeout(() => {
-        !isModal && handleModal();
-        isMenu && handleMenu();
-        hideAuthModal();
-        hideUserDataModal();
-        hideDeleteDataModal();
+        handleModal();
         showNewsletterModal();
-      }, 20000);
+      }, 10000);
       return () => clearTimeout(timer);
     }
-
     // eslint-disable-next-line
-  }, [email, isMenu]);
+  }, [email, isModal]);
 
   //! API Requests - Start
   const checkUser = async () => {
