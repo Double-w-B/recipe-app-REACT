@@ -17,7 +17,7 @@ const SavedRecipesResults = () => {
 
   //! API Request - Start
   const getSavedRecipesFromDB = async () => {
-    const apiUrl = "/api/v1/recipes/";
+    const apiUrl = "/api/v1/recipes";
     setIsRecipesLoading(true);
     try {
       const response = await fetch(apiUrl, { method: "GET" });

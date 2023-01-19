@@ -63,7 +63,7 @@ const Sidebar = (props) => {
     try {
       const url = "/api/v1/newsletter/remove";
       const requestOptions = {
-        method: "POST",
+        method: "DELETE",
         headers: {
           "Content-type": "application/json",
         },

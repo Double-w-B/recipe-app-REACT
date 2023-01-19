@@ -12,8 +12,8 @@ const MenuModal = () => {
     setIsSubmenu,
   };
 
-  const handleClick = () => {
-    if (isSubmenu) setIsSubmenu(false);
+  const handleClick = (e) => {
+    if (e.target.tagName !== "SPAN" && isSubmenu) setIsSubmenu(false);
   };
 
   return (

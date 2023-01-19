@@ -69,7 +69,7 @@ const MainInfo = ({ found, type }) => {
       ingredients,
     };
 
-    const apiUrl = "/api/v1/recipes/";
+    const apiUrl = "/api/v1/recipes";
     const requestOptions = {
       method: "POST",
       headers: {
